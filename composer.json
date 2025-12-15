@@ -1,5 +1,5 @@
 {
-    "name": "network-rail-business-systems/common",
+    "name": "networkrailbusinesssystems/common",
     "description": "Provides common functionality for Network Rail Business Systems Laravel systems",
     "type": "library",
     "homepage": "https://github.com/Network-Rail-Business-Systems/common",
