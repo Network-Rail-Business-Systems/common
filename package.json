@@ -1,0 +1,16 @@
+{
+  "name": "common",
+  "description": "Provides shared functionality across the Network Rail Business Systems Laravel applications",
+  "scripts": {
+    "badges": "php vendor/networkrailbusinesssystems/badges/badges.php",
+    "larastan": "php vendor/bin/phpstan analyse --memory-limit 512M",
+    "pint": "php ./vendor/bin/pint --preset=per",
+    "prepare": "husky install"
+  },
+  "author": "",
+  "license": "MIT",
+  "homepage": "https://github.com/Network-Rail-Business-Systems/common#readme",
+  "devDependencies": {
+    "husky": "^8.0.3"
+  }
+}
