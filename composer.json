@@ -1,6 +1,6 @@
 {
     "name": "network-rail-business-systems/common",
-    "description": "Provides common functionality for NRBS Laravel systems",
+    "description": "Provides common functionality for Network Rail Business Systems Laravel systems",
     "type": "library",
     "homepage": "https://github.com/Network-Rail-Business-Systems/common",
     "license": "MIT",

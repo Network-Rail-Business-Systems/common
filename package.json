@@ -11,6 +11,6 @@
   "license": "MIT",
   "homepage": "https://github.com/Network-Rail-Business-Systems/common#readme",
   "devDependencies": {
-    "husky": "^8.0.3"
+    "husky": "^8"
   }
 }

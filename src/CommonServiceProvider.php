@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class CommonServiceProvider extends ServiceProvider {
-    public const string HOME = '/dashboard';
-
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'common');
@@ -22,18 +20,14 @@ class CommonServiceProvider extends ServiceProvider {
         $this->bootPublishes();
 
         Schema::defaultStringLength(191);
-        Model::shouldBeStrict(app()->environment() !== 'production');
+        Model::shouldBeStrict(App::environment() !== 'production');
 
         // TODO: Find an performant way to make this more concise
         if (
-            in_array(Request::server('SERVER_NAME'), [
-                'systems.networkrail.co.uk',
+            in_array(Request::host(), [
                 'systems.hiav.networkrail.co.uk',
-                'systems2.networkrail.co.uk',
                 'systems2.hiav.networkrail.co.uk',
-                'systems4.networkrail.co.uk',
                 'systems4.hiav.networkrail.co.uk',
-                'systems5.networkrail.co.uk',
                 'systems5.hiav.networkrail.co.uk'
             ])
         ) {
@@ -41,8 +35,10 @@ class CommonServiceProvider extends ServiceProvider {
             $this->app['request']->server->set('HTTPS', 'on');
         }
 
-        if (App::runningInConsole() === false && URL::getRequest()->path() == '/') {
-            throw new HttpResponseException(redirect(config('common.home') && self::HOME));
+        if (
+            App::runningInConsole() === false && URL::getRequest()->path() == '/'
+        ) {
+            throw new HttpResponseException(redirect(config('common.home')));
         }
     }
 
