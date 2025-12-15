@@ -24,6 +24,7 @@ class CommonServiceProvider extends ServiceProvider {
         Schema::defaultStringLength(191);
         Model::shouldBeStrict(app()->environment() !== 'production');
 
+        // TODO: Find an performant way to make this more concise
         if (
             in_array(Request::server('SERVER_NAME'), [
                 'systems.networkrail.co.uk',
