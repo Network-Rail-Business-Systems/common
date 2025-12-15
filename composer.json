@@ -9,6 +9,11 @@
             "NetworkRailBusinessSystems\\Common\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "NetworkRailBusinessSystems\\Common\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Tahreem Asghar",

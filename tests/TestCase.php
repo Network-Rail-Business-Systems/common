@@ -1,8 +1,25 @@
 <?php
 
-namespace tests;
+namespace NetworkRailBusinessSystems\Common\Tests;
 
-class TestCase
+use NetworkRailBusinessSystems\Common\CommonServiceProvider;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
 
+        $this->withoutVite();
+
+        config()->set('common.home', '/dashboard');
+    }
+
+    protected function getPackageProviders($app): array
+    {
+        return [
+            CommonServiceProvider::class,
+        ];
+    }
 }
