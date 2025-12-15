@@ -26,7 +26,7 @@ class CommonServiceProvider extends ServiceProvider {
         if (
             in_array(Request::host(), [
                 'systems.hiav.networkrail.co.uk',
-                'systems2.hiav.networkrail.co.uk',
+                'systems3.hiav.networkrail.co.uk',
                 'systems4.hiav.networkrail.co.uk',
                 'systems5.hiav.networkrail.co.uk'
             ])
