@@ -21,7 +21,7 @@ class CommonServiceProvider extends ServiceProvider {
 
         if (
             App::runningInConsole() === false
-            && URL::getRequest()->path() == '/'
+            && URL::getRequest()->path() === '/'
         ) {
             throw new HttpResponseException(redirect(config('common.home')));
         }
