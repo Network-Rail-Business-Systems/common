@@ -29,6 +29,7 @@ class ProviderTest extends TestCase
         App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/');
 
+
         $this->provider->boot();
     }
 
@@ -36,11 +37,14 @@ class ProviderTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
+        App::shouldReceive('environment')->andReturn('production');
         App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/dashboard');
 
         try {
             $this->provider->boot();
-        } catch (Throwable $exception) {}
+        } catch (Throwable $exception) {
+            $this->fail('Redirect was thrown when it should not have');
+        }
     }
 }
