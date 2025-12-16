@@ -19,6 +19,13 @@ class CommonServiceProvider extends ServiceProvider {
     public function boot(): void {
         $this->bootPublishes();
 
+        if (
+            App::runningInConsole() === false
+            && URL::getRequest()->path() === '/'
+        ) {
+            throw new HttpResponseException(redirect(config('common.home')));
+        }
+
         Schema::defaultStringLength(191);
         Model::shouldBeStrict(App::environment() !== 'production');
 
@@ -33,12 +40,6 @@ class CommonServiceProvider extends ServiceProvider {
         ) {
             URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', 'on');
-        }
-
-        if (
-            App::runningInConsole() === false && URL::getRequest()->path() == '/'
-        ) {
-            throw new HttpResponseException(redirect(config('common.home')));
         }
     }
 
