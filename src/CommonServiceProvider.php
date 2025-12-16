@@ -20,7 +20,8 @@ class CommonServiceProvider extends ServiceProvider {
         $this->bootPublishes();
 
         if (
-            App::runningInConsole() === false && URL::getRequest()->path() == '/'
+            App::runningInConsole() === false
+            && URL::getRequest()->path() == '/'
         ) {
             throw new HttpResponseException(redirect(config('common.home')));
         }
