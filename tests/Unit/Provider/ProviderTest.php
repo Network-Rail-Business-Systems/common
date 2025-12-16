@@ -29,7 +29,6 @@ class ProviderTest extends TestCase
         App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/');
 
-
         $this->provider->boot();
     }
 
