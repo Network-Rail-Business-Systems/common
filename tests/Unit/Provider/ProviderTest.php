@@ -17,7 +17,7 @@ class ProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->provider =new CommonServiceProvider($this->app);
+        $this->provider = new CommonServiceProvider($this->app);
     }
 
     public function testRedirectsWhenBaseUrl(): void
