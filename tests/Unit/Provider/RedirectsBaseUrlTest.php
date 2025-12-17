@@ -9,39 +9,43 @@ use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 use Throwable;
 
-class ProviderTest extends TestCase
+class RedirectsBaseUrlTest extends TestCase
 {
     protected CommonServiceProvider $provider;
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->provider = new CommonServiceProvider($this->app);
-    }
 
+        App::shouldReceive('runningInConsole')->andReturn(false);
+        App::shouldReceive('environment')->andReturn('production');
+    }
     public function testRedirectsWhenBaseUrl(): void
     {
-        $exception = new HttpResponseException(redirect(config('common.home')));
+        $exception = new HttpResponseException(
+            redirect(
+                config('common.home')
+            )
+        );
+
         $this->expectException($exception);
         $this->expectExceptionObject($exception);
 
-        App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/');
 
-        $this->provider->boot();
+        $this->provider->redirectsBaseUrl();
     }
 
-    public function test(): void
+    public function testDoesNotRedirectWhenNotBaseUrl(): void
     {
         $this->expectNotToPerformAssertions();
 
-        App::shouldReceive('environment')->andReturn('production');
-        App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/dashboard');
 
         try {
-            $this->provider->boot();
+            $this->provider->redirectsBaseUrl();
         } catch (Throwable $exception) {
             $this->fail('Redirect was thrown when it should not have');
         }
