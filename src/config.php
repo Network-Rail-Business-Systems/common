@@ -1,7 +1,5 @@
 <?php
 
 return [
-    'common' => [
-        'home' => '/dashboard'
-    ],
+    'home' => '/home'
 ];
