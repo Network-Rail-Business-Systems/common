@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
-class CommonServiceProvider extends ServiceProvider {
+class CommonServiceProvider extends ServiceProvider
+{
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'common');
     }
 
-    public function boot(): void {
+    public function boot(): void
+    {
         $this->bootPublishes();
         $this->redirectsBaseUrl();
         $this->configureModels();
@@ -38,8 +40,8 @@ class CommonServiceProvider extends ServiceProvider {
         ) {
             throw new HttpResponseException(
                 redirect(
-                    config('common.home')
-                )
+                    config('common.home'),
+                ),
             );
         }
     }
@@ -54,15 +56,10 @@ class CommonServiceProvider extends ServiceProvider {
     {
         if (
             in_array(Request::host(), [
-                'systems.networkrail.co.uk',
                 'systems.hiav.networkrail.co.uk',
-                'systems3.networkrail.co.uk',
                 'systems3.hiav.networkrail.co.uk',
-                'systems4.networkrail.co.uk',
-                'systems4.networkrail.co.uk',
                 'systems4.hiav.networkrail.co.uk',
-                'systems5.networkrail.co.uk',
-                'systems5.hiav.networkrail.co.uk'
+                'systems5.hiav.networkrail.co.uk',
             ])
         ) {
             URL::forceScheme('https');

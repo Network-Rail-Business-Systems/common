@@ -22,12 +22,13 @@ class RedirectsBaseUrlTest extends TestCase
         App::shouldReceive('runningInConsole')->andReturn(false);
         App::shouldReceive('environment')->andReturn('production');
     }
+
     public function testRedirectsWhenBaseUrl(): void
     {
         $exception = new HttpResponseException(
             redirect(
-                config('common.home')
-            )
+                '/dashboard',
+            ),
         );
 
         $this->expectException($exception);

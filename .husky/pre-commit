@@ -3,6 +3,5 @@
 
 npm run pint
 npm run larastan
-npm run prettier
 
 git add -A

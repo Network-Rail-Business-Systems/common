@@ -19,8 +19,7 @@ class CheckHttpsTest extends TestCase
     public function test(
         string $host,
         ?string $expectation,
-    ): void
-    {
+    ): void {
         Mockery::mock('overload:' . Request::class, function ($mock) use ($host) {
             $mock->shouldReceive('host')->andReturn($host);
         });
@@ -41,39 +40,19 @@ class CheckHttpsTest extends TestCase
     {
         return [
             [
-                'host' => 'systems.networkrail.co.uk',
-                'expectation' => 'on',
-            ],
-            [
                 'host' => 'systems.hiav.networkrail.co.uk',
                 'expectation' => 'on',
-            ],
-            [
-                'host' => 'systems2.networkrail.co.uk',
-                'expectation' => null,
             ],
             [
                 'host' => 'systems2.hiav.networkrail.co.uk',
                 'expectation' => null,
             ],
             [
-                'host' => 'systems3.networkrail.co.uk',
-                'expectation' => 'on',
-            ],
-            [
                 'host' => 'systems3.hiav.networkrail.co.uk',
                 'expectation' => 'on',
             ],
             [
-                'host' => 'systems4.networkrail.co.uk',
-                'expectation' => 'on',
-            ],
-            [
                 'host' => 'systems4.hiav.networkrail.co.uk',
-                'expectation' => 'on',
-            ],
-            [
-                'host' => 'systems5.networkrail.co.uk',
                 'expectation' => 'on',
             ],
             [
