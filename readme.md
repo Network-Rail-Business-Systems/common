@@ -25,7 +25,7 @@ composer require network-rail-business-systems/common
 
 ### Service Provider
 
-The Form Builder service provider will be automatically registered.
+The Common service provider will be automatically registered.
 
 If you need to manually load it, you can add the following to your `config/app.php` file:
 
@@ -40,21 +40,17 @@ If you need to manually load it, you can add the following to your `config/app.p
 
 The following can be published using `php artisan vendor:publish`:
 
-| Key    | Usage                                  | Target                            |
-|--------|----------------------------------------|-----------------------------------|
-| common | The Form Builder configuration file    | config/common.php                 |
+| Key    | Usage                         | Target                            |
+|--------|-------------------------------|-----------------------------------|
+| common | The Common configuration file | config/common.php                 |
 
 ## Configuration
 
 The `config/common.php` file contains the following options:
 
-| Key  | Usage                                                    | Type   | Default    |
-|------|----------------------------------------------------------|--------|------------|
-| home | The base resource to redirect to from the root directory | string | /dashboard |
-
-## Structure
-
-TODO
+| Key  | Usage                                                    | Type   | Default |
+|------|----------------------------------------------------------|--------|---------|
+| home | The base resource to redirect to from the root directory | string | /home   |
 
 ## Help and support
 
