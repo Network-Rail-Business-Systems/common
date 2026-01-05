@@ -47,8 +47,10 @@ class RedirectsBaseUrlTest extends TestCase
 
         try {
             $this->provider->redirectsBaseUrl();
-        } catch (Throwable $exception) {
+        } catch (HttpResponseException $exception) {
             $this->fail('Redirect was thrown when it should not have');
+        } catch (Throwable $exception) {
+            $this->fail($exception->getMessage());
         }
     }
 }
