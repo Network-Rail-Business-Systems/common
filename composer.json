@@ -1,11 +1,17 @@
 {
-    "name": "network-rail-business-systems/common",
-    "description": "Provides common functionality for NRBS Laravel systems",
+    "name": "networkrailbusinesssystems/common",
+    "description": "Provides common functionality for Network Rail Business Systems Laravel systems",
     "type": "library",
+    "homepage": "https://github.com/Network-Rail-Business-Systems/common",
     "license": "MIT",
     "autoload": {
         "psr-4": {
             "NetworkRailBusinessSystems\\Common\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NetworkRailBusinessSystems\\Common\\Tests\\": "tests/"
         }
     },
     "authors": [
