@@ -20,7 +20,7 @@ Provides common functionality for Network Rail Business Systems Laravel systems.
 You can install this library using Composer:
 
 ```bash
-composer require network-rail-business-systems/common
+composer require networkrailbusinesssystems/common
 ```
 
 ### Service Provider
