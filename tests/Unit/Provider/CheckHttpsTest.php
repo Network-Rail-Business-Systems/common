@@ -3,6 +3,7 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Provider;
 
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\URL;
 use Mockery;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
@@ -12,7 +13,7 @@ class CheckHttpsTest extends TestCase
 {
     protected function setUp(): void
     {
-        //
+        // Must be empty to allow each test to define a host.
     }
 
     #[DataProvider('expectations')]
@@ -33,6 +34,11 @@ class CheckHttpsTest extends TestCase
             $expectation,
             $this->app['request']->server->get('HTTPS'),
             'Scheme was not forced as expected',
+        );
+
+        $this->assertEquals(
+            $expectation === 'on' ? 'https://' : 'http://',
+            URL::formatScheme(),
         );
     }
 

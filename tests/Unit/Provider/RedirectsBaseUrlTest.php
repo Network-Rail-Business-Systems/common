@@ -19,12 +19,46 @@ class RedirectsBaseUrlTest extends TestCase
 
         $this->provider = new CommonServiceProvider($this->app);
 
-        App::shouldReceive('runningInConsole')->andReturn(false);
         App::shouldReceive('environment')->andReturn('production');
     }
 
-    public function testRedirectsWhenBaseUrl(): void
+    public function testInConsoleNoRedirectWhenBaseUrl(): void
     {
+        $this->expectNotToPerformAssertions();
+
+        App::shouldReceive('runningInConsole')->andReturn(true);
+        URL::shouldReceive('getRequest->path')->andReturn('/');
+
+        try {
+            $this->provider->redirectsBaseUrl();
+        } catch (HttpResponseException $exception) {
+            $this->fail('Redirect was thrown when it should not have');
+        } catch (Throwable $exception) {
+            $this->fail($exception->getMessage());
+        }
+    }
+
+    public function testRedirectsToDefaultWhenBaseUrl(): void
+    {
+        $exception = new HttpResponseException(
+            redirect(
+                '/home',
+            ),
+        );
+
+        $this->expectException($exception);
+        $this->expectExceptionObject($exception);
+
+        App::shouldReceive('runningInConsole')->andReturn(false);
+        URL::shouldReceive('getRequest->path')->andReturn('/');
+
+        $this->provider->redirectsBaseUrl();
+    }
+
+    public function testRedirectsToConfiguredWhenBaseUrl(): void
+    {
+        config()->set('common.home', '/dashboard');
+
         $exception = new HttpResponseException(
             redirect(
                 '/dashboard',
@@ -34,6 +68,7 @@ class RedirectsBaseUrlTest extends TestCase
         $this->expectException($exception);
         $this->expectExceptionObject($exception);
 
+        App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/');
 
         $this->provider->redirectsBaseUrl();
@@ -43,7 +78,8 @@ class RedirectsBaseUrlTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        URL::shouldReceive('getRequest->path')->andReturn('/dashboard');
+        App::shouldReceive('runningInConsole')->andReturn(false);
+        URL::shouldReceive('getRequest->path')->andReturn('/home');
 
         try {
             $this->provider->redirectsBaseUrl();
