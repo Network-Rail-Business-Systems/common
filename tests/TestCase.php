@@ -12,8 +12,6 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->withoutVite();
-
-        config()->set('common.home', '/dashboard');
     }
 
     protected function getPackageProviders($app): array

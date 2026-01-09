@@ -49,7 +49,6 @@ class CommonServiceProvider extends ServiceProvider
     public function configureModels(): void
     {
         Schema::defaultStringLength(191);
-
         Model::shouldBeStrict(App::environment() !== 'production');
     }
 

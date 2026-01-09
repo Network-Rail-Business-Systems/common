@@ -41,7 +41,7 @@ class BootTest extends TestCase
 
         $this->assertEquals(
             'on',
-            $this->app['request']->server->get('HTTPS')
+            $this->app['request']->server->get('HTTPS'),
         );
     }
 }

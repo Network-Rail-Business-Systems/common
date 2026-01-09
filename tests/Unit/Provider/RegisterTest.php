@@ -6,15 +6,10 @@ use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     public function test(): void
     {
         $this->assertEquals(
-            '/dashboard',
+            '/home',
             config('common.home'),
         );
     }
