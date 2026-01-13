@@ -14,7 +14,7 @@ class CommonServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'common');
+        $this->mergeConfigFrom(__DIR__ . '/config.php', 'common');
     }
 
     public function boot(): void
