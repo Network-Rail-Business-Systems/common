@@ -55,7 +55,8 @@ class CommonServiceProvider extends ServiceProvider
     public function checkHttps(): void
     {
         if (
-            in_array(Request::host(), [
+            config('common.force_https', false) === true
+            || in_array(Request::host(), [
                 'systems.hiav.networkrail.co.uk',
                 'systems3.hiav.networkrail.co.uk',
                 'systems4.hiav.networkrail.co.uk',
