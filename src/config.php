@@ -2,5 +2,5 @@
 
 return [
     'home' => '/home',
-    'force_https' => false,
+    'force_https' => env('FORCE_HTTPS', false),
 ];
