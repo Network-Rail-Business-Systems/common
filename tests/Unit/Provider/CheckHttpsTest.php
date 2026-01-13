@@ -19,13 +19,18 @@ class CheckHttpsTest extends TestCase
     #[DataProvider('expectations')]
     public function test(
         string $host,
-        ?string $expectation,
+        ?string $expectation = 'on',
+        bool $forceHTTPS = false,
     ): void {
         Mockery::mock('overload:' . Request::class, function ($mock) use ($host) {
             $mock->shouldReceive('host')->andReturn($host);
         });
 
         parent::setUp();
+
+        if ($forceHTTPS === true) {
+            config()->set('common.force_https', true);
+        }
 
         $provider = new CommonServiceProvider($this->app);
         $provider->checkHttps();
@@ -47,7 +52,6 @@ class CheckHttpsTest extends TestCase
         return [
             [
                 'host' => 'systems.hiav.networkrail.co.uk',
-                'expectation' => 'on',
             ],
             [
                 'host' => 'systems2.hiav.networkrail.co.uk',
@@ -55,19 +59,20 @@ class CheckHttpsTest extends TestCase
             ],
             [
                 'host' => 'systems3.hiav.networkrail.co.uk',
-                'expectation' => 'on',
             ],
             [
                 'host' => 'systems4.hiav.networkrail.co.uk',
-                'expectation' => 'on',
             ],
             [
                 'host' => 'systems5.hiav.networkrail.co.uk',
-                'expectation' => 'on',
             ],
             [
                 'host' => 'www.example.com',
                 'expectation' => null,
+            ],
+            [
+                'host' => 'www.example.com',
+                'forceHTTPS' => true,
             ],
         ];
     }
