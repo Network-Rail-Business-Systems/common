@@ -39,7 +39,7 @@ class Csv
             ->when(
                 $prefixDate === true,
                 function (Stringable $string) {
-                    $string->start(
+                    return $string->start(
                         Carbon::now()->format('Y_m_d'),
                     );
                 },
@@ -48,7 +48,7 @@ class Csv
             ->when(
                 str_ends_with($filename, '.csv') === false,
                 function (Stringable $string) {
-                    $string->finish('.csv');
+                    return $string->finish('.csv');
                 },
             )
             ->lower();

@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Csv;
 
+use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use NetworkRailBusinessSystems\Common\Csv;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
@@ -15,6 +16,9 @@ class ExportTest extends TestCase
     {
         parent::setUp();
 
+        $now = Carbon::create(2026, 2, 13);
+        Carbon::setTestNow($now);
+
         config()->set('filesystems.disks.temp', [
             'driver' => 'local',
             'root' => storage_path('app/temp'),
@@ -26,7 +30,7 @@ class ExportTest extends TestCase
         $this->expectException(HttpResponseException::class);
 
         Csv::export(
-            'My CSV',
+            'My csv',
             [],
         );
 
@@ -39,7 +43,7 @@ class ExportTest extends TestCase
     public function testGeneratesCsv(): void
     {
         $this->response = Csv::export(
-            'My CSV',
+            'My csv',
             [
                 [
                     'Name' => 'Bob',
@@ -51,6 +55,11 @@ class ExportTest extends TestCase
                     'Name' => 'Logan',
                 ],
             ],
+        );
+
+        $this->assertEquals(
+            'attachment; filename=2026_02_13_my_csv.csv',
+            $this->response->headers->get('content-disposition'),
         );
 
         $names = [];
