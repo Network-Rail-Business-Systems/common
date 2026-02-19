@@ -11,7 +11,8 @@ Provides common functionality for Network Rail Business Systems Laravel systems.
 
 ## What's in the box?
 
-* Laravel 12 bootstrapping logic, i.e. HTTPS forced on for select servers.
+* Laravel 12 bootstrapping logic, such as HTTPS forced on for select servers
+* CSV helpers for importing and exporting CSVs
 
 ## Installation
 
@@ -51,6 +52,58 @@ The `config/common.php` file contains the following options:
 | Key  | Usage                                                    | Type   | Default |
 |------|----------------------------------------------------------|--------|---------|
 | home | The base resource to redirect to from the root directory | string | /home   |
+
+## CSVs
+
+Use the `Csv` helper to import and export CSVs.
+
+### Import
+
+Utilise the `import` helper to validate the headers and rows of a CSV:
+
+```php
+$uploadedFile = $formRequest->file('uploaded-file');
+
+$expectedHeaders = ['name'];
+
+$rules = [
+    'name' => ['required'],
+];
+
+$messages = [
+    'name.*' => ['A name is required'],
+];
+
+/** @var SimpleExcelReader|array $csv */
+$csv = Csv::import($uploadedFile, $expectedHeaders, $rules, $messages);
+```
+
+If the validation passes you will receive the `SimpleExcelReader` instance, where you can further process the rows.
+
+If the validation fails you will receive an `array` of error messages.
+
+### Export
+
+Utilise the `export` helper to quickly output a CSV of array entries:
+
+```php
+$data = [...$someData];
+
+/** @returns BinaryFileResponse */
+return Csv::export('my-file', $data);
+```
+
+The helper will automatically lowercase and snake-case the filename.
+
+If will also prepend the date, unless you set the `prefixDate` parameter to false.
+
+You may select the disk to be used for the temporary file using the `disk` parameter.
+
+If the provided dataset is empty the CSV will not be created.
+
+Instead, an `HttpResponseException` will be thrown and a message flashed to inform the user.
+
+Ensure that the `rows` passed into `export` can be turned into a flat array per row, otherwise it may fail.
 
 ## Help and support
 
