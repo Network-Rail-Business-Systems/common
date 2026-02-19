@@ -2,11 +2,17 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests;
 
+use AnthonyEdmonds\LaravelTestingTraits\AssertsFlashMessages;
+use AnthonyEdmonds\LaravelTestingTraits\GetsRawCsvs;
+use Laracasts\Flash\FlashServiceProvider;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
+    use AssertsFlashMessages;
+    use GetsRawCsvs;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -18,6 +24,7 @@ abstract class TestCase extends BaseTestCase
     {
         return [
             CommonServiceProvider::class,
+            FlashServiceProvider::class,
         ];
     }
 }
