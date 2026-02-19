@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d1498cd711404d96f466782b74eab09",
+    "content-hash": "8d73c4209826936adbe2e862302dc8e7",
     "packages": [
         {
             "name": "brick/math",
@@ -6072,7 +6072,7 @@
     "packages-dev": [
         {
             "name": "anthonyedmonds/laravel-testing-traits",
-            "version": "dev-main",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnthonyEdmonds/laravel-testing-traits.git",
@@ -6089,7 +6089,6 @@
                 "php": "^8",
                 "phpunit/phpunit": "^12"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -9603,9 +9602,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "anthonyedmonds/laravel-testing-traits": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
