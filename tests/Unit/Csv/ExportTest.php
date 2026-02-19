@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Csv;
 
 use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Collection;
 use NetworkRailBusinessSystems\Common\Csv;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -31,7 +32,7 @@ class ExportTest extends TestCase
 
         Csv::export(
             'My csv',
-            [],
+            new Collection([]),
         );
 
         $this->assertFlashed(
