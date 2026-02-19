@@ -49,7 +49,7 @@ class Csv
                 str_ends_with($filename, '.csv') === false,
                 function (Stringable $string) {
                     $string->finish('.csv');
-                }
+                },
             )
             ->lower();
 
@@ -82,7 +82,7 @@ class Csv
 
         $errors = static::validateHeaders(
             $reader,
-            $expectedHeaders
+            $expectedHeaders,
         );
 
         if (empty($errors) === false) {
