@@ -9,7 +9,7 @@ use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-class CheckHttpsTest extends TestCase
+class SetupHttpsTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -33,7 +33,7 @@ class CheckHttpsTest extends TestCase
         }
 
         $provider = new CommonServiceProvider($this->app);
-        $provider->checkHttps();
+        $provider->setupHttps();
 
         $this->assertEquals(
             $expectation,

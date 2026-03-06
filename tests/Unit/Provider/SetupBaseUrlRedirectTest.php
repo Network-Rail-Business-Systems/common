@@ -9,7 +9,7 @@ use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 use Throwable;
 
-class RedirectsBaseUrlTest extends TestCase
+class SetupBaseUrlRedirectTest extends TestCase
 {
     protected CommonServiceProvider $provider;
 
@@ -30,7 +30,7 @@ class RedirectsBaseUrlTest extends TestCase
         URL::shouldReceive('getRequest->path')->andReturn('/');
 
         try {
-            $this->provider->redirectsBaseUrl();
+            $this->provider->setupBaseUrlRedirect();
         } catch (HttpResponseException $exception) {
             $this->fail('Redirect was thrown when it should not have');
         } catch (Throwable $exception) {
@@ -52,7 +52,7 @@ class RedirectsBaseUrlTest extends TestCase
         App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/');
 
-        $this->provider->redirectsBaseUrl();
+        $this->provider->setupBaseUrlRedirect();
     }
 
     public function testRedirectsToConfiguredWhenBaseUrl(): void
@@ -71,7 +71,7 @@ class RedirectsBaseUrlTest extends TestCase
         App::shouldReceive('runningInConsole')->andReturn(false);
         URL::shouldReceive('getRequest->path')->andReturn('/');
 
-        $this->provider->redirectsBaseUrl();
+        $this->provider->setupBaseUrlRedirect();
     }
 
     public function testDoesNotRedirectWhenNotBaseUrl(): void
@@ -82,7 +82,7 @@ class RedirectsBaseUrlTest extends TestCase
         URL::shouldReceive('getRequest->path')->andReturn('/home');
 
         try {
-            $this->provider->redirectsBaseUrl();
+            $this->provider->setupBaseUrlRedirect();
         } catch (HttpResponseException $exception) {
             $this->fail('Redirect was thrown when it should not have');
         } catch (Throwable $exception) {

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -19,20 +20,14 @@ class CommonServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->bootPublishes();
-        $this->redirectsBaseUrl();
-        $this->configureModels();
-        $this->checkHttps();
+        $this->setupBaseUrlRedirect();
+        $this->setupCommands();
+        $this->setupConfig();
+        $this->setupHttps();
+        $this->setupModels();
     }
 
-    public function bootPublishes(): void
-    {
-        $this->publishes([
-            __DIR__ . '/config.php' => config_path('common.php'),
-        ], 'config');
-    }
-
-    public function redirectsBaseUrl(): void
+    public function setupBaseUrlRedirect(): void
     {
         if (
             App::runningInConsole() === false
@@ -46,13 +41,21 @@ class CommonServiceProvider extends ServiceProvider
         }
     }
 
-    public function configureModels(): void
+    public function setupCommands(): void
     {
-        Schema::defaultStringLength(191);
-        Model::shouldBeStrict(App::environment() !== 'production');
+        $this->commands([
+            UpdatePermissions::class,
+        ]);
     }
 
-    public function checkHttps(): void
+    public function setupConfig(): void
+    {
+        $this->publishes([
+            __DIR__ . '/config.php' => config_path('common.php'),
+        ], 'common-config');
+    }
+
+    public function setupHttps(): void
     {
         if (
             config('common.force_https', false) === true
@@ -66,5 +69,25 @@ class CommonServiceProvider extends ServiceProvider
             URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', 'on');
         }
+    }
+
+    public function setupModels(): void
+    {
+        Schema::defaultStringLength(191);
+        Model::shouldBeStrict(App::environment() !== 'production');
+    }
+
+    public function setupViews(): void
+    {
+        $template = config('common.template') ?? 'govuk';
+
+        $this->publishes([
+            __DIR__ . '/Views' => resource_path('views/vendor/common'),
+        ], 'common-views');
+
+        $this->loadViewsFrom(
+            __DIR__ . '/Views/' . $template,
+            'common',
+        );
     }
 }

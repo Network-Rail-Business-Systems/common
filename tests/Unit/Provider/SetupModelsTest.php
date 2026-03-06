@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\App;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class ConfigureModelsTest extends TestCase
+class SetupModelsTest extends TestCase
 {
     protected CommonServiceProvider $provider;
 
@@ -23,7 +23,7 @@ class ConfigureModelsTest extends TestCase
     {
         App::shouldReceive('environment')->andReturn('production');
 
-        $this->provider->configureModels();
+        $this->provider->setupModels();
 
         $this->assertFalse(Model::preventsLazyLoading());
     }
@@ -32,7 +32,7 @@ class ConfigureModelsTest extends TestCase
     {
         App::shouldReceive('environment')->andReturn('development');
 
-        $this->provider->configureModels();
+        $this->provider->setupModels();
 
         $this->assertTrue(Model::preventsLazyLoading());
 

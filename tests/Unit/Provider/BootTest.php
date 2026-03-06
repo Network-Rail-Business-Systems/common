@@ -33,7 +33,7 @@ class BootTest extends TestCase
         }
 
         $this->assertArrayHasKey(
-            'config',
+            'common-config',
             $this->provider::$publishGroups,
         );
 

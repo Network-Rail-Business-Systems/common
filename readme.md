@@ -41,17 +41,22 @@ If you need to manually load it, you can add the following to your `config/app.p
 
 The following can be published using `php artisan vendor:publish`:
 
-| Key    | Usage                         | Target                            |
-|--------|-------------------------------|-----------------------------------|
-| common | The Common configuration file | config/common.php                 |
+| Key           | Usage                          | Target                        |
+|---------------|--------------------------------|-------------------------------|
+| common-config | The Common configuration file  | config/common.php             |
+| commong-views | Views provided by this library | resources/views/vendor/common |
 
 ## Configuration
 
 The `config/common.php` file contains the following options:
 
-| Key  | Usage                                                    | Type   | Default |
-|------|----------------------------------------------------------|--------|---------|
-| home | The base resource to redirect to from the root directory | string | /home   |
+| Key         | Usage                                                    | Type   | Default                |
+|-------------|----------------------------------------------------------|--------|------------------------|
+| enums       | Which enums to use within common functions               | array  | permissions, roles     |
+| force_https | Whether to force HTTPS on regardless of the hostname     | string | false                  |
+| home        | The base resource to redirect to from the root directory | string | /home                  |
+| models      | Which models to use within common functions              | array  | permission, role, user |
+| template    | Which template group to use for views                    | string | govuk                  |
 
 ## CSVs
 
