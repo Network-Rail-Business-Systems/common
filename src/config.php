@@ -1,8 +1,7 @@
 <?php
 
 use NetworkRailBusinessSystems\Common\Models\User;
-use NetworkRailBusinessSystems\Common\Enums\Permission as PermissionEnum;
-use NetworkRailBusinessSystems\Common\Enums\Role as RoleEnum;
+use NetworkRailBusinessSystems\Common\Policies\UserPolicy;
 use Spatie\Permission\Models\Permission as PermissionModel;
 use Spatie\Permission\Models\Role as RoleModel;
 
@@ -22,8 +21,8 @@ return [
 
     /** Which enums to use */
     'enums' => [
-        'permissions' => PermissionEnum::class,
-        'roles' => RoleEnum::class,
+        'permissions' => 'Permission::class',
+        'roles' => 'Role::class',
     ],
 
     /** Which models to use */
@@ -32,4 +31,9 @@ return [
         'role' => RoleModel::class,
         'user' => User::class,
     ],
+
+    /** Which policies to use */
+    'policies' => [
+        'user' => UserPolicy::class,
+    ]
 ];

@@ -4,8 +4,8 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Middleware;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use NetworkRailBusinessSystems\Common\Enums\Permission;
 use NetworkRailBusinessSystems\Common\Middleware\ProtectNonGetRequests;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 

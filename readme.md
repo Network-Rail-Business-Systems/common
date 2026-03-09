@@ -56,7 +56,32 @@ The `config/common.php` file contains the following options:
 | force_https | Whether to force HTTPS on regardless of the hostname     | string | false                  |
 | home        | The base resource to redirect to from the root directory | string | /home                  |
 | models      | Which models to use within common functions              | array  | permission, role, user |
+| policies    | Which policies to use within common functions            | array  | user                   |
 | template    | Which template group to use for views                    | string | govuk                  |
+
+### Enums
+
+You must create a pair of enums for Roles and Permissions.
+
+Each must implement the `RoleInterface` and `PermissionInterface` respectively.
+
+A `RoleTrait` and `PermissionTrait` are provided for a standard implementation.
+
+## Usage
+
+The components provided by this library should be used in the following ways:
+
+* Called via a provided route
+* Called directly
+* Extended
+
+### Extending and overriding functionality
+
+Before extending any of the components, consider whether the functionality you want to add is system specific, or something you could contribute into common.
+
+The ideal is to keep all common system elements in this library to avoid duplication and reduce maintenance.
+
+Where your functionality is system specific, such as a model relationship, ensure you extend the model from this library.
 
 ## CSVs
 

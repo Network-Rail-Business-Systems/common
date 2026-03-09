@@ -4,12 +4,15 @@ namespace NetworkRailBusinessSystems\Common\Tests;
 
 use AnthonyEdmonds\LaravelFind\FinderServiceProvider;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsFlashMessages;
+use AnthonyEdmonds\LaravelTestingTraits\AssertsPolicies;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsResults;
 use AnthonyEdmonds\LaravelTestingTraits\GetsRawCsvs;
 use AnthonyEdmonds\LaravelTestingTraits\SignsInUsers;
 use Illuminate\Support\Facades\Artisan;
 use Laracasts\Flash\FlashServiceProvider;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Spatie\Permission\PermissionServiceProvider;
@@ -20,16 +23,21 @@ abstract class TestCase extends BaseTestCase
     use GetsRawCsvs;
     use SignsInUsers;
     use AssertsResults;
+    use AssertsPolicies;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        config()->set('testing-traits.user_model', User::class);
+        config()->set('common.enums.permissions', Permission::class);
+        config()->set('common.enums.roles', Role::class);
+
         config()->set('laravel-impersonate.session_key', 'impersonated_by');
         config()->set('laravel-impersonate.session_guard', 'impersonator_guard');
         config()->set('laravel-impersonate.session_guard_using', 'impersonator_guard_using');
         config()->set('laravel-impersonate.default_impersonator_guard', 'web');
+
+        config()->set('testing-traits.user_model', User::class);
 
         $this->withoutVite();
     }

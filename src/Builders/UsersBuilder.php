@@ -4,9 +4,9 @@ namespace NetworkRailBusinessSystems\Common\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use NetworkRailBusinessSystems\Common\Enums\Role;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
 use NetworkRailBusinessSystems\Common\Models\User;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 
 /**
  * @method ?User first()

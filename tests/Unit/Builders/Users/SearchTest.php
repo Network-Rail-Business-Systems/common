@@ -3,7 +3,7 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Builders\Users;
 
 use Illuminate\Support\Collection;
-use NetworkRailBusinessSystems\Common\Enums\Role;
+use NetworkRailBusinessSystems\Common\Tests\Enums\RoleInterface;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
@@ -29,7 +29,7 @@ class SearchTest extends TestCase
     {
         $this->expected = new Collection([
             User::factory()
-                ->withRole(Role::Admin)
+                ->withRole(RoleInterface::Admin)
                 ->create(),
             User::factory()->create([
                 'first_name' => 'Admonish',

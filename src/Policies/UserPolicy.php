@@ -5,28 +5,32 @@ namespace NetworkRailBusinessSystems\Common\Policies;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 use NetworkRailBusinessSystems\Common\Models\User;
-use Spatie\Permission\Models\Role;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 
 class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function manage(User $user, User $account): Response
+    public function manage(User $auth, User $user): Response
     {
-        return $user->can('manage_users') === true
+        return $auth->can('manage_users') === true
             ? $this->allow('You can manage Users')
             : $this->deny('You cannot manage Users');
     }
 
-    public function grant(User $user, User $account, Role $role): Response
+    public function grant(User $auth, User $user, Role $desiredRole): Response
     {
-        return $user->can('grant', $role) === true
-            ? $this->allow("You can grant the $role->name Role")
-            : $this->deny("You cannot grant the $role->name Role");
+        foreach ($auth->roles as $roleModel) {
+            $grantingRole = Role::from($roleModel->name);
+
+            if (
+                $grantingRole->canGrant($desiredRole) === true
+                && $grantingRole->conflictsWith($desiredRole) === false
+            ) {
+                return $this->allow("You can grant the $desiredRole->value Role");
+            }
+        }
+
+        return $this->deny("You cannot grant the $desiredRole->value Role");
     }
 }
-
-// TODO Abstract model references as you go
-// TODO Register policies
-// TODO Config for collections, finders, etc?
-// TODO Templates

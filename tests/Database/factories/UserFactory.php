@@ -3,7 +3,7 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use NetworkRailBusinessSystems\Common\Enums\Role;
+use NetworkRailBusinessSystems\Common\Tests\Enums\RoleInterface;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 
 class UserFactory extends Factory
@@ -21,7 +21,7 @@ class UserFactory extends Factory
         ];
     }
 
-    public function withRole(Role|string $role): self
+    public function withRole(RoleInterface|string $role): self
     {
         return $this->afterCreating(function (User $user) use ($role) {
             $user->assignRole($role);

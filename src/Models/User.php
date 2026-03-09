@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Collection;
 use Lab404\Impersonate\Models\Impersonate;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
-use NetworkRailBusinessSystems\Common\Enums\Permission;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
 use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
 use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
 use Spatie\Permission\Models\Role;

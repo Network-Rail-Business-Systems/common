@@ -3,7 +3,7 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Builders\Users;
 
 use Illuminate\Support\Collection;
-use NetworkRailBusinessSystems\Common\Enums\Role;
+use NetworkRailBusinessSystems\Common\Tests\Enums\RoleInterface;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
@@ -22,7 +22,7 @@ class HasRolesTest extends TestCase
 
         $this->expected = User::factory()
             ->count(3)
-            ->withRole(Role::Admin)
+            ->withRole(RoleInterface::Admin)
             ->create();
 
         $this->unexpected = User::factory()

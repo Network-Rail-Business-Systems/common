@@ -3,8 +3,8 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Commands;
 
 use Illuminate\Support\Facades\DB;
-use NetworkRailBusinessSystems\Common\Enums\Permission as PermissionEnum;
-use NetworkRailBusinessSystems\Common\Enums\Role as RoleEnum;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 use Spatie\Permission\Models\Permission as PermissionModel;
 use Spatie\Permission\Models\Role as RoleModel;
@@ -18,7 +18,7 @@ class UpdatePermissionsTest extends TestCase
         $this->useDatabase();
 
         RoleModel::create([
-            'name' => RoleEnum::Admin,
+            'name' => Role::Admin,
         ]);
 
         RoleModel::create([
@@ -26,7 +26,7 @@ class UpdatePermissionsTest extends TestCase
         ]);
 
         PermissionModel::create([
-            'name' => PermissionEnum::Impersonate,
+            'name' => Permission::Impersonate,
         ]);
 
         PermissionModel::create([
@@ -58,11 +58,11 @@ class UpdatePermissionsTest extends TestCase
 
         /** Roles */
         $this->assertDatabaseHas('roles', [
-            'name' => RoleEnum::Admin,
+            'name' => Role::Admin,
         ]);
 
         $this->assertDatabaseHas('roles', [
-            'name' => RoleEnum::User,
+            'name' => Role::User,
         ]);
 
         $this->assertDatabaseMissing('roles', [
@@ -71,11 +71,11 @@ class UpdatePermissionsTest extends TestCase
 
         /** Permissions */
         $this->assertDatabaseHas('permissions', [
-            'name' => PermissionEnum::Impersonate,
+            'name' => Permission::Impersonate,
         ]);
 
         $this->assertDatabaseHas('permissions', [
-            'name' => PermissionEnum::ManageUsers,
+            'name' => Permission::ManageUsers,
         ]);
 
         $this->assertDatabaseMissing('permissions', [

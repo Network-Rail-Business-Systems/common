@@ -5,8 +5,8 @@ namespace NetworkRailBusinessSystems\Common\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use NetworkRailBusinessSystems\Common\Enums\Permission as PermissionEnum;
-use NetworkRailBusinessSystems\Common\Enums\Role as RoleEnum;
+use NetworkRailBusinessSystems\Common\Interfaces\PermissionInterface;
+use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use Spatie\Permission\Models\Permission as PermissionModel;
 use Spatie\Permission\Models\Role as RoleModel;
 
@@ -25,13 +25,13 @@ class UpdatePermissions extends Command
     /** @var class-string<PermissionModel> */
     protected string $permissionModel;
 
-    /** @var class-string<PermissionEnum> */
+    /** @var class-string<PermissionInterface> */
     protected string $permissionsEnum;
 
     /** @var class-string<RoleModel> */
     protected string $roleModel;
 
-    /** @var class-string<RoleEnum> */
+    /** @var class-string<RoleInterface> */
     protected string $rolesEnum;
 
     public function handle(): void
@@ -102,7 +102,7 @@ class UpdatePermissions extends Command
         $toInsert = [];
 
         foreach ($roles as $role) {
-            $assignments = $role->assignments();
+            $assignments = $role->permissions();
 
             foreach ($assignments as $permission) {
                 $toInsert[] = [

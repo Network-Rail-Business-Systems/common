@@ -29,6 +29,7 @@
         </include>
         <exclude>
             <directory>src/Views</directory>
+            <directory>src/FormRequests</directory>
         </exclude>
     </source>
 </phpunit>
