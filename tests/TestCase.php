@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Tests;
 
 use AnthonyEdmonds\LaravelFind\FinderServiceProvider;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsFlashMessages;
+use AnthonyEdmonds\LaravelTestingTraits\AssertsResults;
 use AnthonyEdmonds\LaravelTestingTraits\GetsRawCsvs;
 use AnthonyEdmonds\LaravelTestingTraits\SignsInUsers;
 use Illuminate\Support\Facades\Artisan;
@@ -18,6 +19,7 @@ abstract class TestCase extends BaseTestCase
     use AssertsFlashMessages;
     use GetsRawCsvs;
     use SignsInUsers;
+    use AssertsResults;
 
     protected function setUp(): void
     {

@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use NetworkRailBusinessSystems\Common\Enums\Role;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
 use NetworkRailBusinessSystems\Common\Models\User;
 
@@ -16,7 +17,7 @@ class UsersBuilder extends Builder
 {
     public function byEmail(string $email): self
     {
-        return $this->where('email', '=', $email);
+        return $this->where('email', 'LIKE', "$email%");
     }
 
     public function byName(string $name): self
@@ -36,7 +37,7 @@ class UsersBuilder extends Builder
         return $this->whereHas('roles');
     }
 
-    public function byRole(string $role): self
+    public function byRole(Role|string $role): self
     {
         return $this->whereHas('roles', function (Builder $query) use ($role) {
             $query->where('name', '=', $role);
