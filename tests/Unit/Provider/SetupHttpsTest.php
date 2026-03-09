@@ -8,7 +8,11 @@ use Mockery;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class SetupHttpsTest extends TestCase
 {
     protected function setUp(): void
