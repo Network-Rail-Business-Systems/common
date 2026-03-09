@@ -33,7 +33,8 @@ class ByFilterTest extends TestCase
         $this->assertResultsMatch(
             User::query()
                 ->byFilter(
-                    UserFinder::FILTER_ALL)
+                    UserFinder::FILTER_ALL,
+                )
                 ->get(),
             $this->expected,
             $this->unexpected,

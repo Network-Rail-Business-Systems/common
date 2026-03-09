@@ -1,0 +1,29 @@
+<?php
+
+namespace NetworkRailBusinessSystems\Common\Tests\Unit\Finders\User;
+
+use NetworkRailBusinessSystems\Common\Finders\UserFinder;
+use NetworkRailBusinessSystems\Common\Tests\TestCase;
+
+class ListFiltersTest extends TestCase
+{
+    protected UserFinder $finder;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->finder = new UserFinder();
+    }
+
+    public function test(): void
+    {
+        $this->assertEquals(
+            [
+                UserFinder::FILTER_ALL => 'All Users',
+                UserFinder::FILTER_ROLES => 'Users with Roles',
+            ],
+            $this->finder->listFilters(),
+        );
+    }
+}
