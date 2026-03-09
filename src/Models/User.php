@@ -11,6 +11,8 @@ use Illuminate\Support\Collection;
 use Lab404\Impersonate\Models\Impersonate;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
 use NetworkRailBusinessSystems\Common\Enums\Permission;
+use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
+use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -27,12 +29,13 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Collection<Role> $roles
  * @property Carbon $updated_at
  */
-class User extends Authenticatable
+class User extends Authenticatable implements EntraAuthenticatable
 {
     use HasFactory;
     use HasRoles;
     use SoftDeletes;
     use Impersonate;
+    use AuthenticatesWithEntra;
 
     protected $fillable = [
         'email',

@@ -22,7 +22,7 @@ class UpdatePermissionsTest extends TestCase
         ]);
 
         RoleModel::create([
-            'name' => 'Old Role'
+            'name' => 'Old Role',
         ]);
 
         PermissionModel::create([

@@ -25,3 +25,8 @@ class UserPolicy
             : $this->deny("You cannot grant the $role->name Role");
     }
 }
+
+// TODO Abstract model references as you go
+// TODO Register policies
+// TODO Config for collections, finders, etc?
+// TODO Templates
