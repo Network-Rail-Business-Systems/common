@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Tests;
 
 use AnthonyEdmonds\LaravelFind\FinderServiceProvider;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsFlashMessages;
+use AnthonyEdmonds\LaravelTestingTraits\AssertsOrder;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsPolicies;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsResults;
 use AnthonyEdmonds\LaravelTestingTraits\GetsRawCsvs;
@@ -24,6 +25,7 @@ abstract class TestCase extends BaseTestCase
     use SignsInUsers;
     use AssertsResults;
     use AssertsPolicies;
+    use AssertsOrder;
 
     protected function setUp(): void
     {
@@ -31,6 +33,10 @@ abstract class TestCase extends BaseTestCase
 
         config()->set('common.enums.permissions', Permission::class);
         config()->set('common.enums.roles', Role::class);
+        config()->set('common.models.user', User::class);
+
+        config()->set('activitylog.default_auth_driver', null);
+        config()->set('activitylog.default_log_name', 'default');
 
         config()->set('laravel-impersonate.session_key', 'impersonated_by');
         config()->set('laravel-impersonate.session_guard', 'impersonator_guard');
@@ -40,6 +46,9 @@ abstract class TestCase extends BaseTestCase
         config()->set('testing-traits.user_model', User::class);
 
         $this->withoutVite();
+
+        $router = app('router');
+        $router->common();
     }
 
     protected function getPackageProviders($app): array

@@ -12,6 +12,7 @@ class ValuesTest extends TestCase
         $this->assertEquals(
             [
                 Role::Admin->value,
+                Role::Other->value,
                 Role::User->value,
             ],
             Role::values(),

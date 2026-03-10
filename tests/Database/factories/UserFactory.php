@@ -3,7 +3,7 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use NetworkRailBusinessSystems\Common\Tests\Enums\RoleInterface;
+use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 
 class UserFactory extends Factory

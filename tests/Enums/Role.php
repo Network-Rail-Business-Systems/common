@@ -11,6 +11,8 @@ enum Role: string implements RoleInterface
 
     case Admin = 'Admin';
 
+    case Other = 'Other';
+
     case User = 'User';
 
     public function conflicts(): array
@@ -28,6 +30,7 @@ enum Role: string implements RoleInterface
         return match ($this) {
             Role::Admin => [
                 Role::Admin,
+                Role::User,
             ],
             default => [],
         };

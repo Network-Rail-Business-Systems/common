@@ -4,33 +4,68 @@ namespace NetworkRailBusinessSystems\Common\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use NetworkRailBusinessSystems\Common\Models\User;
-use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 
 class UserPolicy
 {
     use HandlesAuthorization;
 
+    // Management
     public function manage(User $auth, User $user): Response
     {
-        return $auth->can('manage_users') === true
+        return $auth->hasPermissionTo($user::managePermission()) === true
             ? $this->allow('You can manage Users')
             : $this->deny('You cannot manage Users');
     }
 
-    public function grant(User $auth, User $user, Role $desiredRole): Response
+    // Roles
+    public function assignRole(User $auth, User $user, RoleInterface $desiredRole): Response
     {
-        foreach ($auth->roles as $roleModel) {
-            $grantingRole = Role::from($roleModel->name);
+        foreach ($user->roles as $roleModel) {
+            $existingRole = $desiredRole::from($roleModel->name);
 
-            if (
-                $grantingRole->canGrant($desiredRole) === true
-                && $grantingRole->conflictsWith($desiredRole) === false
-            ) {
-                return $this->allow("You can grant the $desiredRole->value Role");
+            if ($desiredRole->conflictsWith($existingRole) === true) {
+                return $this->deny("You cannot have both the \"$desiredRole->value\" and \"$existingRole->value\" Roles");
             }
         }
 
-        return $this->deny("You cannot grant the $desiredRole->value Role");
+        foreach ($auth->roles as $roleModel) {
+            $grantingRole = $desiredRole::from($roleModel->name);
+
+            if ($grantingRole->canGrant($desiredRole) === true) {
+                return $this->allow("You can grant the \"$desiredRole->value\" Role");
+            }
+        }
+
+        return $this->deny("You cannot grant the \"$desiredRole->value\" Role");
+    }
+
+    public function revokeRole(User $auth, User $user, RoleInterface $role): Response
+    {
+        foreach ($auth->roles as $roleModel) {
+            $revokingRole = $role::from($roleModel->name);
+
+            if ($revokingRole->canGrant($role) === true) {
+                return $this->allow("You can revoke the \"$role->value\" Role");
+            }
+        }
+
+        return $this->deny("You cannot revoke the \"$role->value\" Role");
+    }
+
+    // Impersonation
+    public function beImpersonated(User $auth, User $user): Response
+    {
+        return $user->hasPermissionTo($user::impersonatePermission()) === false
+            ? $this->allow('You can impersonate this User')
+            : $this->deny('You cannot impersonate this User');
+    }
+
+    public function impersonate(User $auth, User $user): Response
+    {
+        return $user->hasPermissionTo($user::impersonatePermission()) === true
+            ? $this->allow('You can impersonate Users')
+            : $this->deny('You cannot impersonate Users');
     }
 }

@@ -22,8 +22,8 @@ class ByEmailTest extends TestCase
             ->count(3)
             ->sequence(
                 ['email' => 'anthony@test.com'],
-                ['email' => 'ants@test.com'],
-                ['email' => 'antique@test.com'],
+                ['email' => 'anths@test.com'],
+                ['email' => 'anthique@test.com'],
             )
             ->create();
 
@@ -36,7 +36,7 @@ class ByEmailTest extends TestCase
     {
         $this->assertResultsMatch(
             User::query()
-                ->byEmail('ant')
+                ->byEmail('anth')
                 ->get(),
             $this->expected,
             $this->unexpected,

@@ -52,6 +52,7 @@ The `config/common.php` file contains the following options:
 
 | Key         | Usage                                                    | Type   | Default                |
 |-------------|----------------------------------------------------------|--------|------------------------|
+| controllers | Which controllers to use within common functions         | array  | role, user             |
 | enums       | Which enums to use within common functions               | array  | permissions, roles     |
 | force_https | Whether to force HTTPS on regardless of the hostname     | string | false                  |
 | home        | The base resource to redirect to from the root directory | string | /home                  |
@@ -59,13 +60,23 @@ The `config/common.php` file contains the following options:
 | policies    | Which policies to use within common functions            | array  | user                   |
 | template    | Which template group to use for views                    | string | govuk                  |
 
+Where possible a default implementations has been provided for controllers, enums, models, and policies.
+
+You can set or override each implementation by providing the fully qualified name of the new implementation.
+
 ### Enums
 
-You must create a pair of enums for Roles and Permissions.
+You must create enums for Roles and Permissions.
 
 Each must implement the `RoleInterface` and `PermissionInterface` respectively.
 
 A `RoleTrait` and `PermissionTrait` are provided for a standard implementation.
+
+### Models
+
+You must implement your own User model.
+
+An abstract `User` model is provided for you to extend.
 
 ## Usage
 

@@ -10,9 +10,10 @@ trait PermissionTrait
     {
         /** @var class-string<RoleInterface> $rolesEnum */
         $rolesEnum = config('common.enums.roles');
-        $roles = $rolesEnum::cases();
+        $cases = $rolesEnum::cases();
+        $roles = [];
 
-        foreach ($roles as $role) {
+        foreach ($cases as $role) {
             if (in_array($this, $role->permissions()) === true) {
                 $roles[] = $role;
             }

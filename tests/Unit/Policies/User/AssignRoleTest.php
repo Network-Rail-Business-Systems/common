@@ -7,11 +7,13 @@ use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class ManageTest extends TestCase
+class AssignRoleTest extends TestCase
 {
-    protected UserPolicy $policy;
-
     protected User $auth;
+
+    protected Role $role;
+
+    protected UserPolicy $policy;
 
     protected User $user;
 
@@ -27,27 +29,44 @@ class ManageTest extends TestCase
         $this->user = User::factory()->create();
     }
 
+    public function testDeniesWhenConflicted(): void
+    {
+        $this->auth->assignRole(Role::Admin);
+        $this->user->assignRole(Role::User);
+
+        $this->assertPolicyDenies(
+            $this->policy->assignRole(
+                $this->auth,
+                $this->user,
+                Role::Admin,
+            ),
+            'You cannot have both the "' . Role::Admin->value . '" and "' . Role::User->value . '" Roles',
+        );
+    }
+
     public function testAllowsWithPermission(): void
     {
         $this->auth->assignRole(Role::Admin);
 
         $this->assertPolicyAllows(
-            $this->policy->manage(
+            $this->policy->assignRole(
                 $this->auth,
                 $this->user,
+                Role::Admin,
             ),
-            'You can manage Users',
+            'You can grant the "Admin" Role',
         );
     }
 
-    public function testDeniesWithout(): void
+    public function testDeniesWhenCannotGrant(): void
     {
         $this->assertPolicyDenies(
-            $this->policy->manage(
+            $this->policy->assignRole(
                 $this->auth,
                 $this->user,
+                Role::Admin,
             ),
-            'You cannot manage Users',
+            'You cannot grant the "Admin" Role',
         );
     }
 }

@@ -5,6 +5,7 @@ namespace NetworkRailBusinessSystems\Common\Interfaces;
 /**
  * @property string $value
  * @method static array<PermissionInterface> cases()
+ * @method static static from(string $value)
  */
 interface PermissionInterface
 {

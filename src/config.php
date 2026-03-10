@@ -1,6 +1,7 @@
 <?php
 
-use NetworkRailBusinessSystems\Common\Models\User;
+use NetworkRailBusinessSystems\Common\Controllers\User\UserController;
+use NetworkRailBusinessSystems\Common\Controllers\User\UserRoleController;
 use NetworkRailBusinessSystems\Common\Policies\UserPolicy;
 use Spatie\Permission\Models\Permission as PermissionModel;
 use Spatie\Permission\Models\Role as RoleModel;
@@ -19,6 +20,11 @@ return [
      */
     'template' => 'govuk',
 
+    'controllers' => [
+        'role' => UserRoleController::class,
+        'user' => UserController::class,
+    ],
+
     /** Which enums to use */
     'enums' => [
         'permissions' => 'Permission::class',
@@ -29,11 +35,11 @@ return [
     'models' => [
         'permission' => PermissionModel::class,
         'role' => RoleModel::class,
-        'user' => User::class,
+        'user' => 'User::class',
     ],
 
     /** Which policies to use */
     'policies' => [
         'user' => UserPolicy::class,
-    ]
+    ],
 ];

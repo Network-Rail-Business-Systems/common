@@ -8,11 +8,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
 use Lab404\Impersonate\Models\Impersonate;
+use NetworkRailBusinessSystems\ActivityLog\Interfaces\Actioned;
+use NetworkRailBusinessSystems\ActivityLog\Interfaces\Actioner;
+use NetworkRailBusinessSystems\ActivityLog\Traits\HasActions;
+use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
-use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
+use NetworkRailBusinessSystems\Common\Interfaces\PermissionInterface;
 use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
 use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -27,15 +35,21 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $name
  * @property string $remember_token
  * @property Collection<Role> $roles
+ * @property string $short_email
  * @property Carbon $updated_at
  */
-class User extends Authenticatable implements EntraAuthenticatable
+abstract class User extends Authenticatable implements EntraAuthenticatable, Actioner, Actioned
 {
     use HasFactory;
     use HasRoles;
     use SoftDeletes;
     use Impersonate;
     use AuthenticatesWithEntra;
+    use CausesActivity;
+    use HasActions;
+    use HasActivities;
+    use LogsActivity;
+    use CausesActivity;
 
     protected $fillable = [
         'email',
@@ -90,14 +104,49 @@ class User extends Authenticatable implements EntraAuthenticatable
         return $query;
     }
 
-    // Utilities
+    // Getters
+    public function getShortEmailAttribute(): string
+    {
+        return explode('@', $this->email, 2)[0];
+    }
+
+    // ActivityLog
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->dontSubmitEmptyLogs()
+            ->logOnlyDirty()
+            ->logFillable();
+    }
+
+    public function backRoute(): string
+    {
+        return route('admin.users.show', $this);
+    }
+
+    public function label(): string
+    {
+        return $this->name;
+    }
+
+    public function permission(): string
+    {
+        return static::managePermission()->value;
+    }
+
+    // Impersonation
     public function canImpersonate(): bool
     {
-        return $this->hasPermissionTo(Permission::Impersonate) === true;
+        return Gate::check('impersonate', $this) === true;
     }
 
     public function canBeImpersonated(): bool
     {
-        return $this->hasPermissionTo(Permission::Impersonate) === false;
+        return Gate::check('beImpersonated', $this) === true;
     }
+
+    // Permissions
+    abstract public static function impersonatePermission(): PermissionInterface;
+
+    abstract public static function managePermission(): PermissionInterface;
 }

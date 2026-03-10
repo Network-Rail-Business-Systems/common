@@ -16,8 +16,11 @@ class UserFinder extends Finder
 
     public function search(): UserCollection
     {
+        /** @var class-string<User> $userClass */
+        $userClass = config('common.models.user');
+
         return UserCollection::make(
-            User::query()
+            $userClass::query()
                 ->with(['roles'])
                 ->index($this->currentSearch, $this->currentFilter)
                 ->paginate(),

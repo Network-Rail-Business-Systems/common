@@ -7,12 +7,11 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
-use NetworkRailBusinessSystems\Common\Models\User;
-use NetworkRailBusinessSystems\Common\Policies\UserPolicy;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -28,6 +27,9 @@ class CommonServiceProvider extends ServiceProvider
         $this->setupConfig();
         $this->setupHttps();
         $this->setupModels();
+        $this->setupPolicies();
+        $this->setupRoutes();
+        $this->setupViews();
     }
 
     public function setupBaseUrlRedirect(): void
@@ -82,10 +84,40 @@ class CommonServiceProvider extends ServiceProvider
 
     public function setupPolicies(): void
     {
+        dd(
+            config('common.models.user'),
+        );
+
         Gate::policy(
             config('common.models.user'),
             config('common.policies.user'),
         );
+    }
+
+    public function setupRoutes(): void
+    {
+        Route::macro('common', function () {
+            Route::name('admin.')->group(function () {
+                Route::prefix('/users')
+                    ->name('users.')
+                    ->controller(config('common.controllers.user'))
+                    ->group(function () {
+                        Route::get('/', 'index')->name('index');
+
+                        Route::prefix('/{user}')->group(function () {
+                            Route::get('/', 'show')->name('show');
+
+                            Route::prefix('/roles')
+                                ->name('roles.')
+                                ->controller(config('common.controllers.role'))
+                                ->group(function () {
+                                    Route::post('/assign', 'assign')->name('assign');
+                                    Route::post('/revoke', 'revoke')->name('revoke');
+                                });
+                        });
+                    });
+            });
+        });
     }
 
     public function setupViews(): void

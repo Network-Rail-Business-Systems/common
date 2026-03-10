@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Request;
 use Mockery;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Throwable;
 
+#[PreserveGlobalState(false)]
+#[RunTestsInSeparateProcesses]
 class BootTest extends TestCase
 {
     protected CommonServiceProvider $provider;

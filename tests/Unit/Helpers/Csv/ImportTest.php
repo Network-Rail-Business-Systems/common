@@ -1,9 +1,9 @@
 <?php
 
-namespace NetworkRailBusinessSystems\Common\Tests\Unit\Csv;
+namespace NetworkRailBusinessSystems\Common\Tests\Unit\Helpers\Csv;
 
 use Illuminate\Http\UploadedFile;
-use NetworkRailBusinessSystems\Common\Csv;
+use NetworkRailBusinessSystems\Common\Helpers\Csv;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 use Spatie\SimpleExcel\SimpleExcelReader;
 

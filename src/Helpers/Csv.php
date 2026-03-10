@@ -1,6 +1,6 @@
 <?php
 
-namespace NetworkRailBusinessSystems\Common;
+namespace NetworkRailBusinessSystems\Common\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;

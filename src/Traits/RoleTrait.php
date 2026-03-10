@@ -22,10 +22,8 @@ trait RoleTrait
 
     public function conflictsWith(RoleInterface $role): bool
     {
-        return in_array(
-            $role,
-            $this->conflicts(),
-        ) === true;
+        return in_array($role, $this->conflicts()) === true
+            || in_array($this, $role->conflicts()) === true;
     }
 
     public static function values(): array

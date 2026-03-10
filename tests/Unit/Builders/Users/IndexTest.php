@@ -4,7 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Builders\Users;
 
 use Illuminate\Support\Collection;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
-use NetworkRailBusinessSystems\Common\Tests\Enums\RoleInterface;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
@@ -23,13 +23,13 @@ class IndexTest extends TestCase
 
         $this->expected = User::factory()
             ->count(3)
-            ->withRole(RoleInterface::Admin)
+            ->withRole(Role::Admin)
             ->create();
 
         $this->unexpected = User::factory()
             ->count(3)
             ->create([
-                'first_name' => RoleInterface::Admin,
+                'first_name' => Role::Admin,
             ]);
     }
 
@@ -37,7 +37,7 @@ class IndexTest extends TestCase
     {
         $this->assertResultsMatch(
             User::query()
-                ->index(RoleInterface::Admin->value, UserFinder::FILTER_ROLES)
+                ->index(Role::Admin->value, UserFinder::FILTER_ROLES)
                 ->get(),
             $this->expected,
             $this->unexpected,

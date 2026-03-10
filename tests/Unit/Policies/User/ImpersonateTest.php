@@ -7,11 +7,13 @@ use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class ManageTest extends TestCase
+class ImpersonateTest extends TestCase
 {
-    protected UserPolicy $policy;
-
     protected User $auth;
+
+    protected Role $role;
+
+    protected UserPolicy $policy;
 
     protected User $user;
 
@@ -27,27 +29,27 @@ class ManageTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function testAllowsWithPermission(): void
+    public function testDeniesWithoutPermission(): void
     {
-        $this->auth->assignRole(Role::Admin);
-
-        $this->assertPolicyAllows(
-            $this->policy->manage(
+        $this->assertPolicyDenies(
+            $this->policy->impersonate(
                 $this->auth,
                 $this->user,
             ),
-            'You can manage Users',
+            'You cannot impersonate Users',
         );
     }
 
-    public function testDeniesWithout(): void
+    public function testAllowsWithPermission(): void
     {
-        $this->assertPolicyDenies(
-            $this->policy->manage(
+        $this->user->assignRole(Role::Admin);
+
+        $this->assertPolicyAllows(
+            $this->policy->impersonate(
                 $this->auth,
                 $this->user,
             ),
-            'You cannot manage Users',
+            'You can impersonate Users',
         );
     }
 }
