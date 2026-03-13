@@ -84,10 +84,6 @@ class CommonServiceProvider extends ServiceProvider
 
     public function setupPolicies(): void
     {
-        dd(
-            config('common.models.user'),
-        );
-
         Gate::policy(
             config('common.models.user'),
             config('common.policies.user'),
@@ -97,26 +93,34 @@ class CommonServiceProvider extends ServiceProvider
     public function setupRoutes(): void
     {
         Route::macro('common', function () {
-            Route::name('admin.')->group(function () {
-                Route::prefix('/users')
-                    ->name('users.')
-                    ->controller(config('common.controllers.user'))
-                    ->group(function () {
-                        Route::get('/', 'index')->name('index');
+            Route::prefix('/admin')
+                ->name('admin.')
+                ->controller(config('common.controllers.admin'))
+                ->group(function () {
+                    Route::get('/', 'index')->name('index');
 
-                        Route::prefix('/{user}')->group(function () {
-                            Route::get('/', 'show')->name('show');
+                    Route::prefix('/users')
+                        ->name('users.')
+                        ->controller(config('common.controllers.user'))
+                        ->group(function () {
+                            Route::get('/', 'index')->name('index');
+                            Route::get('/create', 'create')->name('create');
+                            Route::post('/create', 'store')->name('store');
+                            Route::get('/export', 'export')->name('export');
 
-                            Route::prefix('/roles')
-                                ->name('roles.')
-                                ->controller(config('common.controllers.role'))
-                                ->group(function () {
-                                    Route::post('/assign', 'assign')->name('assign');
-                                    Route::post('/revoke', 'revoke')->name('revoke');
-                                });
+                            Route::prefix('/{user}')->group(function () {
+                                Route::get('/', 'show')->name('show');
+
+                                Route::prefix('/roles')
+                                    ->name('roles.')
+                                    ->controller(config('common.controllers.role'))
+                                    ->group(function () {
+                                        Route::post('/assign', 'assign')->name('assign');
+                                        Route::post('/revoke', 'remove')->name('remove');
+                                    });
+                            });
                         });
-                    });
-            });
+                });
         });
     }
 

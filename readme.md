@@ -44,21 +44,26 @@ The following can be published using `php artisan vendor:publish`:
 | Key           | Usage                          | Target                        |
 |---------------|--------------------------------|-------------------------------|
 | common-config | The Common configuration file  | config/common.php             |
-| commong-views | Views provided by this library | resources/views/vendor/common |
+| common-views  | Views provided by this library | resources/views/vendor/common |
+
+### Routes
+
+Add the common routes to your system using the `Route::common()` macro.
 
 ## Configuration
 
 The `config/common.php` file contains the following options:
 
-| Key         | Usage                                                    | Type   | Default                |
-|-------------|----------------------------------------------------------|--------|------------------------|
-| controllers | Which controllers to use within common functions         | array  | role, user             |
-| enums       | Which enums to use within common functions               | array  | permissions, roles     |
-| force_https | Whether to force HTTPS on regardless of the hostname     | string | false                  |
-| home        | The base resource to redirect to from the root directory | string | /home                  |
-| models      | Which models to use within common functions              | array  | permission, role, user |
-| policies    | Which policies to use within common functions            | array  | user                   |
-| template    | Which template group to use for views                    | string | govuk                  |
+| Key         | Usage                                                    | Type   | Default                    |
+|-------------|----------------------------------------------------------|--------|----------------------------|
+| controllers | Which controllers to use within common functions         | array  | role, user                 |
+| enums       | Which enums to use within common functions               | array  | permissions, roles         |
+| force_https | Whether to force HTTPS on regardless of the hostname     | string | false                      |
+| home        | The base resource to redirect to from the root directory | string | /home                      |
+| models      | Which models to use within common functions              | array  | permission, role, user     |
+| permissions | Which Permissions to use within common functions         | array  | access_admin, manage_users |
+| policies    | Which policies to use within common functions            | array  | user                       |
+| template    | Which template group to use for views                    | string | govuk                      |
 
 Where possible a default implementations has been provided for controllers, enums, models, and policies.
 
@@ -71,6 +76,13 @@ You must create enums for Roles and Permissions.
 Each must implement the `RoleInterface` and `PermissionInterface` respectively.
 
 A `RoleTrait` and `PermissionTrait` are provided for a standard implementation.
+
+#### Permissions
+
+You should add the following Permissions to your enum as a minimum:
+
+* Permission::AccessAdmin
+* Permission::ManageUsers
 
 ### Models
 

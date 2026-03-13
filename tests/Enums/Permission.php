@@ -9,6 +9,8 @@ enum Permission: string implements PermissionInterface
 {
     use PermissionTrait;
 
+    case AccessAdmin = 'access_admin';
+
     case Impersonate = 'impersonate';
 
     case ManageUsers = 'manage_users';

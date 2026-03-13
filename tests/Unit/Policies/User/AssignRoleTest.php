@@ -54,7 +54,7 @@ class AssignRoleTest extends TestCase
                 $this->user,
                 Role::Admin,
             ),
-            'You can grant the "Admin" Role',
+            'You can assign the "Admin" Role',
         );
     }
 
@@ -66,7 +66,7 @@ class AssignRoleTest extends TestCase
                 $this->user,
                 Role::Admin,
             ),
-            'You cannot grant the "Admin" Role',
+            'You cannot assign the "Admin" Role',
         );
     }
 }

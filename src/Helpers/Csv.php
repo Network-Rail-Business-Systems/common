@@ -40,18 +40,18 @@ class Csv
                 $prefixDate === true,
                 function (Stringable $string) {
                     return $string->start(
-                        Carbon::now()->format('Y_m_d'),
+                        Carbon::now()->format('Y_m_d_'),
                     );
                 },
             )
+            ->lower()
             ->snake()
             ->when(
                 str_ends_with($filename, '.csv') === false,
                 function (Stringable $string) {
                     return $string->finish('.csv');
                 },
-            )
-            ->lower();
+            );
 
         $path = Storage::disk($disk)->path($filename);
         $csv = SimpleExcelWriter::create($path, 'csv');

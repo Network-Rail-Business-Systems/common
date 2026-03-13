@@ -34,24 +34,24 @@ class UserPolicy
             $grantingRole = $desiredRole::from($roleModel->name);
 
             if ($grantingRole->canGrant($desiredRole) === true) {
-                return $this->allow("You can grant the \"$desiredRole->value\" Role");
+                return $this->allow("You can assign the \"$desiredRole->value\" Role");
             }
         }
 
-        return $this->deny("You cannot grant the \"$desiredRole->value\" Role");
+        return $this->deny("You cannot assign the \"$desiredRole->value\" Role");
     }
 
-    public function revokeRole(User $auth, User $user, RoleInterface $role): Response
+    public function removeRole(User $auth, User $user, RoleInterface $role): Response
     {
         foreach ($auth->roles as $roleModel) {
             $revokingRole = $role::from($roleModel->name);
 
             if ($revokingRole->canGrant($role) === true) {
-                return $this->allow("You can revoke the \"$role->value\" Role");
+                return $this->allow("You can remove the \"$role->value\" Role");
             }
         }
 
-        return $this->deny("You cannot revoke the \"$role->value\" Role");
+        return $this->deny("You cannot remove the \"$role->value\" Role");
     }
 
     // Impersonation

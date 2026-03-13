@@ -40,6 +40,7 @@ enum Role: string implements RoleInterface
     {
         return match ($this) {
             Role::Admin => [
+                Permission::AccessAdmin,
                 Permission::Impersonate,
                 Permission::ManageUsers,
             ],

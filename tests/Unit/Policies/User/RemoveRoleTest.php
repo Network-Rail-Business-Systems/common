@@ -7,7 +7,7 @@ use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class RevokeRoleTest extends TestCase
+class RemoveRoleTest extends TestCase
 {
     protected Role $role;
 
@@ -34,24 +34,24 @@ class RevokeRoleTest extends TestCase
         $this->auth->assignRole(Role::Admin);
 
         $this->assertPolicyAllows(
-            $this->policy->revokeRole(
+            $this->policy->removeRole(
                 $this->auth,
                 $this->user,
                 Role::Admin,
             ),
-            'You can revoke the "' . Role::Admin->value . '" Role',
+            'You can remove the "' . Role::Admin->value . '" Role',
         );
     }
 
     public function testDeniesWithout(): void
     {
         $this->assertPolicyDenies(
-            $this->policy->revokeRole(
+            $this->policy->removeRole(
                 $this->auth,
                 $this->user,
                 Role::Admin,
             ),
-            'You cannot revoke the "' . Role::Admin->value . '" Role',
+            'You cannot remove the "' . Role::Admin->value . '" Role',
         );
     }
 }

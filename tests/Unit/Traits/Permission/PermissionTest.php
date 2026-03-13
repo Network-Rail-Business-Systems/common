@@ -11,6 +11,7 @@ class PermissionTest extends TestCase
     {
         $this->assertEquals(
             [
+                Permission::AccessAdmin->value,
                 Permission::Impersonate->value,
                 Permission::ManageUsers->value,
             ],

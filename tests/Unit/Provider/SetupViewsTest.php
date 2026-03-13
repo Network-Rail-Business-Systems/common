@@ -26,11 +26,19 @@ class SetupViewsTest extends TestCase
         );
 
         $this->assertTrue(
-            View::exists('common::users.index'),
+            View::exists('common::admin.index'),
         );
 
         $this->assertTrue(
-            View::exists('common::users.show'),
+            View::exists('common::admin.users.index'),
+        );
+
+        $this->assertTrue(
+            View::exists('common::admin.users.create'),
+        );
+
+        $this->assertTrue(
+            View::exists('common::admin.users.show'),
         );
     }
 }

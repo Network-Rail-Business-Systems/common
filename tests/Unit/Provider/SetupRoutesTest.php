@@ -3,12 +3,11 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Provider;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
-use NetworkRailBusinessSystems\Common\Policies\UserPolicy;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class SetupPoliciesTest extends TestCase
+class SetupRoutesTest extends TestCase
 {
     protected CommonServiceProvider $provider;
 
@@ -19,17 +18,21 @@ class SetupPoliciesTest extends TestCase
         Gate::clearResolvedInstances();
 
         $this->provider = new CommonServiceProvider($this->app);
-        $this->provider->setupPolicies();
+        $this->provider->setupRoutes();
     }
 
     public function test(): void
     {
-        $this->assertEquals(
-            [
-                'User::class' => UserPolicy::class,
-                User::class => UserPolicy::class,
-            ],
-            Gate::policies(),
+        $this->assertTrue(
+            Route::has('admin.'),
+        );
+
+        $this->assertTrue(
+            Route::has('admin.users.'),
+        );
+
+        $this->assertTrue(
+            Route::has('admin.users.roles.'),
         );
     }
 }

@@ -78,6 +78,10 @@ abstract class User extends Authenticatable implements EntraAuthenticatable, Act
         'remember_token',
     ];
 
+    protected $with = [
+        'roles',
+    ];
+
     protected string $guard_name = 'web';
 
     protected $perPage = 10;

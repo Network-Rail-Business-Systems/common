@@ -2,12 +2,14 @@
 
 namespace NetworkRailBusinessSystems\Common\Interfaces;
 
+use BackedEnum;
+
 /**
  * @property string $value
  * @method static array<RoleInterface> cases()
  * @method static static from(string $value)
  */
-interface RoleInterface
+interface RoleInterface extends BackedEnum
 {
     /** Whether this Role can grant the given Role */
     public function canGrant(RoleInterface $role): bool;
