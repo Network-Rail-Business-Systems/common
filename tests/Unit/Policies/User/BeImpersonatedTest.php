@@ -39,7 +39,7 @@ class BeImpersonatedTest extends TestCase
                 $this->auth,
                 $this->user,
             ),
-            'You cannot impersonate this User',
+            'You cannot impersonate Users who have the "Admin" Role',
         );
     }
 

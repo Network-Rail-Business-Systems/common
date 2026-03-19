@@ -20,6 +20,14 @@ trait RoleTrait
         ) === true;
     }
 
+    public function canImpersonate(RoleInterface $role): bool
+    {
+        return in_array(
+            $role,
+            $this->allowedImpersonations(),
+        ) === true;
+    }
+
     public function conflictsWith(RoleInterface $role): bool
     {
         return in_array($role, $this->conflicts()) === true

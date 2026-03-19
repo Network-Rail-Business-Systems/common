@@ -15,6 +15,7 @@ use NetworkRailBusinessSystems\ActivityLog\Interfaces\Actioner;
 use NetworkRailBusinessSystems\ActivityLog\Traits\HasActions;
 use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
+use NetworkRailBusinessSystems\Common\Factories\UserFactory;
 use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
 use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
 use Spatie\Activitylog\LogOptions;
@@ -106,6 +107,11 @@ abstract class User extends Authenticatable implements EntraAuthenticatable, Act
         /** @var UsersBuilder $query */
         $query = parent::query();
         return $query;
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return new UserFactory();
     }
 
     // Getters

@@ -4,15 +4,13 @@ namespace NetworkRailBusinessSystems\Common\Interfaces;
 
 use BackedEnum;
 
-/**
- * @property string $value
- * @method static array<RoleInterface> cases()
- * @method static static from(string $value)
- */
 interface RoleInterface extends BackedEnum
 {
     /** Whether this Role can grant the given Role */
     public function canGrant(RoleInterface $role): bool;
+
+    /** Whether this Role can impersonate a given Role */
+    public function canImpersonate(RoleInterface $role): bool;
 
     /** Which Roles each Role conflicts with; use a match statement */
     public function conflicts(): array;
@@ -22,6 +20,9 @@ interface RoleInterface extends BackedEnum
 
     /** Which Roles each Role can assign; use a match statement */
     public function grants(): array;
+
+    /** Which Roles this Role can impersonate */
+    public function allowedImpersonations(): array;
 
     /** The Permissions each Role has been assigned; use a match statement */
     public function permissions(): array;

@@ -55,12 +55,24 @@ class UserPolicy
     }
 
     // Impersonation
-    // TODO Support tiered impersonation
     public function beImpersonated(User $auth, User $user): Response
     {
-        return $user->hasPermissionTo(config('common.permissions.impersonate')) === false
-            ? $this->allow('You can impersonate this User')
-            : $this->deny('You cannot impersonate this User');
+        /** @var RoleInterface $roleEnum */
+        $roleEnum = config('common.enums.roles');
+
+        foreach ($auth->roles as $impersonatingRoleModel) {
+            $impersonatingRole = $roleEnum::from($impersonatingRoleModel->name);
+
+            foreach ($user->roles as $impersonateeRoleModel) {
+                $impersonateeRole = $roleEnum::from($impersonateeRoleModel->name);
+
+                if ($impersonatingRole->canImpersonate($impersonateeRole) === false) {
+                    return $this->deny("You cannot impersonate Users who have the \"$impersonateeRole->value\" Role");
+                }
+            }
+        }
+
+        return $this->allow('You can impersonate this User');
     }
 
     public function impersonate(User $auth, User $user): Response

@@ -15,6 +15,20 @@ enum Role: string implements RoleInterface
 
     case User = 'User';
 
+    public function allowedImpersonations(): array
+    {
+        return match ($this) {
+            Role::Admin => [
+                Role::Other,
+                Role::User,
+            ],
+            Role::Other => [
+                Role::User,
+            ],
+            default => [],
+        };
+    }
+
     public function conflicts(): array
     {
         return match ($this) {

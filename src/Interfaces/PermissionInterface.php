@@ -4,11 +4,6 @@ namespace NetworkRailBusinessSystems\Common\Interfaces;
 
 use BackedEnum;
 
-/**
- * @property string $value
- * @method static array<PermissionInterface> cases()
- * @method static static from(string $value)
- */
 interface PermissionInterface extends BackedEnum
 {
     /** Which Roles this Permission is assigned to */
