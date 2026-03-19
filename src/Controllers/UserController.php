@@ -6,10 +6,10 @@ use AnthonyEdmonds\LaravelFormBuilder\Helpers\Field;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use NetworkRailBusinessSystems\Common\Finders\UserFinder;
 use NetworkRailBusinessSystems\Common\FormRequests\ImportUserRequest;
 use NetworkRailBusinessSystems\Common\Helpers\Csv;
 use NetworkRailBusinessSystems\Common\Models\User;
-use NetworkRailBusinessSystems\Common\ResourceCollections\UserCollection;
 use NetworkRailBusinessSystems\Common\ResourceCollections\UserRoleCollection;
 use NetworkRailBusinessSystems\Entra\Models\EntraUser;
 use Spatie\Permission\Models\Role;
@@ -31,12 +31,8 @@ class UserController extends Controller
                 'Admin' => route('admin.index'),
                 'Users' => route('admin.users.index'),
             ],
+            'finder' => UserFinder::find(),
             'title' => 'Manage Users',
-            'users' => UserCollection::make(
-                $userModel->query()
-                    ->with(['roles'])
-                    ->paginate(),
-            ),
         ]);
     }
 
@@ -105,26 +101,40 @@ class UserController extends Controller
 
     public function export(): BinaryFileResponse
     {
+        $userModel = $this->newUserModel();
+
         $this->authorize(
             config('common.permissions.manage_users'),
-            $this->newUserModel(),
+            $userModel,
         );
+
+        $finder = new UserFinder();
+
+        $users = DB::table('users')
+            ->select([
+                'users.id AS id',
+                DB::raw('MAX(users.name) AS name'),
+                DB::raw('MAX(users.email) AS email'),
+                DB::raw('MAX(users.updated_at) AS last_login'),
+                DB::raw('GROUP_CONCAT(roles.name, ",") AS roles'),
+            ])
+            ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+            ->leftJoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->whereExists(
+                $userModel::query()
+                    ->index(
+                        $finder->currentSearch,
+                        $finder->currentFilter,
+                    )
+                    ->whereColumn('users.id', '=', 'users.id'), // TODO How to handle this, if needed?
+            )
+            ->groupBy('users.id')
+            ->orderBy('users.name')
+            ->get();
 
         return Csv::export(
             mb_strtolower(config('app.acronym')) . '_users.csv',
-            DB::table('users')
-                ->select([
-                    'users.id AS id',
-                    DB::raw('MAX(users.name) AS name'),
-                    DB::raw('MAX(users.email) AS email'),
-                    DB::raw('MAX(users.updated_at) AS last_login'),
-                    DB::raw('GROUP_CONCAT(roles.name, ",") AS roles'),
-                ])
-                ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-                ->leftJoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
-                ->groupBy('users.id')
-                ->orderBy('users.name')
-                ->get(),
+            $users,
         );
     }
 

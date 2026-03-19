@@ -2,9 +2,9 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Controllers\User;
 
+use AnthonyEdmonds\LaravelFind\FinderOutput;
 use Illuminate\Contracts\View\View;
 use NetworkRailBusinessSystems\Common\Controllers\UserController;
-use NetworkRailBusinessSystems\Common\ResourceCollections\UserCollection;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
@@ -52,8 +52,8 @@ class IndexTest extends TestCase
         );
 
         $this->assertInstanceOf(
-            UserCollection::class,
-            $data['users'],
+            FinderOutput::class,
+            $data['finder'],
         );
     }
 }
