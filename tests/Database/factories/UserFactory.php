@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use NetworkRailBusinessSystems\Common\Tests\Models\User;
 
+// TODO Abstract factory
 class UserFactory extends Factory
 {
     protected $model = User::class;

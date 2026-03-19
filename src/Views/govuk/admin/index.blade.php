@@ -1,3 +1,5 @@
+@extends('govuk::templates.custom')
+
 @section('main')
     <x-govuk::p>From this page you can manage various parts of the system.</x-govuk::p>
     <x-govuk::p>Select from one of the following options:</x-govuk::p>

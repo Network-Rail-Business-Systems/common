@@ -1,4 +1,4 @@
-@extends('govuk::custom')
+@extends('govuk::templates.custom')
 
 @section('main')
     <x-govuk::p>This page allows you to manage Users.</x-govuk::p>
@@ -19,7 +19,7 @@
         </li>
     </x-govuk::ul>
 
-    <x-govuk::section-break />
+    <x-govuk::section-break size="m" />
 
     <x-govuk::table
         :caption="$finder->caption"

@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        app()->bind(User::class, config('common.models.user'));
+    }
+
     public function index(): View
     {
         $userModel = $this->newUserModel();
@@ -110,26 +115,40 @@ class UserController extends Controller
 
         $finder = new UserFinder();
 
-        $users = DB::table('users')
+        $rolesTable = config('permission.table_names.roles');
+        $modelHasRolesTable = config('permission.table_names.model_has_roles');
+        $modelColumn = config('permission.column_names.model_morph_key');
+
+        $users = DB::table('users AS results')
             ->select([
-                'users.id AS id',
-                DB::raw('MAX(users.name) AS name'),
-                DB::raw('MAX(users.email) AS email'),
-                DB::raw('MAX(users.updated_at) AS last_login'),
-                DB::raw('GROUP_CONCAT(roles.name, ",") AS roles'),
+                'results.id AS id',
+                DB::raw('MAX(results.name) AS name'),
+                DB::raw('MAX(results.email) AS email'),
+                DB::raw('MAX(results.updated_at) AS last_login'),
+                DB::raw("GROUP_CONCAT($rolesTable.name, \",\") AS roles"),
             ])
-            ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-            ->leftJoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->leftJoin(
+                $modelHasRolesTable,
+                "$modelHasRolesTable.$modelColumn",
+                '=',
+                'results.id',
+            )
+            ->leftJoin(
+                $rolesTable,
+                "$rolesTable.id",
+                '=',
+                "$modelHasRolesTable.$modelColumn",
+            )
             ->whereExists(
                 $userModel::query()
                     ->index(
                         $finder->currentSearch,
                         $finder->currentFilter,
                     )
-                    ->whereColumn('users.id', '=', 'users.id'), // TODO How to handle this, if needed?
+                    ->whereColumn('users.id', '=', 'results.id'),
             )
-            ->groupBy('users.id')
-            ->orderBy('users.name')
+            ->groupBy('results.id')
+            ->orderBy('results.name')
             ->get();
 
         return Csv::export(

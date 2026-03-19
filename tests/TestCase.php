@@ -15,6 +15,7 @@ use AnthonyEdmonds\LaravelTestingTraits\SignsInUsers;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\FlashServiceProvider;
+use NetworkRailBusinessSystems\ActivityLog\ActivityLogServiceProvider;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
@@ -42,6 +43,9 @@ abstract class TestCase extends BaseTestCase
 
         config()->set('common.enums.permissions', Permission::class);
         config()->set('common.enums.roles', Role::class);
+        config()->set('common.permissions.access_admin', Permission::AccessAdmin);
+        config()->set('common.permissions.impersonate', Permission::Impersonate);
+        config()->set('common.permissions.manage_users', Permission::ManageUsers);
         config()->set('common.template', 'bulma');
         config()->set('common.models.user', User::class);
 
@@ -90,6 +94,7 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [
+            ActivityLogServiceProvider::class,
             CommonServiceProvider::class,
             FinderServiceProvider::class,
             FlashServiceProvider::class,

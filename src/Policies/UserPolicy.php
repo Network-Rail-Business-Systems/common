@@ -14,7 +14,7 @@ class UserPolicy
     // Management
     public function manage(User $auth, User $user): Response
     {
-        return $auth->hasPermissionTo($user::managePermission()) === true
+        return $auth->hasPermissionTo(config('common.permissions.manage_users')) === true
             ? $this->allow('You can manage Users')
             : $this->deny('You cannot manage Users');
     }
@@ -55,16 +55,17 @@ class UserPolicy
     }
 
     // Impersonation
+    // TODO Support tiered impersonation
     public function beImpersonated(User $auth, User $user): Response
     {
-        return $user->hasPermissionTo($user::impersonatePermission()) === false
+        return $user->hasPermissionTo(config('common.permissions.impersonate')) === false
             ? $this->allow('You can impersonate this User')
             : $this->deny('You cannot impersonate this User');
     }
 
     public function impersonate(User $auth, User $user): Response
     {
-        return $user->hasPermissionTo($user::impersonatePermission()) === true
+        return $user->hasPermissionTo(config('common.permissions.impersonate')) === true
             ? $this->allow('You can impersonate Users')
             : $this->deny('You cannot impersonate Users');
     }

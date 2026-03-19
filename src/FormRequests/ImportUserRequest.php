@@ -19,7 +19,6 @@ class ImportUserRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-                'unique:users,email',
                 new UserExistsInEntra(),
             ],
         ];
@@ -28,7 +27,7 @@ class ImportUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.unique' => 'An account with that e-mail address already exists.',
+            'email.*' => 'Enter the e-mail of a person with a Network Rail account',
         ];
     }
 }

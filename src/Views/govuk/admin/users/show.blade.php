@@ -1,4 +1,4 @@
-@extends('govuk::custom')
+@extends('govuk::templates.custom')
 
 @section('main')
     <x-govuk::p>This page allows you to manage this User.</x-govuk::p>
@@ -23,13 +23,13 @@
         </li>
 
         <li>
-            <x-govuk::a href="{{ route('admin.users.activity', $user) }}">
+            <x-govuk::a href="{{ route('admin.users.activities', $user) }}">
                 View activity log for this User
             </x-govuk::a>
         </li>
     </x-govuk::ul>
 
-    <x-govuk::section-break />
+    <x-govuk::section-break size="m" />
 
     <x-govuk::table
         caption="Roles"

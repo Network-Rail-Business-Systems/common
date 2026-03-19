@@ -4,10 +4,9 @@ namespace NetworkRailBusinessSystems\Common\ResourceCollections;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
+use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use NetworkRailBusinessSystems\Common\Models\User;
-use Spatie\Permission\Models\Role;
 
-/** @mixin Role */
 class UserRoleResource extends JsonResource
 {
     public function toArray($request): array
@@ -18,8 +17,9 @@ class UserRoleResource extends JsonResource
         /** @var User $viewer */
         $viewer = Auth::user();
 
-        /** @var Role $role */
-        $role = $this->resource;
+        /** @var class-string<RoleInterface> $roleClass */
+        $roleClass = config('common.enums.roles');
+        $role = $roleClass::from($this->resource->name);
 
         $hasRole = $user->hasRole($role) === true;
         $action = $hasRole === true
@@ -27,12 +27,12 @@ class UserRoleResource extends JsonResource
             : 'assign';
 
         return [
-            'name' => $role->name,
+            'name' => $role->value,
             'status' => $hasRole === true ? 'Active' : 'Inactive',
             'colour' => $hasRole === true ? 'blue' : 'grey',
             'action' => $hasRole === true ? 'Remove' : 'Assign',
-            'link' => route("common.users.roles.$action", [$user, $role]),
-            'hide' => $viewer->can($action, [$user, $role]) === false
+            'link' => route("admin.users.roles.$action", [$user, $role]),
+            'hide' => $viewer->can("{$action}Role", [$user, $role]) === false
                 ? 1
                 : 0,
         ];

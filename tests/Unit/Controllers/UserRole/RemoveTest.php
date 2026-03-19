@@ -28,7 +28,7 @@ class RemoveTest extends TestCase
         $this->signInWithRole(Role::Admin->value);
 
         $this->controller = new UserRoleController();
-        $this->redirect = $this->controller->remove($this->user, Role::Admin);
+        $this->redirect = $this->controller->remove($this->user, Role::Admin->value);
     }
 
     public function test(): void

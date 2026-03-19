@@ -11,6 +11,7 @@ class UserResource extends JsonResource
     public function toArray($request): array
     {
         return [
+            'email' => $this->email,
             'name' => $this->name,
             'roles' => $this->roles->implode('name', ', '),
             'link' => route('admin.users.show', $this),

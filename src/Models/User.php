@@ -15,7 +15,6 @@ use NetworkRailBusinessSystems\ActivityLog\Interfaces\Actioner;
 use NetworkRailBusinessSystems\ActivityLog\Traits\HasActions;
 use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
-use NetworkRailBusinessSystems\Common\Interfaces\PermissionInterface;
 use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
 use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
 use Spatie\Activitylog\LogOptions;
@@ -25,6 +24,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
+ * @property bool $active
  * @property string $azure_id
  * @property Carbon $created_at
  * @property ?Carbon $deleted_at
@@ -109,6 +109,11 @@ abstract class User extends Authenticatable implements EntraAuthenticatable, Act
     }
 
     // Getters
+    public function getActiveAttribute(): bool
+    {
+        return $this->trashed() === false;
+    }
+
     public function getShortEmailAttribute(): string
     {
         return explode('@', $this->email, 2)[0];
@@ -135,7 +140,7 @@ abstract class User extends Authenticatable implements EntraAuthenticatable, Act
 
     public function permission(): string
     {
-        return static::managePermission()->value;
+        return config('common.permissions.manage_users')->value;
     }
 
     // Impersonation
@@ -148,9 +153,4 @@ abstract class User extends Authenticatable implements EntraAuthenticatable, Act
     {
         return Gate::check('beImpersonated', $this) === true;
     }
-
-    // Permissions
-    abstract public static function impersonatePermission(): PermissionInterface;
-
-    abstract public static function managePermission(): PermissionInterface;
 }

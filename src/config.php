@@ -37,6 +37,7 @@ return [
     /** Which Permissions to use; replace with your own Permission::AccessAdmin implementations */
     'permissions' => [
         'access_admin' => 'access_admin',
+        'impersonate' => 'impersonate',
         'manage_users' => 'manage_users',
     ],
 

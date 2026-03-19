@@ -108,10 +108,13 @@ class CommonServiceProvider extends ServiceProvider
                             Route::post('/create', 'store')->name('store');
                             Route::get('/export', 'export')->name('export');
 
+                            Route::activityLogActioner(config('common.models.user'));
+                            Route::activityLogActioned(config('common.models.user'));
+
                             Route::prefix('/{user}')->group(function () {
                                 Route::get('/', 'show')->name('show');
 
-                                Route::prefix('/roles')
+                                Route::prefix('/roles/{name}')
                                     ->name('roles.')
                                     ->controller(config('common.controllers.role'))
                                     ->group(function () {
@@ -127,13 +130,14 @@ class CommonServiceProvider extends ServiceProvider
     public function setupViews(): void
     {
         $template = config('common.template') ?? 'govuk';
+        $path = __DIR__ . '/Views/' . $template;
 
         $this->publishes([
-            __DIR__ . '/Views' => resource_path('views/vendor/common'),
+            $path => resource_path('views/vendor/common'),
         ], 'common-views');
 
         $this->loadViewsFrom(
-            __DIR__ . '/Views/' . $template,
+            $path,
             'common',
         );
     }

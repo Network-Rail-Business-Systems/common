@@ -5,8 +5,8 @@ namespace NetworkRailBusinessSystems\Common\Builders;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
+use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use NetworkRailBusinessSystems\Common\Models\User;
-use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 
 /**
  * @method ?User first()
@@ -37,7 +37,7 @@ class UsersBuilder extends Builder
         return $this->whereHas('roles');
     }
 
-    public function byRole(Role|string $role): self
+    public function byRole(RoleInterface|string $role): self
     {
         return $this->whereHas('roles', function (Builder $query) use ($role) {
             $query->where('name', '=', $role);
