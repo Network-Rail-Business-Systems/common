@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Controllers\User;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use NetworkRailBusinessSystems\Common\Controllers\UserController;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
@@ -18,6 +19,9 @@ class ExportTest extends TestCase
     {
         parent::setUp();
 
+        $now = Carbon::now();
+        Carbon::setTestNow($now);
+
         Storage::fake('temp');
 
         $this->useDatabase();
@@ -32,7 +36,7 @@ class ExportTest extends TestCase
     public function test(): void
     {
         $this->assertEquals(
-            'attachment; filename=2026_03_13_cmn_users.csv',
+            'attachment; filename=2026_03_19_cmn_users.csv',
             $this->response->headers->get('content-disposition'),
         );
     }
