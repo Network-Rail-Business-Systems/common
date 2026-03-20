@@ -7,3 +7,5 @@ parameters:
         - src
     ignoreErrors:
         - identifier: larastan.noEnvCallsOutsideOfConfig
+        - identifier: trait.unused
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given#'

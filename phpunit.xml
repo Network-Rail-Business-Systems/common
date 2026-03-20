@@ -28,6 +28,9 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
+            <directory>src/Factories</directory>
+            <directory>src/FormRequests</directory>
+            <directory>src/ResourceCollections</directory>
             <directory>src/Views</directory>
         </exclude>
     </source>

@@ -41,17 +41,70 @@ If you need to manually load it, you can add the following to your `config/app.p
 
 The following can be published using `php artisan vendor:publish`:
 
-| Key    | Usage                         | Target                            |
-|--------|-------------------------------|-----------------------------------|
-| common | The Common configuration file | config/common.php                 |
+| Key           | Usage                          | Target                        |
+|---------------|--------------------------------|-------------------------------|
+| common-config | The Common configuration file  | config/common.php             |
+| common-views  | Views provided by this library | resources/views/vendor/common |
+
+### Routes
+
+Add the common routes to your system using the `Route::common()` macro.
 
 ## Configuration
 
 The `config/common.php` file contains the following options:
 
-| Key  | Usage                                                    | Type   | Default |
-|------|----------------------------------------------------------|--------|---------|
-| home | The base resource to redirect to from the root directory | string | /home   |
+| Key         | Usage                                                    | Type   | Default                    |
+|-------------|----------------------------------------------------------|--------|----------------------------|
+| controllers | Which controllers to use within common functions         | array  | role, user                 |
+| enums       | Which enums to use within common functions               | array  | permissions, roles         |
+| force_https | Whether to force HTTPS on regardless of the hostname     | string | false                      |
+| home        | The base resource to redirect to from the root directory | string | /home                      |
+| models      | Which models to use within common functions              | array  | permission, role, user     |
+| permissions | Which Permissions to use within common functions         | array  | access_admin, manage_users |
+| policies    | Which policies to use within common functions            | array  | user                       |
+| template    | Which template group to use for views                    | string | govuk                      |
+
+Where possible a default implementations has been provided for controllers, enums, models, and policies.
+
+You can set or override each implementation by providing the fully qualified name of the new implementation.
+
+### Enums
+
+You must create enums for Roles and Permissions.
+
+Each must implement the `RoleInterface` and `PermissionInterface` respectively.
+
+A `RoleTrait` and `PermissionTrait` are provided for a standard implementation.
+
+#### Permissions
+
+You should add the following Permissions to your enum as a minimum:
+
+* Permission::AccessAdmin
+* Permission::ManageUsers
+
+### Models
+
+You must implement your own User model.
+
+An abstract `User` model is provided for you to extend.
+
+## Usage
+
+The components provided by this library should be used in the following ways:
+
+* Called via a provided route
+* Called directly
+* Extended
+
+### Extending and overriding functionality
+
+Before extending any of the components, consider whether the functionality you want to add is system specific, or something you could contribute into common.
+
+The ideal is to keep all common system elements in this library to avoid duplication and reduce maintenance.
+
+Where your functionality is system specific, such as a model relationship, ensure you extend the model from this library.
 
 ## CSVs
 

@@ -27,8 +27,14 @@
     "minimum-stability": "dev",
     "require" : {
         "php": "^8.3",
+        "anthonyedmonds/laravel-find": "^6",
+        "anthonyedmonds/laravel-form-builder": "^1",
         "illuminate/support": "^12",
+        "lab404/laravel-impersonate": "^1",
         "laracasts/flash": "^3",
+        "networkrailbusinesssystems/activity-log": "^3",
+        "networkrailbusinesssystems/entra": "^1",
+        "spatie/laravel-permission": "^6",
         "spatie/simple-excel": "^3"
     },
     "require-dev" : {
