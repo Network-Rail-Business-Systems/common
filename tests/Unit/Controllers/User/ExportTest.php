@@ -19,7 +19,7 @@ class ExportTest extends TestCase
     {
         parent::setUp();
 
-        $now = Carbon::now();
+        $now = Carbon::create(2026, 3, 19);
         Carbon::setTestNow($now);
 
         Storage::fake('temp');
