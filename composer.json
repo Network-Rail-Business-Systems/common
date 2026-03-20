@@ -27,23 +27,23 @@
     "minimum-stability": "dev",
     "require" : {
         "php": "^8.3",
-        "anthonyedmonds/laravel-find": "^6",
-        "anthonyedmonds/laravel-form-builder": "^1",
-        "illuminate/support": "^12",
+        "anthonyedmonds/laravel-find": "dev-laravel-13",
+        "anthonyedmonds/laravel-form-builder": "dev-laravel-13",
+        "illuminate/support": "^13",
         "lab404/laravel-impersonate": "^1",
         "laracasts/flash": "^3",
-        "networkrailbusinesssystems/activity-log": "^3",
-        "networkrailbusinesssystems/entra": "^1",
+        "networkrailbusinesssystems/activity-log": "dev-laravel-13",
+        "networkrailbusinesssystems/entra": "dev-laravel-13",
         "spatie/laravel-permission": "^6",
         "spatie/simple-excel": "^3"
     },
     "require-dev" : {
-        "anthonyedmonds/laravel-testing-traits": "^1",
+        "anthonyedmonds/laravel-testing-traits": "dev-laravel-13",
         "brianium/paratest": "^7",
         "larastan/larastan": "^3",
         "laravel/pint": "^1",
-        "networkrailbusinesssystems/badges": "^1",
-        "orchestra/testbench": "^10",
+        "networkrailbusinesssystems/badges": "dev-laravel-13",
+        "orchestra/testbench": "^11",
         "phpunit/phpunit": "^12"
     },
     "config" : {
