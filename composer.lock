@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fb8f5c5a6993d28512196acee276b43",
+    "content-hash": "fb1c174dc158aa68304351c02852f429",
     "packages": [
         {
             "name": "anthonyedmonds/govuk-laravel",
-            "version": "dev-laravel-13",
+            "version": "7.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnthonyEdmonds/govuk-laravel.git",
-                "reference": "784f7bc86b3bd0d76ced9b1c132f228b4097a830"
+                "reference": "6da0f068a3cea29494cb4d124fa0b9c0ba496f94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AnthonyEdmonds/govuk-laravel/zipball/784f7bc86b3bd0d76ced9b1c132f228b4097a830",
-                "reference": "784f7bc86b3bd0d76ced9b1c132f228b4097a830",
+                "url": "https://api.github.com/repos/AnthonyEdmonds/govuk-laravel/zipball/6da0f068a3cea29494cb4d124fa0b9c0ba496f94",
+                "reference": "6da0f068a3cea29494cb4d124fa0b9c0ba496f94",
                 "shasum": ""
             },
             "require": {
@@ -30,7 +30,7 @@
                 "larastan/larastan": "^3",
                 "laravel/pint": "^1",
                 "league/commonmark": "^2",
-                "networkrailbusinesssystems/badges": "dev-laravel-13",
+                "networkrailbusinesssystems/badges": "^1",
                 "orchestra/testbench": "^11",
                 "phpunit/phpunit": "^12"
             },
@@ -73,22 +73,22 @@
             ],
             "support": {
                 "issues": "https://github.com/AnthonyEdmonds/govuk-laravel/issues",
-                "source": "https://github.com/AnthonyEdmonds/govuk-laravel/tree/laravel-13"
+                "source": "https://github.com/AnthonyEdmonds/govuk-laravel/tree/7.5.0"
             },
-            "time": "2026-03-20T14:24:48+00:00"
+            "time": "2026-03-23T09:20:00+00:00"
         },
         {
             "name": "anthonyedmonds/laravel-find",
-            "version": "dev-laravel-13",
+            "version": "6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnthonyEdmonds/laravel-find.git",
-                "reference": "116e435dc477dc97ab82965c44ecafcabacb9a4e"
+                "reference": "f348de86ee1480a32545d511d683b6a6a564e9dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-find/zipball/116e435dc477dc97ab82965c44ecafcabacb9a4e",
-                "reference": "116e435dc477dc97ab82965c44ecafcabacb9a4e",
+                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-find/zipball/f348de86ee1480a32545d511d683b6a6a564e9dd",
+                "reference": "f348de86ee1480a32545d511d683b6a6a564e9dd",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 "brianium/paratest": "^7",
                 "larastan/larastan": "^3",
                 "laravel/pint": "^1",
-                "networkrailbusinesssystems/badges": "dev-laravel-13",
+                "networkrailbusinesssystems/badges": "^1",
                 "orchestra/testbench": "^11",
                 "phpunit/phpunit": "^12"
             },
@@ -138,22 +138,22 @@
             ],
             "support": {
                 "issues": "https://github.com/AnthonyEdmonds/laravel-find/issues",
-                "source": "https://github.com/AnthonyEdmonds/laravel-find/tree/laravel-13"
+                "source": "https://github.com/AnthonyEdmonds/laravel-find/tree/6.4.0"
             },
-            "time": "2026-03-20T14:40:09+00:00"
+            "time": "2026-03-23T09:21:58+00:00"
         },
         {
             "name": "anthonyedmonds/laravel-form-builder",
-            "version": "dev-laravel-13",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnthonyEdmonds/laravel-form-builder.git",
-                "reference": "b482b6d075f7cfd5b083d63c02a617f916ff5527"
+                "reference": "b497788514f18957c85e53a5e99a23055b54fe76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-form-builder/zipball/b482b6d075f7cfd5b083d63c02a617f916ff5527",
-                "reference": "b482b6d075f7cfd5b083d63c02a617f916ff5527",
+                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-form-builder/zipball/b497788514f18957c85e53a5e99a23055b54fe76",
+                "reference": "b497788514f18957c85e53a5e99a23055b54fe76",
                 "shasum": ""
             },
             "require": {
@@ -164,7 +164,7 @@
                 "brianium/paratest": "^7",
                 "larastan/larastan": "^3",
                 "laravel/pint": "^1",
-                "networkrailbusinesssystems/badges": "dev-laravel-13",
+                "networkrailbusinesssystems/badges": "^1",
                 "orchestra/testbench": "^11",
                 "phpunit/phpunit": "^12"
             },
@@ -205,9 +205,9 @@
             ],
             "support": {
                 "issues": "https://github.com/AnthonyEdmonds/laravel-form-builder/issues",
-                "source": "https://github.com/AnthonyEdmonds/laravel-form-builder/tree/laravel-13"
+                "source": "https://github.com/AnthonyEdmonds/laravel-form-builder/tree/1.8.0"
             },
-            "time": "2026-03-20T14:19:24+00:00"
+            "time": "2026-03-23T09:18:05+00:00"
         },
         {
             "name": "brick/math",
@@ -271,16 +271,16 @@
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
-            "version": "3.2.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon-doctrine-types.git",
-                "reference": "18ba5ddfec8976260ead6e866180bd5d2f71aa1d"
+                "reference": "bdb3329c59d5cba3c2490bd6e41409d3f39f830d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon-doctrine-types/zipball/18ba5ddfec8976260ead6e866180bd5d2f71aa1d",
-                "reference": "18ba5ddfec8976260ead6e866180bd5d2f71aa1d",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon-doctrine-types/zipball/bdb3329c59d5cba3c2490bd6e41409d3f39f830d",
+                "reference": "bdb3329c59d5cba3c2490bd6e41409d3f39f830d",
                 "shasum": ""
             },
             "require": {
@@ -294,7 +294,13 @@
                 "nesbot/carbon": "^2.71.0 || ^3.0.0",
                 "phpunit/phpunit": "^10.3"
             },
+            "default-branch": true,
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Carbon\\Doctrine\\": "src/Carbon/Doctrine/"
@@ -320,7 +326,7 @@
             ],
             "support": {
                 "issues": "https://github.com/CarbonPHP/carbon-doctrine-types/issues",
-                "source": "https://github.com/CarbonPHP/carbon-doctrine-types/tree/3.2.0"
+                "source": "https://github.com/CarbonPHP/carbon-doctrine-types/tree/main"
             },
             "funding": [
                 {
@@ -336,7 +342,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-09T16:56:22+00:00"
+            "time": "2026-03-20T21:20:48+00:00"
         },
         {
             "name": "dcblogdev/laravel-microsoft-graph",
@@ -1475,12 +1481,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e4223623a04f8c7ffd1ecc82af430fe7292ef007"
+                "reference": "8aa511e8f4615379000eae661f7f12ddeb6adb0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e4223623a04f8c7ffd1ecc82af430fe7292ef007",
-                "reference": "e4223623a04f8c7ffd1ecc82af430fe7292ef007",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8aa511e8f4615379000eae661f7f12ddeb6adb0f",
+                "reference": "8aa511e8f4615379000eae661f7f12ddeb6adb0f",
                 "shasum": ""
             },
             "require": {
@@ -1498,6 +1504,7 @@
                 "ext-tokenizer": "*",
                 "fruitcake/php-cors": "^1.3",
                 "guzzlehttp/guzzle": "^7.8.2",
+                "guzzlehttp/promises": "^2.0.3",
                 "guzzlehttp/uri-template": "^1.0",
                 "laravel/prompts": "^0.3.0",
                 "laravel/serializable-closure": "^2.0.10",
@@ -1582,7 +1589,6 @@
                 "aws/aws-sdk-php": "^3.322.9",
                 "ext-gmp": "*",
                 "fakerphp/faker": "^1.24",
-                "guzzlehttp/promises": "^2.0.3",
                 "guzzlehttp/psr7": "^2.4",
                 "laravel/pint": "^1.18",
                 "league/flysystem-aws-s3-v3": "^3.25.1",
@@ -1689,7 +1695,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-03-18T18:45:21+00:00"
+            "time": "2026-03-22T15:42:41+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1697,12 +1703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "bd828d2aac931fb69a8b110d131aacdfda5433d9"
+                "reference": "807ce5f218a17da653b8c70da212223ba278d53f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/bd828d2aac931fb69a8b110d131aacdfda5433d9",
-                "reference": "bd828d2aac931fb69a8b110d131aacdfda5433d9",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/807ce5f218a17da653b8c70da212223ba278d53f",
+                "reference": "807ce5f218a17da653b8c70da212223ba278d53f",
                 "shasum": ""
             },
             "require": {
@@ -1749,7 +1755,7 @@
                 "issues": "https://github.com/laravel/prompts/issues",
                 "source": "https://github.com/laravel/prompts/tree/main"
             },
-            "time": "2026-03-17T14:26:47+00:00"
+            "time": "2026-03-20T20:15:18+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2932,30 +2938,30 @@
         },
         {
             "name": "networkrailbusinesssystems/activity-log",
-            "version": "dev-laravel-13",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Network-Rail-Business-Systems/activity-log.git",
-                "reference": "def51959f0a9d743de66cb20ca5f2258b8876d24"
+                "reference": "739d2a44bf6d76f0f7833819ad5a22e9db67bf7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/activity-log/zipball/def51959f0a9d743de66cb20ca5f2258b8876d24",
-                "reference": "def51959f0a9d743de66cb20ca5f2258b8876d24",
+                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/activity-log/zipball/739d2a44bf6d76f0f7833819ad5a22e9db67bf7f",
+                "reference": "739d2a44bf6d76f0f7833819ad5a22e9db67bf7f",
                 "shasum": ""
             },
             "require": {
-                "anthonyedmonds/govuk-laravel": "dev-laravel-13",
+                "anthonyedmonds/govuk-laravel": "^7",
                 "illuminate/support": "^13",
                 "php": "^8.3",
                 "spatie/laravel-activitylog": "^4"
             },
             "require-dev": {
-                "anthonyedmonds/laravel-testing-traits": "dev-laravel-13",
+                "anthonyedmonds/laravel-testing-traits": "^1",
                 "brianium/paratest": "^7",
                 "larastan/larastan": "^3",
                 "laravel/pint": "^1",
-                "networkrailbusinesssystems/badges": "dev-laravel-13",
+                "networkrailbusinesssystems/badges": "^1",
                 "orchestra/testbench": "^11",
                 "phpunit/phpunit": "^12"
             },
@@ -2989,22 +2995,22 @@
             "description": "Common activity log components for GOV.UK systems",
             "homepage": "https://github.com/Network-Rail-Business-Systems/activity-log",
             "support": {
-                "source": "https://github.com/Network-Rail-Business-Systems/activity-log/tree/laravel-13"
+                "source": "https://github.com/Network-Rail-Business-Systems/activity-log/tree/3.1.0"
             },
-            "time": "2026-03-20T14:33:39+00:00"
+            "time": "2026-03-23T09:39:15+00:00"
         },
         {
             "name": "networkrailbusinesssystems/entra",
-            "version": "dev-laravel-13",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Network-Rail-Business-Systems/entra.git",
-                "reference": "7ab026e5e14752f05bea7777e61705343295b900"
+                "reference": "f7ba7c1c3dfa7a422e1e8a372ef2ea25bab717df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/entra/zipball/7ab026e5e14752f05bea7777e61705343295b900",
-                "reference": "7ab026e5e14752f05bea7777e61705343295b900",
+                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/entra/zipball/f7ba7c1c3dfa7a422e1e8a372ef2ea25bab717df",
+                "reference": "f7ba7c1c3dfa7a422e1e8a372ef2ea25bab717df",
                 "shasum": ""
             },
             "require": {
@@ -3013,11 +3019,11 @@
                 "php": "^8.3"
             },
             "require-dev": {
-                "anthonyedmonds/laravel-testing-traits": "dev-laravel-13",
+                "anthonyedmonds/laravel-testing-traits": "^1",
                 "brianium/paratest": "^7",
                 "larastan/larastan": "^3",
                 "laravel/pint": "^1",
-                "networkrailbusinesssystems/badges": "dev-laravel-13",
+                "networkrailbusinesssystems/badges": "^1",
                 "orchestra/testbench": "^11",
                 "phpunit/phpunit": "^12"
             },
@@ -3054,9 +3060,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Network-Rail-Business-Systems/entra/issues",
-                "source": "https://github.com/Network-Rail-Business-Systems/entra/tree/laravel-13"
+                "source": "https://github.com/Network-Rail-Business-Systems/entra/tree/1.6.0"
             },
-            "time": "2026-03-20T14:56:09+00:00"
+            "time": "2026-03-23T09:31:55+00:00"
         },
         {
             "name": "nunomaduro/laravel-mojito",
@@ -7152,16 +7158,16 @@
     "packages-dev": [
         {
             "name": "anthonyedmonds/laravel-testing-traits",
-            "version": "dev-laravel-13",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnthonyEdmonds/laravel-testing-traits.git",
-                "reference": "ef9f40fca06d050d7318b49e8ad3e828ee76e6a3"
+                "reference": "c39ffcebe9789595398916255f883e871cad4439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-testing-traits/zipball/ef9f40fca06d050d7318b49e8ad3e828ee76e6a3",
-                "reference": "ef9f40fca06d050d7318b49e8ad3e828ee76e6a3",
+                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-testing-traits/zipball/c39ffcebe9789595398916255f883e871cad4439",
+                "reference": "c39ffcebe9789595398916255f883e871cad4439",
                 "shasum": ""
             },
             "require": {
@@ -7204,9 +7210,9 @@
             ],
             "support": {
                 "issues": "https://github.com/AnthonyEdmonds/laravel-testing-traits/issues",
-                "source": "https://github.com/AnthonyEdmonds/laravel-testing-traits/tree/laravel-13"
+                "source": "https://github.com/AnthonyEdmonds/laravel-testing-traits/tree/1.3.0"
             },
-            "time": "2026-03-20T14:09:13+00:00"
+            "time": "2026-03-23T09:14:32+00:00"
         },
         {
             "name": "brianium/paratest",
@@ -8182,16 +8188,16 @@
         },
         {
             "name": "networkrailbusinesssystems/badges",
-            "version": "dev-laravel-13",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Network-Rail-Business-Systems/badges.git",
-                "reference": "8f7040d6bd511d99a8d8c32c967011dfd25bcc78"
+                "reference": "4ede45770810072c21ff3ca749ecc6cf0add7ba9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/badges/zipball/8f7040d6bd511d99a8d8c32c967011dfd25bcc78",
-                "reference": "8f7040d6bd511d99a8d8c32c967011dfd25bcc78",
+                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/badges/zipball/4ede45770810072c21ff3ca749ecc6cf0add7ba9",
+                "reference": "4ede45770810072c21ff3ca749ecc6cf0add7ba9",
                 "shasum": ""
             },
             "type": "library",
@@ -8212,9 +8218,9 @@
             ],
             "description": "Generate readme badges during your pre-push",
             "support": {
-                "source": "https://github.com/Network-Rail-Business-Systems/badges/tree/laravel-13"
+                "source": "https://github.com/Network-Rail-Business-Systems/badges/tree/1.5.0"
             },
-            "time": "2026-03-20T14:11:24+00:00"
+            "time": "2026-03-23T08:53:02+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -8910,8 +8916,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b9b86e25586f9e89799b5c58a5c028c2694db443",
-                "reference": "b9b86e25586f9e89799b5c58a5c028c2694db443",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f65e1e55f037e46465e4a689eeee9e778fdbd37a",
+                "reference": "f65e1e55f037e46465e4a689eeee9e778fdbd37a",
                 "shasum": ""
             },
             "require": {
@@ -8957,7 +8963,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-20T14:02:25+00:00"
+            "time": "2026-03-23T09:28:28+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -9436,12 +9442,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "dd30359ca6dc3e0a37217c7017e0fb7e4794102f"
+                "reference": "3be75d5b9244936dd4ac62ade2bfb004d13acf0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/dd30359ca6dc3e0a37217c7017e0fb7e4794102f",
-                "reference": "dd30359ca6dc3e0a37217c7017e0fb7e4794102f",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/3be75d5b9244936dd4ac62ade2bfb004d13acf0f",
+                "reference": "3be75d5b9244936dd4ac62ade2bfb004d13acf0f",
                 "shasum": ""
             },
             "require": {
@@ -9506,9 +9512,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/main"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.22"
             },
-            "time": "2026-03-20T11:25:34+00:00"
+            "time": "2026-03-22T23:03:24+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -10660,14 +10666,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "anthonyedmonds/laravel-find": 20,
-        "anthonyedmonds/laravel-form-builder": 20,
-        "anthonyedmonds/laravel-testing-traits": 20,
-        "networkrailbusinesssystems/activity-log": 20,
-        "networkrailbusinesssystems/badges": 20,
-        "networkrailbusinesssystems/entra": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
