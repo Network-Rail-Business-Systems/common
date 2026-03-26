@@ -9,6 +9,7 @@ use AnthonyEdmonds\LaravelTestingTraits\AssertsFlashMessages;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsOrder;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsPolicies;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsResults;
+use AnthonyEdmonds\LaravelTestingTraits\AssertsValidationRules;
 use AnthonyEdmonds\LaravelTestingTraits\AssertsViews;
 use AnthonyEdmonds\LaravelTestingTraits\GetsRawCsvs;
 use AnthonyEdmonds\LaravelTestingTraits\SignsInUsers;
@@ -36,6 +37,7 @@ abstract class TestCase extends BaseTestCase
     use AssertsViews;
     use AssertsForms;
     use AssertsEntra;
+    use AssertsValidationRules;
 
     protected function setUp(): void
     {
