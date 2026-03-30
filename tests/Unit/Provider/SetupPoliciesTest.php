@@ -5,7 +5,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Provider;
 use Illuminate\Support\Facades\Gate;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Policies\UserPolicy;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class SetupPoliciesTest extends TestCase

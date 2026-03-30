@@ -5,7 +5,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Builders\Users;
 use Illuminate\Support\Collection;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class ByFilterTest extends TestCase

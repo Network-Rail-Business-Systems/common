@@ -4,7 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Policies\User;
 
 use NetworkRailBusinessSystems\Common\Policies\UserPolicy;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class BeImpersonatedTest extends TestCase

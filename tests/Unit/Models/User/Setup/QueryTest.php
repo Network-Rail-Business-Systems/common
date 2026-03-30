@@ -3,7 +3,7 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Models\User\Setup;
 
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class QueryTest extends TestCase

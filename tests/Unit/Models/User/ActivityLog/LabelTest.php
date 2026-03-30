@@ -2,7 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Models\User\ActivityLog;
 
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class LabelTest extends TestCase

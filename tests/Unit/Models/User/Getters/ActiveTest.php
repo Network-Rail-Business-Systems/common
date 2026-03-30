@@ -2,7 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Models\User\Getters;
 
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class ActiveTest extends TestCase

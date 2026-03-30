@@ -28,7 +28,7 @@
     "require" : {
         "php": "^8.3",
         "anthonyedmonds/laravel-find": "^6",
-        "anthonyedmonds/laravel-form-builder": "^1",
+        "anthonyedmonds/laravel-form-builder": "^2",
         "illuminate/support": "^13",
         "lab404/laravel-impersonate": "^1",
         "laracasts/flash": "^3",
