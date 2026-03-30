@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 use NetworkRailBusinessSystems\Common\Controllers\UserController;
 use NetworkRailBusinessSystems\Common\ResourceCollections\UserRoleCollection;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class ShowTest extends TestCase

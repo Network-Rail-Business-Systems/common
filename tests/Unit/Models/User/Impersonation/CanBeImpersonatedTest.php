@@ -3,7 +3,7 @@
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Models\User\Impersonation;
 
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class CanBeImpersonatedTest extends TestCase

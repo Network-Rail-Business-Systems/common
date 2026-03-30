@@ -20,7 +20,7 @@ use NetworkRailBusinessSystems\ActivityLog\ActivityLogServiceProvider;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Entra\Traits\AssertsEntra;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Spatie\Permission\PermissionServiceProvider;
@@ -85,6 +85,7 @@ abstract class TestCase extends BaseTestCase
         config()->set('laravel-impersonate.default_impersonator_guard', 'web');
 
         config()->set('testing-traits.user_model', User::class);
+        config()->set('govuk-activity-log.user_model', User::class);
 
         $this->withoutVite();
         View::replaceNamespace('common', __DIR__ . '/../src/Views/bulma');

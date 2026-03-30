@@ -5,7 +5,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Controllers\UserRole;
 use Illuminate\Http\RedirectResponse;
 use NetworkRailBusinessSystems\Common\Controllers\UserRoleController;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
-use NetworkRailBusinessSystems\Common\Tests\Models\User;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class AssignTest extends TestCase

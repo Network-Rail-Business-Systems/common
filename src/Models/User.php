@@ -39,7 +39,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $short_email
  * @property Carbon $updated_at
  */
-abstract class User extends Authenticatable implements EntraAuthenticatable, Actioner, Actioned
+class User extends Authenticatable implements EntraAuthenticatable, Actioner, Actioned
 {
     use HasFactory;
     use HasRoles;
