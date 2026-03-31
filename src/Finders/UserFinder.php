@@ -8,6 +8,8 @@ use NetworkRailBusinessSystems\Common\ResourceCollections\UserCollection;
 
 class UserFinder extends Finder
 {
+    public const string FINDER_KEY = 'users';
+
     public const string FILTER_ALL = 'all';
 
     public const string FILTER_ROLES = 'roles';
