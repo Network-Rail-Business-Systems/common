@@ -158,6 +158,23 @@ Instead, an `HttpResponseException` will be thrown and a message flashed to info
 
 Ensure that the `rows` passed into `export` can be turned into a flat array per row, otherwise it may fail.
 
+## HasFormatters
+
+The `HasFormatters` trait is provided for consistent formatting of values in common formats.
+
+| Method           | Type             | Output                                           |
+|------------------|------------------|--------------------------------------------------|
+| formatCount()    | array\|Arrayable | String with count before plural or singular term | 
+| formatCurrency() | float\|int       | String in £0.00 format                           |
+| formatDate()     | Carbon           | String in d/m/Y H:i format                       |
+| formatPrefix()   | string\|int      | String with prefix added before value            |
+| formatSuffix()   | string\|int      | String with suffix added after value             |
+| formatText()     | string           | String with `\n` converted to `<br/>`            |
+
+Each method has additional parameters to customise its behaviour.
+
+They also handle "blank" values, returning either `null` or a defined value of your choice.
+
 ## Help and support
 
 You are welcome to raise any issues or questions on GitHub.
