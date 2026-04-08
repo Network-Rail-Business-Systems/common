@@ -46,7 +46,7 @@ class UsersBuilder extends Builder
 
     public function index(string $term, string $filter): self
     {
-        return $this->withoutGlobalScopes()
+        return $this
             ->byFilter($filter)
             ->search($term);
     }
