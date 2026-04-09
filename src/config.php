@@ -52,4 +52,11 @@ return [
      * ¬ govuk
      */
     'template' => 'govuk',
+
+    /** A list of personally identifiable information held in this system */
+    'privacy' => [
+        'Browser session information',
+        'E-mail address',
+        'Name',
+    ],
 ];
