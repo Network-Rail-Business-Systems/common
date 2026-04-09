@@ -100,37 +100,39 @@ class CommonServiceProvider extends ServiceProvider
                     Route::get('/', 'show')->name('privacy');
                 });
 
-            Route::prefix('/admin')
-                ->name('admin.')
-                ->controller(config('common.controllers.admin'))
-                ->group(function () {
-                    Route::get('/', 'index')->name('index');
+            Route::middleware('EntraAuthenticated')->group(function () {
+                Route::prefix('/admin')
+                    ->name('admin.')
+                    ->controller(config('common.controllers.admin'))
+                    ->group(function () {
+                        Route::get('/', 'index')->name('index');
 
-                    Route::prefix('/users')
-                        ->name('users.')
-                        ->controller(config('common.controllers.user'))
-                        ->group(function () {
-                            Route::get('/', 'index')->name('index');
-                            Route::get('/create', 'create')->name('create');
-                            Route::post('/create', 'store')->name('store');
-                            Route::get('/export', 'export')->name('export');
+                        Route::prefix('/users')
+                            ->name('users.')
+                            ->controller(config('common.controllers.user'))
+                            ->group(function () {
+                                Route::get('/', 'index')->name('index');
+                                Route::get('/create', 'create')->name('create');
+                                Route::post('/create', 'store')->name('store');
+                                Route::get('/export', 'export')->name('export');
 
-                            Route::activityLogActioner(config('common.models.user'));
-                            Route::activityLogActioned(config('common.models.user'));
+                                Route::activityLogActioner(config('common.models.user'));
+                                Route::activityLogActioned(config('common.models.user'));
 
-                            Route::prefix('/{user}')->group(function () {
-                                Route::get('/', 'show')->name('show');
+                                Route::prefix('/{user}')->group(function () {
+                                    Route::get('/', 'show')->name('show');
 
-                                Route::prefix('/roles/{name}')
-                                    ->name('roles.')
-                                    ->controller(config('common.controllers.role'))
-                                    ->group(function () {
-                                        Route::post('/assign', 'assign')->name('assign');
-                                        Route::post('/revoke', 'remove')->name('remove');
-                                    });
+                                    Route::prefix('/roles/{name}')
+                                        ->name('roles.')
+                                        ->controller(config('common.controllers.role'))
+                                        ->group(function () {
+                                            Route::post('/assign', 'assign')->name('assign');
+                                            Route::post('/revoke', 'remove')->name('remove');
+                                        });
+                                });
                             });
-                        });
-                });
+                    });
+            });
         });
     }
 
