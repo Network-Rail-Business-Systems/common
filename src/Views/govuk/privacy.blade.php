@@ -1,3 +1,5 @@
+@extends('govuk::templates.custom')
+
 @section('main')
     <x-govuk::h2>How information about you will be used</x-govuk::h2>
     <x-govuk::p>This privacy policy relates to personal data processed by Network Rail Infrastructure Ltd, the data controller, via the following site:</x-govuk::p>
