@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
+use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -93,6 +94,12 @@ class CommonServiceProvider extends ServiceProvider
     public function setupRoutes(): void
     {
         Route::macro('common', function () {
+            Route::prefix('/privacy')
+                ->controller(PrivacyController::class)
+                ->group(function () {
+                    Route::get('/', 'show')->name('privacy');
+                });
+
             Route::prefix('/admin')
                 ->name('admin.')
                 ->controller(config('common.controllers.admin'))
