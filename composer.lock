@@ -144,16 +144,16 @@
         },
         {
             "name": "anthonyedmonds/laravel-form-builder",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnthonyEdmonds/laravel-form-builder.git",
-                "reference": "62fc43dedc667fd9e69298ac116ba2a278e3fea3"
+                "reference": "17e896e45d8cb21c80f8d0cd5476acc8a005d5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-form-builder/zipball/62fc43dedc667fd9e69298ac116ba2a278e3fea3",
-                "reference": "62fc43dedc667fd9e69298ac116ba2a278e3fea3",
+                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-form-builder/zipball/17e896e45d8cb21c80f8d0cd5476acc8a005d5ab",
+                "reference": "17e896e45d8cb21c80f8d0cd5476acc8a005d5ab",
                 "shasum": ""
             },
             "require": {
@@ -205,9 +205,9 @@
             ],
             "support": {
                 "issues": "https://github.com/AnthonyEdmonds/laravel-form-builder/issues",
-                "source": "https://github.com/AnthonyEdmonds/laravel-form-builder/tree/2.0.1"
+                "source": "https://github.com/AnthonyEdmonds/laravel-form-builder/tree/2.0.2"
             },
-            "time": "2026-03-30T09:24:50+00:00"
+            "time": "2026-04-09T13:37:39+00:00"
         },
         {
             "name": "brick/math",
@@ -1481,12 +1481,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "26013caaf61036704c25c3caf3e46e39a83d31e1"
+                "reference": "0dcc8d2ba7f41bc8376a08e9ccd5d7b83e6a6d90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/26013caaf61036704c25c3caf3e46e39a83d31e1",
-                "reference": "26013caaf61036704c25c3caf3e46e39a83d31e1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0dcc8d2ba7f41bc8376a08e9ccd5d7b83e6a6d90",
+                "reference": "0dcc8d2ba7f41bc8376a08e9ccd5d7b83e6a6d90",
                 "shasum": ""
             },
             "require": {
@@ -1696,7 +1696,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-04-08T13:54:12+00:00"
+            "time": "2026-04-09T15:20:28+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2574,12 +2574,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "8a119d6b373041a3fcfb6126c1d9b446e54570b4"
+                "reference": "68b974809baff3f071893de61447212e9e688ee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/8a119d6b373041a3fcfb6126c1d9b446e54570b4",
-                "reference": "8a119d6b373041a3fcfb6126c1d9b446e54570b4",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/68b974809baff3f071893de61447212e9e688ee7",
+                "reference": "68b974809baff3f071893de61447212e9e688ee7",
                 "shasum": ""
             },
             "require": {
@@ -2670,7 +2670,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-08T20:26:13+00:00"
+            "time": "2026-04-09T13:04:03+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -8916,8 +8916,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b4219aee1045a464b83d89e8140d8c0784f5ed56",
-                "reference": "b4219aee1045a464b83d89e8140d8c0784f5ed56",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fa019474d49ec45637c904442b2486ab7af2e803",
+                "reference": "fa019474d49ec45637c904442b2486ab7af2e803",
                 "shasum": ""
             },
             "require": {
@@ -8974,7 +8974,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-08T18:01:43+00:00"
+            "time": "2026-04-10T07:38:51+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
