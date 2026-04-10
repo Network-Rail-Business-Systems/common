@@ -50,7 +50,6 @@ class User extends Authenticatable implements EntraAuthenticatable, Actioner, Ac
     use HasActions;
     use HasActivities;
     use LogsActivity;
-    use CausesActivity;
 
     protected $fillable = [
         'email',
