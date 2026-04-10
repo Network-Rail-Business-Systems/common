@@ -42,17 +42,16 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements EntraAuthenticatable, Actioner, Actioned
 {
-    use HasFactory;
-    use HasRoles;
-    use SoftDeletes;
-    use Impersonate;
     use AuthenticatesWithEntra;
     use CausesActivity;
     use HasActions;
     use HasActivities;
-    use LogsActivity;
-    use CausesActivity;
+    use HasFactory;
+    use HasRoles;
+    use Impersonate;
     use ImprovedHasAttribute;
+    use LogsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'email',
