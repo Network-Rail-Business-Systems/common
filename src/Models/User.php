@@ -16,6 +16,7 @@ use NetworkRailBusinessSystems\ActivityLog\Traits\HasActions;
 use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
 use NetworkRailBusinessSystems\Common\Factories\UserFactory;
+use NetworkRailBusinessSystems\Common\Traits\ImprovedHasAttribute;
 use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
 use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
 use Spatie\Activitylog\LogOptions;
@@ -41,15 +42,16 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements EntraAuthenticatable, Actioner, Actioned
 {
-    use HasFactory;
-    use HasRoles;
-    use SoftDeletes;
-    use Impersonate;
     use AuthenticatesWithEntra;
     use CausesActivity;
     use HasActions;
     use HasActivities;
+    use HasFactory;
+    use HasRoles;
+    use Impersonate;
+    use ImprovedHasAttribute;
     use LogsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'email',

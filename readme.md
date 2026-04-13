@@ -175,6 +175,14 @@ Each method has additional parameters to customise its behaviour.
 
 They also handle "blank" values, returning either `null` or a defined value of your choice.
 
+## ImprovedHasAttribute
+
+By default, Laravel only checks `$attributes` and `$casts` on a `Model` for attribute existence.
+
+This causes an exception to be thrown when using strict models, even though the attribute name is correct.
+
+Adding `use ImprovedHasAttribute` to a model adds `$fillable` and `$guarded` to the check to avoid this.
+
 ## Help and support
 
 You are welcome to raise any issues or questions on GitHub.
