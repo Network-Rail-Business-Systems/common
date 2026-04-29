@@ -3,16 +3,19 @@
 namespace NetworkRailBusinessSystems\Common;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -149,5 +152,14 @@ class CommonServiceProvider extends ServiceProvider
             $path,
             'common',
         );
+    }
+
+    public static function setupExceptions(Exceptions $exceptions): void
+    {
+        $exceptions->render(function (HttpExceptionInterface $exception) {
+            $status = $exception->getStatusCode();
+
+            return Response::view("govuk::errors.$status", ['exception' => $exception], $status);
+        });
     }
 }
