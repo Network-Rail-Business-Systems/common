@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
@@ -22,6 +23,7 @@ class CommonServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'common');
+        $this->setupExceptions();
     }
 
     public function boot(): void
@@ -154,12 +156,23 @@ class CommonServiceProvider extends ServiceProvider
         );
     }
 
-    public static function setupExceptions(Exceptions $exceptions): void
+    public function setupExceptions(): void
     {
-        $exceptions->render(function (HttpExceptionInterface $exception) {
-            $status = $exception->getStatusCode();
+        App::afterResolving(
+            Handler::class,
+            function ($handler) {
+                $exceptions = new Exceptions($handler);
 
-            return Response::view("govuk::errors.$status", ['exception' => $exception], $status);
-        });
+                $exceptions->render(function (HttpExceptionInterface $exception) {
+                    $status = $exception->getStatusCode();
+
+                    return Response::view(
+                        "common::errors.$status",
+                        ['exception' => $exception],
+                        $status,
+                    );
+                });
+            },
+        );
     }
 }
