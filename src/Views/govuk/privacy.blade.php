@@ -24,7 +24,8 @@
     <x-govuk::p>Personal data will not be transferred outside the European Economic Area.</x-govuk::p>
 
     <x-govuk::h2>Who you can talk to about privacy</x-govuk::h2>
-    <x-govuk::p>If you need any further information, please
+    <x-govuk::p>
+        If you need any further information, 
         <x-govuk::a href="{{ route('enquiry') }}">contact the support team</x-govuk::a>.
     </x-govuk::p>
     <x-govuk::p>If you wish to raise a concern or speak with a Network Rail Data Protection Officer, you may e-mail them at:
