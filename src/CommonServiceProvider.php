@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Throwable;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -160,11 +160,11 @@ class CommonServiceProvider extends ServiceProvider
     {
         App::afterResolving(
             Handler::class,
-            function ($handler) {
+            function (Handler $handler) {
                 $exceptions = new Exceptions($handler);
 
-                $exceptions->render(function (HttpExceptionInterface $exception) {
-                    $status = $exception->getStatusCode();
+                $exceptions->render(function (Throwable $exception) {
+                    $status = $exception->getCode();
 
                     return Response::view(
                         "common::errors.$status",

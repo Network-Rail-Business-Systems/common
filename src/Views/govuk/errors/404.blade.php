@@ -1,1 +1,1 @@
-404 error
+@extends('govuk::errors.404')
