@@ -12,6 +12,7 @@ Provides common functionality for Network Rail Business Systems Laravel systems.
 ## What's in the box?
 
 * Laravel 12 bootstrapping logic, such as HTTPS forced on for select servers
+* Exception handling and pages
 * CSV helpers for importing and exporting CSVs
 
 ## Installation
@@ -105,6 +106,12 @@ Before extending any of the components, consider whether the functionality you w
 The ideal is to keep all common system elements in this library to avoid duplication and reduce maintenance.
 
 Where your functionality is system specific, such as a model relationship, ensure you extend the model from this library.
+
+## Exceptions
+
+Exception pages are provided for consistent exception handling between systems.
+
+These are registered automatically by the Common Service Provider.
 
 ## CSVs
 
