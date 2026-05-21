@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\ValidationException;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
 use Throwable;
@@ -168,11 +169,15 @@ class CommonServiceProvider extends ServiceProvider
                         ? $exception->getStatusCode()
                         : 500;
 
-                    return Response::view(
-                        "common::errors.$status",
-                        ['exception' => $exception],
-                        $status,
-                    );
+                    return match ($exception::class) {
+                        ValidationException::class,
+                        HttpResponseException::class => false,
+                        default => Response::view(
+                            "common::errors.$status",
+                            ['exception' => $exception],
+                            $status,
+                        ),
+                    };
                 });
             },
         );
