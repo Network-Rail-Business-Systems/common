@@ -164,7 +164,9 @@ class CommonServiceProvider extends ServiceProvider
                 $exceptions = new Exceptions($handler);
 
                 $exceptions->render(function (Throwable $exception) {
-                    $status = $exception->getCode();
+                    $status = method_exists($exception, 'getStatusCode') === true
+                        ? $exception->getStatusCode()
+                        : 500;
 
                     return Response::view(
                         "common::errors.$status",
