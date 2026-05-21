@@ -164,19 +164,19 @@ class CommonServiceProvider extends ServiceProvider
                 $exceptions = new Exceptions($handler);
 
                 $exceptions->render(function (Throwable $exception) use ($handler) {
-                    if ($handler->shouldReport($exception) === false) {
-                        return false;
-                    }
-
                     $status = method_exists($exception, 'getStatusCode') === true
                         ? $exception->getStatusCode()
                         : 500;
-
-                    return Response::view(
-                        "common::errors.$status",
-                        ['exception' => $exception],
-                        $status,
-                    );
+                    
+                    return match ($exception::class) {
+                        ValidationException::class,
+                        HttpResponseException::class => false,
+                        default => Response::view(
+                            "common::errors.$status",
+                            ['exception' => $exception],
+                            $status,
+                        ),
+                    };
                 });
             },
         );
