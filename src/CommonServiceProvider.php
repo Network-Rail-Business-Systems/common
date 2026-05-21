@@ -163,8 +163,8 @@ class CommonServiceProvider extends ServiceProvider
             function (Handler $handler) {
                 $exceptions = new Exceptions($handler);
 
-                $exceptions->render(function (Throwable $exception) {
-                    if (is_a($exception, HttpResponseException::class) === true) {
+                $exceptions->render(function (Throwable $exception) use ($handler) {
+                    if ($handler->shouldReport($exception) === false) {
                         return false;
                     }
 
