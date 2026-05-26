@@ -11,7 +11,7 @@ Provides common functionality for Network Rail Business Systems Laravel systems.
 
 ## What's in the box?
 
-* Laravel 12 bootstrapping logic, such as HTTPS forced on for select servers
+* Laravel 13 bootstrapping logic, such as HTTPS forced on for select servers
 * Exception handling and pages
 * CSV helpers for importing and exporting CSVs
 
