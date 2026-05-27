@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Controllers;
 
 use AnthonyEdmonds\LaravelFormBuilder\Helpers\Field;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
@@ -101,7 +102,8 @@ class UserController extends Controller
             ),
             'title' => "Manage $user->name",
             'user' => $user,
-        ]);
+        ])
+            ->with($this->showWiths());
     }
 
     public function export(): BinaryFileResponse
@@ -113,13 +115,22 @@ class UserController extends Controller
             $userModel,
         );
 
+        return Csv::export(
+            mb_strtolower(config('app.acronym')) . '_users.csv',
+            $this->exportQuery()->get(),
+        );
+    }
+
+    protected function exportQuery(): Builder
+    {
         $finder = new UserFinder();
+        $userModel = $this->newUserModel();
 
         $rolesTable = config('permission.table_names.roles');
         $modelHasRolesTable = config('permission.table_names.model_has_roles');
         $modelColumn = config('permission.column_names.model_morph_key');
 
-        $users = DB::table('users AS results')
+        return DB::table('users AS results')
             ->select([
                 'results.id AS id',
                 DB::raw('MAX(results.name) AS name'),
@@ -148,13 +159,7 @@ class UserController extends Controller
                     ->whereColumn('users.id', '=', 'results.id'),
             )
             ->groupBy('results.id')
-            ->orderBy('results.name')
-            ->get();
-
-        return Csv::export(
-            mb_strtolower(config('app.acronym')) . '_users.csv',
-            $users,
-        );
+            ->orderBy('results.name');
     }
 
     protected function newUserModel(): User
@@ -162,5 +167,10 @@ class UserController extends Controller
         /** @var class-string<User> $userClass */
         $userClass = config('common.models.user');
         return new $userClass();
+    }
+
+    protected function showWiths(): array
+    {
+        return [];
     }
 }
