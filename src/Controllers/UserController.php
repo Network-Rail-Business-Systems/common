@@ -103,7 +103,7 @@ class UserController extends Controller
             'title' => "Manage $user->name",
             'user' => $user,
         ])
-            ->with($this->showWiths());
+            ->with($this->showWiths($user));
     }
 
     public function export(): BinaryFileResponse
@@ -169,7 +169,7 @@ class UserController extends Controller
         return new $userClass();
     }
 
-    protected function showWiths(): array
+    protected function showWiths(User $user): array
     {
         return [];
     }
