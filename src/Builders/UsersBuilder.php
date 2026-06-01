@@ -12,6 +12,7 @@ use NetworkRailBusinessSystems\Common\Models\User;
  * @method ?User first()
  * @method User firstOrFail()
  * @method Collection<int, User> get()
+ * @method self withTrashed(bool $withTrashed = true)
  */
 class UsersBuilder extends Builder
 {
