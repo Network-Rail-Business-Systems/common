@@ -3,28 +3,22 @@
 namespace NetworkRailBusinessSystems\Common;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\ValidationException;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
-use Throwable;
 
 class CommonServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'common');
-        $this->setupExceptions();
     }
 
     public function boot(): void
@@ -155,31 +149,7 @@ class CommonServiceProvider extends ServiceProvider
             $path,
             'common',
         );
-    }
 
-    public function setupExceptions(): void
-    {
-        App::afterResolving(
-            Handler::class,
-            function (Handler $handler) {
-                $exceptions = new Exceptions($handler);
-
-                $exceptions->render(function (Throwable $exception) {
-                    $status = method_exists($exception, 'getStatusCode') === true
-                        ? $exception->getStatusCode()
-                        : 500;
-
-                    return match ($exception::class) {
-                        ValidationException::class,
-                        HttpResponseException::class => false,
-                        default => Response::view(
-                            "common::errors.$status",
-                            ['exception' => $exception],
-                            $status,
-                        ),
-                    };
-                });
-            },
-        );
+        config()->prepend('view.paths', $path);
     }
 }
