@@ -1,1 +1,1 @@
-@extends('common::errors', ['status' => 401])
+@extends('common::errors.error', ['status' => 401])

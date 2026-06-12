@@ -1,1 +1,1 @@
-@extends('common::errors', ['status' => 429])
+@extends('common::errors.error', ['status' => 429])
