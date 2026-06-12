@@ -40,5 +40,10 @@ class SetupViewsTest extends TestCase
         $this->assertTrue(
             View::exists('common::admin.users.show'),
         );
+
+        $this->assertStringEndsWith(
+            'common/src/Views/bulma',
+            config('view.paths')[0],
+        );
     }
 }
