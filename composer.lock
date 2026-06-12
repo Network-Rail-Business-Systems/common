@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18ff9b69070508eaf7090fd438b00934",
+    "content-hash": "6317f84b47fb05090297df206e0fd835",
     "packages": [
         {
             "name": "anthonyedmonds/govuk-laravel",
@@ -1273,12 +1273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "eef7f87bab6f204eba3c39224d8075c70c637946"
+                "reference": "39a2a597cfe1bf2c84354eb7cf8434b356e366f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/eef7f87bab6f204eba3c39224d8075c70c637946",
-                "reference": "eef7f87bab6f204eba3c39224d8075c70c637946",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/39a2a597cfe1bf2c84354eb7cf8434b356e366f2",
+                "reference": "39a2a597cfe1bf2c84354eb7cf8434b356e366f2",
                 "shasum": ""
             },
             "require": {
@@ -1352,7 +1352,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-23T22:00:21+00:00"
+            "time": "2026-06-12T12:15:52+00:00"
         },
         {
             "name": "lab404/laravel-impersonate",
@@ -3069,6 +3069,75 @@
                 "source": "https://github.com/Network-Rail-Business-Systems/entra/tree/1.6.8"
             },
             "time": "2026-06-12T08:07:32+00:00"
+        },
+        {
+            "name": "networkrailbusinesssystems/support-page",
+            "version": "dev-feature/route-split",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Network-Rail-Business-Systems/support-page.git",
+                "reference": "d19a59648f2e80fa1cee9c8c3e50d68220d17f62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/support-page/zipball/d19a59648f2e80fa1cee9c8c3e50d68220d17f62",
+                "reference": "d19a59648f2e80fa1cee9c8c3e50d68220d17f62",
+                "shasum": ""
+            },
+            "require": {
+                "anthonyedmonds/govuk-laravel": "^8",
+                "anthonyedmonds/laravel-form-builder": "^2",
+                "illuminate/support": "^13",
+                "laracasts/flash": "^3",
+                "php": "^8.3",
+                "spatie/laravel-permission": "^6"
+            },
+            "require-dev": {
+                "anthonyedmonds/laravel-testing-traits": "^1",
+                "larastan/larastan": "^3",
+                "laravel/pint": "^1",
+                "networkrailbusinesssystems/badges": "^1",
+                "orchestra/testbench": "^11",
+                "phpunit/phpunit": "^12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NetworkRailBusinessSystems\\SupportPage\\Providers\\SupportPageProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NetworkRailBusinessSystems\\SupportPage\\": "src/app",
+                    "NetworkRailBusinessSystems\\SupportPage\\Database\\Factories\\": "src/database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sim Roberts",
+                    "email": "simran.roberts@networkrail.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Allows you quickly add a support page to your project",
+            "homepage": "https://github.com/Network-Rail-Business-Systems/support-page",
+            "keywords": [
+                "blade template",
+                "help",
+                "help page",
+                "support",
+                "support page"
+            ],
+            "support": {
+                "source": "https://github.com/Network-Rail-Business-Systems/support-page/tree/feature/route-split"
+            },
+            "time": "2026-06-12T12:47:55+00:00"
         },
         {
             "name": "nunomaduro/laravel-mojito",
@@ -10764,7 +10833,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "networkrailbusinesssystems/support-page": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

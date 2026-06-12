@@ -1,1 +1,1 @@
-@extends('govuk::errors.401')
+@extends('common::errors', ['status' => 401])

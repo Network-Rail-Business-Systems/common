@@ -94,6 +94,9 @@ class CommonServiceProvider extends ServiceProvider
     public function setupRoutes(): void
     {
         Route::macro('common', function () {
+            /** @phpstan-ignore-next-line */
+            Route::supportPage();
+
             Route::prefix('/privacy')
                 ->controller(PrivacyController::class)
                 ->group(function () {
@@ -106,6 +109,9 @@ class CommonServiceProvider extends ServiceProvider
                     ->controller(config('common.controllers.admin'))
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
+
+                        /** @phpstan-ignore-next-line */
+                        Route::supportPageAdmin();
 
                         Route::prefix('/users')
                             ->name('users.')
