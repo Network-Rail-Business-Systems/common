@@ -21,7 +21,7 @@ class SetupModelsTest extends TestCase
 
     public function testProduction(): void
     {
-        App::shouldReceive('environment')->andReturn('production');
+        App::shouldReceive('isProduction')->andReturnTrue();
 
         $this->provider->setupModels();
 
@@ -30,7 +30,7 @@ class SetupModelsTest extends TestCase
 
     public function testDevelopment(): void
     {
-        App::shouldReceive('environment')->andReturn('development');
+        App::shouldReceive('isProduction')->andReturnFalse();
 
         $this->provider->setupModels();
 
