@@ -22,6 +22,7 @@ use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Entra\Traits\AssertsEntra;
+use NetworkRailBusinessSystems\SupportPage\Providers\SupportPageProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Spatie\Permission\PermissionServiceProvider;
 
@@ -102,6 +103,7 @@ abstract class TestCase extends BaseTestCase
             FinderServiceProvider::class,
             FlashServiceProvider::class,
             PermissionServiceProvider::class,
+            SupportPageProvider::class,
         ];
     }
 
