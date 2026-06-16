@@ -5,6 +5,7 @@ namespace NetworkRailBusinessSystems\Common\Builders;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
+use NetworkRailBusinessSystems\Common\Interfaces\PermissionInterface;
 use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use NetworkRailBusinessSystems\Common\Models\User;
 
@@ -42,6 +43,21 @@ class UsersBuilder extends Builder
     {
         return $this->whereHas('roles', function (Builder $query) use ($role) {
             $query->where('name', '=', $role);
+        });
+    }
+
+    public function byPermission(PermissionInterface|string $permission): self
+    {
+        return $this->where(function (UsersBuilder $query) use ($permission) {
+            $query
+                ->whereHas('permissions', function (Builder $query) use ($permission) {
+                    $query->where('name', '=', $permission);
+                })
+                ->orWhereHas('roles', function (Builder $query) use ($permission) {
+                    $query->whereHas('permissions', function (Builder $query) use ($permission) {
+                        $query->where('name', '=', $permission);
+                    });
+                });
         });
     }
 
