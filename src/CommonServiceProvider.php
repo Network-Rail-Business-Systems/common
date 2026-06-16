@@ -3,7 +3,6 @@
 namespace NetworkRailBusinessSystems\Common;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
@@ -82,7 +81,6 @@ class CommonServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Model::shouldBeStrict(App::isProduction() === false);
-        FormRequest::failOnUnknownFields(App::isProduction() === false);
     }
 
     public function setupPolicies(): void
