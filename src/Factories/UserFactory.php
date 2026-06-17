@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
+use NetworkRailBusinessSystems\Common\Interfaces\PermissionInterface;
 use NetworkRailBusinessSystems\Common\Interfaces\RoleInterface;
 use NetworkRailBusinessSystems\Common\Models\User;
 
@@ -63,6 +64,14 @@ class UserFactory extends Factory
         return $this->afterCreating(function ($user) use ($role) {
             /** @var User $user */
             $user->assignRole($role);
+        });
+    }
+
+    public function withPermission(PermissionInterface|string $permission): Factory
+    {
+        return $this->afterCreating(function ($user) use ($permission) {
+            /** @var User $user */
+            $user->givePermissionTo($permission);
         });
     }
 }
