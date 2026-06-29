@@ -7,15 +7,10 @@ use Illuminate\Foundation\AliasLoader;
 use NetworkRailBusinessSystems\Common\Overrides\CurlVersion as CurlVersionOverride;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class RegisterTest extends TestCase
+class SetupOverridesTest extends TestCase
 {
     public function test(): void
     {
-        $this->assertEquals(
-            '/home',
-            config('common.home'),
-        );
-
         $loader = AliasLoader::getInstance();
 
         $this->assertEquals(
