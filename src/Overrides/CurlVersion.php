@@ -53,6 +53,21 @@ class CurlVersion
         //
     }
 
+    public static function supportsProxyTlsCredentialAwareConnectionReuse(): bool
+    {
+        return false;
+    }
+
+    public static function supportsProxyCredentialAwareConnectionReuse(): bool
+    {
+        return false;
+    }
+
+    public static function supportsProxyHeaderSeparation(): bool
+    {
+        return false;
+    }
+
     public static function getVersion(): ?string
     {
         return '7.29.0';
