@@ -12,7 +12,7 @@
             
             <g clip-path="url(#r)">
                 <rect width="60" height="20" fill="#555"/>
-                <rect x="60" width="20" height="20" fill="#00703c"/>
+                <rect x="60" width="20" height="20" fill="#f47738"/>
                 <rect width="80" height="20" fill="url(#s)"/>
             </g>
             
