@@ -3,6 +3,7 @@
 namespace NetworkRailBusinessSystems\Common;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Request;
@@ -15,6 +16,13 @@ class CommonServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'common');
+
+        $loader = AliasLoader::getInstance();
+
+        $loader->alias(
+            'GuzzleHttp\Handler\CurlVersion',
+            'NetworkRailBusinessSystems\Common\CurlVersion',
+        );
     }
 
     public function boot(): void
