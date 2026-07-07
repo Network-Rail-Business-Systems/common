@@ -98,7 +98,7 @@ class UsersBuilder extends Builder
         });
     }
 
-    public function stale(Carbon $cutoff): self
+    public function goingStale(Carbon $cutoff): self
     {
         return $this->where(function (UsersBuilder $query) use ($cutoff) {
             $query
@@ -107,6 +107,15 @@ class UsersBuilder extends Builder
                     $cutoff->clone()->startOfDay(),
                     $cutoff->endOfDay(),
                 ]);
+        });
+    }
+
+    public function goneStale(Carbon $cutoff): self
+    {
+        return $this->where(function (UsersBuilder $query) use ($cutoff) {
+            $query
+                ->whereHas('roles')
+                ->where('updated_at', '<=', $cutoff->endOfDay());
         });
     }
 }

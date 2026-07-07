@@ -8,7 +8,7 @@ use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class StaleTest extends TestCase
+class GoneStaleTest extends TestCase
 {
     protected Collection $expected;
 
@@ -25,17 +25,22 @@ class StaleTest extends TestCase
             User::factory()
                 ->withRole(Role::Admin)
                 ->create([
-                    'updated_at' => Carbon::yesterday()->startOfDay(),
+                    'updated_at' => Carbon::today(),
                 ]),
             User::factory()
                 ->withRole(Role::Admin)
                 ->create([
-                    'updated_at' => Carbon::yesterday()->endOfDay(),
+                    'updated_at' => Carbon::today()->midDay(),
                 ]),
             User::factory()
                 ->withRole(Role::Admin)
                 ->create([
-                    'updated_at' => Carbon::yesterday()->midDay(),
+                    'updated_at' => Carbon::today()->endOfDay(),
+                ]),
+            User::factory()
+                ->withRole(Role::Admin)
+                ->create([
+                    'updated_at' => Carbon::yesterday(),
                 ]),
         ]);
 
@@ -43,14 +48,7 @@ class StaleTest extends TestCase
             User::factory()
                 ->withRole(Role::Admin)
                 ->create([
-                    'updated_at' => Carbon::yesterday()
-                        ->startOfDay()
-                        ->subMinute(),
-                ]),
-            User::factory()
-                ->withRole(Role::Admin)
-                ->create([
-                    'updated_at' => Carbon::yesterday()
+                    'updated_at' => Carbon::today()
                         ->endOfDay()
                         ->addSecond(),
                 ]),
@@ -70,7 +68,7 @@ class StaleTest extends TestCase
     {
         $this->assertResultsMatch(
             User::query()
-                ->stale(Carbon::yesterday())
+                ->goneStale(Carbon::today())
                 ->get(),
             $this->expected,
             $this->unexpected,

@@ -26,7 +26,7 @@ class StripStaleUsers implements ShouldBeUnique, ShouldQueue
         $userClass = config('common.models.user');
 
         $userClass::query()
-            ->stale(
+            ->goneStale(
                 Carbon::today()->subMonths($userClass::STALE_CUTOFF_MONTHS),
             )
             ->each(function ($user) {

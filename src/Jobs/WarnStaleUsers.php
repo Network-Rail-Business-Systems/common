@@ -28,7 +28,7 @@ class WarnStaleUsers implements ShouldBeUnique, ShouldQueue
         $cutoff = Carbon::today()->subMonths($userClass::STALE_CUTOFF_MONTHS);
 
         $userClass::query()
-            ->stale(
+            ->goingStale(
                 $cutoff->clone()->addMonth(),
             )
             ->each(function ($user) use ($cutoff) {
@@ -36,7 +36,7 @@ class WarnStaleUsers implements ShouldBeUnique, ShouldQueue
             });
 
         $userClass::query()
-            ->stale(
+            ->goingStale(
                 $cutoff->clone()->addWeek(),
             )
             ->each(function ($user) use ($cutoff) {
