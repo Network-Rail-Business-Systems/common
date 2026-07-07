@@ -1,7 +1,7 @@
 @component('mail::message')
 # Your elevated access rights will be revoked on {{ $cutoff->format('d/m/Y') }}
 
-You have an account with elevated access rights in the {{ config('app.name') }} System, however you have not logged in for a long time.
+Your {{ config('app.name') }} account has elevated access rights, however you have not logged in for a long time.
 
 For security purposes, we revoke elevated access rights from accounts after one year of inactivity.
 

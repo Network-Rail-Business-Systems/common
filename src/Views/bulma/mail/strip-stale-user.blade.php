@@ -1,7 +1,7 @@
 @component('mail::message')
 # Your elevated access rights have been revoked
 
-You had an account with elevated access rights in the {{ config('app.name') }} System, however you did not log in for a long time.
+Your {{ config('app.name') }} account had elevated access rights, however you did not log in for a long time.
 
 For security purposes, we revoke elevated access rights from accounts after one year of inactivity.
 
