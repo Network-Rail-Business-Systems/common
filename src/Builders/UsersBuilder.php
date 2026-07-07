@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Builders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use NetworkRailBusinessSystems\Common\Finders\UserFinder;
@@ -94,6 +95,18 @@ class UsersBuilder extends Builder
                 ->orWhereHas('roles', function (Builder $query) use ($fuzzyTerm) {
                     $query->where('name', 'LIKE', $fuzzyTerm);
                 });
+        });
+    }
+
+    public function stale(Carbon $cutoff): self
+    {
+        return $this->where(function (UsersBuilder $query) use ($cutoff) {
+            $query
+                ->whereHas('roles')
+                ->whereBetween('updated_at', [
+                    $cutoff->clone()->startOfDay(),
+                    $cutoff->endOfDay(),
+                ]);
         });
     }
 }

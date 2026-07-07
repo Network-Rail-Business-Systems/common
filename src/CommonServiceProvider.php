@@ -9,11 +9,16 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
+use NetworkRailBusinessSystems\Common\Jobs\CleanupFailedJobs;
+use NetworkRailBusinessSystems\Common\Jobs\CleanupTempStorage;
+use NetworkRailBusinessSystems\Common\Jobs\StripStaleUsers;
+use NetworkRailBusinessSystems\Common\Jobs\WarnStaleUsers;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -29,6 +34,7 @@ class CommonServiceProvider extends ServiceProvider
         $this->setupCommands();
         $this->setupConfig();
         $this->setupHttps();
+        $this->setupJobs();
         $this->setupModels();
         $this->setupPolicies();
         $this->setupRoutes();
@@ -77,6 +83,29 @@ class CommonServiceProvider extends ServiceProvider
             URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', 'on');
         }
+    }
+
+    public function setupJobs(): void
+    {
+        Schedule::job(new WarnStaleUsers())
+            ->daily()
+            ->name('warn_stale_users')
+            ->onOneServer();
+
+        Schedule::job(new StripStaleUsers())
+            ->daily()
+            ->name('strip_stale_users')
+            ->onOneServer();
+
+        Schedule::job(new CleanupFailedJobs(168))
+            ->weekly()
+            ->name('cleanup_failed_jobs')
+            ->onOneServer();
+
+        Schedule::job(new CleanupTempStorage())
+            ->daily()
+            ->name('cleanup_temp_storage')
+            ->onOneServer();
     }
 
     public function setupModels(): void

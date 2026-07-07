@@ -53,6 +53,8 @@ class User extends Authenticatable implements EntraAuthenticatable, Actioner, Ac
     use LogsActivity;
     use SoftDeletes;
 
+    public const int STALE_CUTOFF_MONTHS = 12;
+
     protected $fillable = [
         'email',
         'first_name',
