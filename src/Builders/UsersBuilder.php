@@ -105,7 +105,7 @@ class UsersBuilder extends Builder
                 ->whereHas('roles')
                 ->whereBetween('updated_at', [
                     $cutoff->clone()->startOfDay(),
-                    $cutoff->endOfDay(),
+                    $cutoff->clone()->endOfDay(),
                 ]);
         });
     }
@@ -115,7 +115,11 @@ class UsersBuilder extends Builder
         return $this->where(function (UsersBuilder $query) use ($cutoff) {
             $query
                 ->whereHas('roles')
-                ->where('updated_at', '<=', $cutoff->endOfDay());
+                ->where(
+                    'updated_at',
+                    '<=',
+                    $cutoff->clone()->endOfDay(),
+                );
         });
     }
 }
