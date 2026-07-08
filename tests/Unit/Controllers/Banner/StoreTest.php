@@ -27,6 +27,11 @@ class StoreTest extends TestCase
 
         $this->signInWithPermission(Permission::ManageBanner);
 
+        $this->controller = new BannerController();
+    }
+
+    public function test(): void
+    {
         $this->request = new BannerRequest([
             'type' => 'info',
             'message' => 'Potato',
@@ -36,12 +41,8 @@ class StoreTest extends TestCase
             'ends_at-year' => 2026,
         ]);
 
-        $this->controller = new BannerController();
         $this->redirect = $this->controller->store($this->request);
-    }
 
-    public function test(): void
-    {
         $this->assertEquals(
             [
                 'type' => 'info',
@@ -59,6 +60,29 @@ class StoreTest extends TestCase
         $this->assertEquals(
             route('admin.banner.create'),
             $this->redirect->getTargetUrl(),
+        );
+    }
+
+    public function testHandlesNullEndsAt(): void
+    {
+        $this->request = new BannerRequest([
+            'type' => 'info',
+            'message' => 'Potato',
+            'ends_at' => 1,
+            'ends_at-day' => null,
+            'ends_at-month' => null,
+            'ends_at-year' => null,
+        ]);
+
+        $this->redirect = $this->controller->store($this->request);
+
+        $this->assertEquals(
+            [
+                'type' => 'info',
+                'message' => 'Potato',
+                'ends_at' => null,
+            ],
+            Cache::get(BannerController::CACHE_KEY),
         );
     }
 }
