@@ -22,7 +22,6 @@ class BannerController extends Controller
 
     public const array BLANK_BANNER = [
         'type' => null,
-        'title' => null,
         'message' => null,
         'ends_at' => null,
     ];
@@ -36,7 +35,7 @@ class BannerController extends Controller
         $existingBanner = Cache::get(self::CACHE_KEY) ?? self::BLANK_BANNER;
 
         return view('common::admin.banner.create', [
-            'method' => 'POST',
+            'title' => 'Manage system banner',
             'questions' => [
                 Field::radios(
                     'type',
@@ -44,11 +43,6 @@ class BannerController extends Controller
                     self::BANNER_TYPES,
                 )
                     ->setValue($existingBanner['type']),
-                Field::input(
-                    'title',
-                    'What should the title of the banner be?',
-                )
-                    ->setValue($existingBanner['title']),
                 Field::input(
                     'message',
                     'What message would you like to put on the banner?',
@@ -62,6 +56,8 @@ class BannerController extends Controller
                     ->optional()
                     ->setHint('Leave blank to show until the system cache is cleared'),
             ],
+            'action' => route('admin.banner.store'),
+            'method' => 'POST',
             'submitButtonMode' => '',
             'submitButtonLabel' => 'Save banner',
             'otherButtonHref' => route('admin.index'),
@@ -84,7 +80,6 @@ class BannerController extends Controller
             self::CACHE_KEY,
             [
                 'type' => $request->input('type'),
-                'title' => $request->input('title'),
                 'message' => $request->input('message'),
                 'ends_at' => $end,
             ],

@@ -13,5 +13,7 @@ enum Permission: string implements PermissionInterface
 
     case Impersonate = 'impersonate';
 
+    case ManageBanner = 'manage_banner';
+
     case ManageUsers = 'manage_users';
 }

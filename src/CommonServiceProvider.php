@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,24 @@ class CommonServiceProvider extends ServiceProvider
         $this->setupPolicies();
         $this->setupRoutes();
         $this->setupViews();
+
+        $this->setBanner();
+    }
+
+    public function setBanner(): void
+    {
+        if (
+            Cache::has(BannerController::CACHE_KEY) === true
+            && flash()->messages->isEmpty() === true
+        ) {
+            $banner = Cache::get(BannerController::CACHE_KEY);
+
+            match ($banner['type']) {
+                'danger' => flash()->error($banner['message']),
+                'warning' => flash()->warning($banner['message']),
+                default => flash()->info($banner['message']),
+            };
+        }
     }
 
     public function setupBaseUrlRedirect(): void

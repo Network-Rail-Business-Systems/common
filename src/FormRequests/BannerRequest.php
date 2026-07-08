@@ -20,11 +20,9 @@ class BannerRequest extends FormRequest
             'type' => [
                 'required',
                 'string',
-                Rule::in(BannerController::BANNER_TYPES),
-            ],
-            'title' => [
-                'required',
-                'string',
+                Rule::in(
+                    array_keys(BannerController::BANNER_TYPES),
+                ),
             ],
             'message' => [
                 'required',
