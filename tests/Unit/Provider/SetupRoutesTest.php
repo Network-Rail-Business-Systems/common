@@ -20,6 +20,11 @@ class SetupRoutesTest extends TestCase
     public function test(): void
     {
         $this->assertEquals(
+            'http://localhost/favicons/ico',
+            route('favicons.ico'),
+        );
+
+        $this->assertEquals(
             'http://localhost/privacy',
             route('privacy'),
         );
