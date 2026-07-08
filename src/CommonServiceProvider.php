@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
+use NetworkRailBusinessSystems\Common\Controllers\BannerController;
 use NetworkRailBusinessSystems\Common\Controllers\FaviconController;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
 use NetworkRailBusinessSystems\Common\Jobs\CleanupFailedJobs;
@@ -168,6 +169,15 @@ class CommonServiceProvider extends ServiceProvider
                         Route::get('/', 'index')->name('index');
 
                         Route::supportPageAdmin();
+
+                        Route::prefix('/banner')
+                            ->name('banner.')
+                            ->controller(BannerController::class)
+                            ->group(function () {
+                                Route::get('/', 'create')->name('create');
+                                Route::post('/', 'store')->name('store');
+                                Route::delete('/', 'clear')->name('clear');
+                            });
 
                         Route::prefix('/users')
                             ->name('users.')

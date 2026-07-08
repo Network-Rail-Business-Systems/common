@@ -9,7 +9,12 @@
     <x-govuk::h2>Actions</x-govuk::h2>
     <x-govuk::ul>
         <li>
-            <x-govuk::a href="{{ route('admin.banner.clear') }}">Clear the current banner</x-govuk::a>
+            <x-govuk::form
+                action="{{ route('admin.banner.clear') }}"
+                method="DELETE"
+            >
+                <x-govuk::button as-link>Clear the current banner</x-govuk::button>
+            </x-govuk::forma>
         </li>
     </x-govuk::ul>
 @endsection
