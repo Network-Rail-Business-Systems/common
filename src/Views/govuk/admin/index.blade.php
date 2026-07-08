@@ -7,6 +7,14 @@
     <x-govuk::ul spaced>
         @can(config('common.permissions.manage_users'))
             <li>
+                <x-govuk::a href="{{ route('admin.banner.create') }}">
+                    Manage system banner
+                </x-govuk::a>
+            </li>
+        @endcan
+
+        @can(config('common.permissions.manage_users'))
+            <li>
                 <x-govuk::a href="{{ route('admin.users.index') }}">
                     Manage Users and Roles
                 </x-govuk::a>
