@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
+use NetworkRailBusinessSystems\Common\Controllers\LogoController;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
 
 class CommonServiceProvider extends ServiceProvider
@@ -112,6 +113,14 @@ class CommonServiceProvider extends ServiceProvider
                 ->controller(PrivacyController::class)
                 ->group(function () {
                     Route::get('/', 'show')->name('privacy');
+                });
+
+            Route::prefix('/logos')
+                ->name('logos.')
+                ->controller(LogoController::class)
+                ->group(function () {
+                    Route::get('/header', 'header')->name('header');
+                    Route::get('/footer', 'footer')->name('footer');
                 });
 
             Route::middleware('EntraAuthenticated')->group(function () {
