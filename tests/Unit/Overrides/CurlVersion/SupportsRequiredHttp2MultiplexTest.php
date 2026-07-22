@@ -5,12 +5,12 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Overrides\CurlVersion;
 use NetworkRailBusinessSystems\Common\Overrides\CurlVersion;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class SupportsTls12Test extends TestCase
+class SupportsRequiredHttp2MultiplexTest extends TestCase
 {
     public function test(): void
     {
-        $this->assertTrue(
-            CurlVersion::supportsTls12(),
+        $this->assertFalse(
+            CurlVersion::supportsRequiredHttp2Multiplex(),
         );
     }
 }

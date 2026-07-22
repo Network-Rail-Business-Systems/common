@@ -2,6 +2,8 @@
 
 namespace NetworkRailBusinessSystems\Common\Overrides;
 
+use Psr\Http\Message\RequestInterface;
+
 /**
  * The version of CURL on our servers is limited to an insecure build
  * Once the servers are updated past RHEL 7x, this should be removable
@@ -13,17 +15,37 @@ class CurlVersion
         return true;
     }
 
-    public static function supportsTls12(): bool
-    {
-        return true;
-    }
-
     public static function supportsTls13(): bool
     {
         return false;
     }
 
+    public static function supportsMultiplex(): bool
+    {
+        return false;
+    }
+
+    public static function supportsHttpVersionReuseMatching(): bool
+    {
+        return false;
+    }
+
+    public static function supportsRequiredHttp2Multiplex(): bool
+    {
+        return false;
+    }
+
     public static function supportsHttp2(): bool
+    {
+        return false;
+    }
+
+    public static function supportsHttp3(): bool
+    {
+        return false;
+    }
+
+    public static function supportsRequiredHttp3Multiplex(): bool
     {
         return false;
     }
@@ -53,6 +75,21 @@ class CurlVersion
         //
     }
 
+    public static function supportsConnectionSharing(): bool
+    {
+        return false;
+    }
+
+    public static function ensureConnectionSharingSupported(): void
+    {
+        //
+    }
+
+    public static function supportsShareConnectionCaches(): bool
+    {
+        return false;
+    }
+
     public static function supportsProxyTlsCredentialAwareConnectionReuse(): bool
     {
         return false;
@@ -63,13 +100,28 @@ class CurlVersion
         return false;
     }
 
+    public static function supportsSocksProxyCredentialAwareConnectionReuse(): bool
+    {
+        return false;
+    }
+
     public static function supportsProxyHeaderSeparation(): bool
     {
         return false;
     }
 
-    public static function getVersion(): ?string
+    public static function supportsProtocolsStr(): bool
     {
-        return '7.29.0';
+        return false;
+    }
+
+    public static function supportsProxyTunneling(): bool
+    {
+        return false;
+    }
+
+    public static function ensureSupported(RequestInterface $request): void
+    {
+        //
     }
 }
