@@ -15,6 +15,11 @@ class CurlVersion
         return true;
     }
 
+    public static function supportsTls12(): bool
+    {
+        return true;
+    }
+
     public static function supportsTls13(): bool
     {
         return false;
@@ -123,5 +128,30 @@ class CurlVersion
     public static function ensureSupported(RequestInterface $request): void
     {
         //
+    }
+
+    public static function supportsConnectionCaps(): bool
+    {
+        return false;
+    }
+
+    public static function ensureConnectionCapsSupported(string $option): void
+    {
+        //
+    }
+
+    public static function supportsRequiredMultiplex(): bool
+    {
+        return false;
+    }
+
+    public static function supportsNtlm(): bool
+    {
+        return false;
+    }
+
+    public static function getVersion(): string
+    {
+        return '7.29.0';
     }
 }
