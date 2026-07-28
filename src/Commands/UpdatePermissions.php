@@ -37,7 +37,15 @@ class UpdatePermissions extends Command
     public function handle(): void
     {
         $this->info('This command will update the Roles and Permissions in this system to match the defined enums.');
-        $this->confirm('Continue?');
+
+        $continue = $this->input('no-interaction') === false
+            ? $this->confirm('Continue?')
+            : true;
+
+        if ($continue === false) {
+            $this->info('Cancelled');
+            return;
+        }
 
         $this->setup();
 
