@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 
@@ -73,5 +74,23 @@ trait HasFormatters
         return empty($text) === false
             ? nl2br($text)
             : $blank;
+    }
+
+    protected function formatPerson(
+        ?Model $user,
+        array $fields = ['name', 'email'],
+        ?array $blank = null,
+    ): ?array {
+        if ($user === null) {
+            return $blank;
+        }
+
+        $values = [];
+
+        foreach ($fields as $field) {
+            $values[] = $user->$field;
+        }
+
+        return $values;
     }
 }
