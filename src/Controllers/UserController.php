@@ -69,9 +69,10 @@ class UserController extends Controller
         );
 
         /** @var ?User $user */
-        $user = EntraUser::import(
-            $request->input('email'),
-        );
+        // TODO DirectoryUser::import();
+        //        $user = EntraUser::import(
+        //            $request->input('email'),
+        //        );
 
         if ($user === null) {
             flash()->error('Enter the e-mail of a person with a Network Rail account');

@@ -33,7 +33,7 @@
         "lab404/laravel-impersonate": "^1",
         "laracasts/flash": "^3",
         "networkrailbusinesssystems/activity-log": "^3",
-        "networkrailbusinesssystems/entra": "^1",
+        "networkrailbusinesssystems/entra": "^2",
         "networkrailbusinesssystems/support-page": "^5",
         "spatie/laravel-permission": "^6",
         "spatie/simple-excel": "^3"

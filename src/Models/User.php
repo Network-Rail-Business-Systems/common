@@ -5,6 +5,7 @@ namespace NetworkRailBusinessSystems\Common\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Collection;
@@ -17,8 +18,7 @@ use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
 use NetworkRailBusinessSystems\Common\Factories\UserFactory;
 use NetworkRailBusinessSystems\Common\Traits\ImprovedHasAttribute;
-use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
-use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
+use NetworkRailBusinessSystems\Entra\Interfaces\AuthenticatesWithEntra;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -40,9 +40,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $short_email
  * @property Carbon $updated_at
  */
-class User extends Authenticatable implements EntraAuthenticatable, Actioner, Actioned
+class User extends Authenticatable implements AuthenticatesWithEntra, Actioner, Actioned
 {
-    use AuthenticatesWithEntra;
     use CausesActivity;
     use HasActions;
     use HasActivities;
@@ -159,5 +158,17 @@ class User extends Authenticatable implements EntraAuthenticatable, Actioner, Ac
     public function canBeImpersonated(): bool
     {
         return Gate::check('beImpersonated', $this) === true;
+    }
+
+    // AuthenticatesWithEntra
+    public static function findOrCreateByAzureId(string $azureId): AuthenticatesWithEntra
+    {
+        // TODO Directory implementation
+        /** @var User $user */
+        $user = static::query()
+            ->where('azure_id', '=', $azureId)
+            ->firstOrNew();
+
+        return $user;
     }
 }
