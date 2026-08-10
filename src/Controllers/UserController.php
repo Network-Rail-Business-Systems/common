@@ -12,7 +12,7 @@ use NetworkRailBusinessSystems\Common\FormRequests\ImportUserRequest;
 use NetworkRailBusinessSystems\Common\Helpers\Csv;
 use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\ResourceCollections\UserRoleCollection;
-use NetworkRailBusinessSystems\Entra\Models\EntraUser;
+use NetworkRailBusinessSystems\DirectoryLink\Exceptions\NotInDirectoryException;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -68,13 +68,11 @@ class UserController extends Controller
             $this->newUserModel(),
         );
 
-        /** @var ?User $user */
-        // TODO DirectoryUser::import();
-        //        $user = EntraUser::import(
-        //            $request->input('email'),
-        //        );
-
-        if ($user === null) {
+        try {
+            $user = User::importFromDirectory(
+                $request->input('email', 'mail'),
+            );
+        } catch (NotInDirectoryException $exception) {
             flash()->error('Enter the e-mail of a person with a Network Rail account');
 
             return redirect()->route('admin.users.create');

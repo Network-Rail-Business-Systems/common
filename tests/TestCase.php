@@ -21,6 +21,8 @@ use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Models\User;
+use NetworkRailBusinessSystems\DirectoryLink\DirectoryLinkServiceProvider;
+use NetworkRailBusinessSystems\DirectoryLink\Traits\AssertsDirectory;
 use NetworkRailBusinessSystems\Entra\Traits\AssertsEntra;
 use NetworkRailBusinessSystems\SupportPage\Providers\SupportPageProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -39,6 +41,7 @@ abstract class TestCase extends BaseTestCase
     use AssertsForms;
     use AssertsEntra;
     use AssertsValidationRules;
+    use AssertsDirectory;
 
     protected function setUp(): void
     {
@@ -88,6 +91,15 @@ abstract class TestCase extends BaseTestCase
         config()->set('testing-traits.user_model', User::class);
         config()->set('govuk-activity-log.user_model', User::class);
 
+        config()->set('directory-link.models.user.local', User::class);
+        config()->set('directory-link.sync.user.attributes', [
+            'displayName' => 'name',
+            'givenName' => 'first_name',
+            'id' => 'azure_id',
+            'mail' => 'email',
+            'surname' => 'last_name',
+        ]);
+
         $this->withoutVite();
         View::replaceNamespace('common', __DIR__ . '/../src/Views/bulma');
 
@@ -104,6 +116,7 @@ abstract class TestCase extends BaseTestCase
             FlashServiceProvider::class,
             PermissionServiceProvider::class,
             SupportPageProvider::class,
+            DirectoryLinkServiceProvider::class,
         ];
     }
 

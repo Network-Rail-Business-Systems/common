@@ -5,7 +5,6 @@ namespace NetworkRailBusinessSystems\Common\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Collection;
@@ -18,6 +17,8 @@ use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
 use NetworkRailBusinessSystems\Common\Factories\UserFactory;
 use NetworkRailBusinessSystems\Common\Traits\ImprovedHasAttribute;
+use NetworkRailBusinessSystems\DirectoryLink\Interfaces\SyncsWithDirectory;
+use NetworkRailBusinessSystems\DirectoryLink\Traits\UsesDirectory;
 use NetworkRailBusinessSystems\Entra\Interfaces\AuthenticatesWithEntra;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
@@ -40,7 +41,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $short_email
  * @property Carbon $updated_at
  */
-class User extends Authenticatable implements AuthenticatesWithEntra, Actioner, Actioned
+class User extends Authenticatable implements AuthenticatesWithEntra, SyncsWithDirectory, Actioner, Actioned
 {
     use CausesActivity;
     use HasActions;
@@ -51,6 +52,7 @@ class User extends Authenticatable implements AuthenticatesWithEntra, Actioner, 
     use ImprovedHasAttribute;
     use LogsActivity;
     use SoftDeletes;
+    use UsesDirectory;
 
     protected $fillable = [
         'email',
@@ -163,12 +165,6 @@ class User extends Authenticatable implements AuthenticatesWithEntra, Actioner, 
     // AuthenticatesWithEntra
     public static function findOrCreateByAzureId(string $azureId): AuthenticatesWithEntra
     {
-        // TODO Directory implementation
-        /** @var User $user */
-        $user = static::query()
-            ->where('azure_id', '=', $azureId)
-            ->firstOrNew();
-
-        return $user;
+        return static::importFromDirectory($azureId);
     }
 }

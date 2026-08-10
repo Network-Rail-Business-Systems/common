@@ -5,6 +5,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Controllers\User;
 use Illuminate\Http\RedirectResponse;
 use NetworkRailBusinessSystems\Common\Controllers\UserController;
 use NetworkRailBusinessSystems\Common\FormRequests\ImportUserRequest;
+use NetworkRailBusinessSystems\Common\Models\User;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
@@ -22,7 +23,7 @@ class StoreTest extends TestCase
 
         $this->useDatabase();
         $this->usePermissions();
-        $this->useEntraEmulator();
+        $this->useDirectoryEmulator();
 
         $this->signInWithRole(Role::Admin->value);
 
@@ -37,12 +38,10 @@ class StoreTest extends TestCase
 
         $this->redirect = $this->controller->store($this->request);
 
-        $this->assertDatabaseHas('users', [
-            'email' => 'gandalf.stormcrow@networkrail.co.uk',
-        ]);
+        $user = User::query()->find(2);
 
         $this->assertFlashed(
-            'The account for Gandalf Stormcrow was successfully created',
+            "The account for $user->name was successfully created",
             'success',
         );
 
@@ -54,6 +53,8 @@ class StoreTest extends TestCase
 
     public function testFails(): void
     {
+        $this->directoryShouldReturnEmpty();
+
         $this->request = new ImportUserRequest([
             'email' => 'bad.crow@networkrail.co.uk',
         ]);
