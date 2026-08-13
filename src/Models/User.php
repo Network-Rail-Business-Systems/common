@@ -17,8 +17,9 @@ use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
 use NetworkRailBusinessSystems\Common\Factories\UserFactory;
 use NetworkRailBusinessSystems\Common\Traits\ImprovedHasAttribute;
-use NetworkRailBusinessSystems\Entra\EntraAuthenticatable;
-use NetworkRailBusinessSystems\Entra\Traits\AuthenticatesWithEntra;
+use NetworkRailBusinessSystems\DirectoryLink\Interfaces\SyncsWithDirectory;
+use NetworkRailBusinessSystems\DirectoryLink\Traits\UsesDirectory;
+use NetworkRailBusinessSystems\Entra\Interfaces\AuthenticatesWithEntra;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -40,9 +41,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $short_email
  * @property Carbon $updated_at
  */
-class User extends Authenticatable implements EntraAuthenticatable, Actioner, Actioned
+class User extends Authenticatable implements AuthenticatesWithEntra, SyncsWithDirectory, Actioner, Actioned
 {
-    use AuthenticatesWithEntra;
     use CausesActivity;
     use HasActions;
     use HasActivities;
@@ -52,6 +52,7 @@ class User extends Authenticatable implements EntraAuthenticatable, Actioner, Ac
     use ImprovedHasAttribute;
     use LogsActivity;
     use SoftDeletes;
+    use UsesDirectory;
 
     protected $fillable = [
         'email',
@@ -159,5 +160,11 @@ class User extends Authenticatable implements EntraAuthenticatable, Actioner, Ac
     public function canBeImpersonated(): bool
     {
         return Gate::check('beImpersonated', $this) === true;
+    }
+
+    // AuthenticatesWithEntra
+    public static function findOrCreateByAzureId(string $azureId): AuthenticatesWithEntra
+    {
+        return static::importFromDirectory($azureId);
     }
 }
