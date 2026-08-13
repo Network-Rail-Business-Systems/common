@@ -5,7 +5,15 @@
     <x-govuk::p>Select from one of the following options:</x-govuk::p>
 
     <x-govuk::ul spaced>
-        @can(config('common.permissions.manage_users'))
+        @can(config('support-page.permission'))
+            <li>
+                <x-govuk::a href="{{ route('admin.support-page.index') }}">
+                    Manage support page
+                </x-govuk::a>
+            </li>
+        @endcan
+
+        @can(config('common.permissions.manage_banner'))
             <li>
                 <x-govuk::a href="{{ route('admin.banner.create') }}">
                     Manage system banner
