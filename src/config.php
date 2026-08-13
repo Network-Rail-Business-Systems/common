@@ -38,6 +38,7 @@ return [
     'permissions' => [
         'access_admin' => 'access_admin',
         'impersonate' => 'impersonate',
+        'manage_banner' => 'manage_banner',
         'manage_users' => 'manage_users',
     ],
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
+use NetworkRailBusinessSystems\Common\Controllers\BannerController;
 use NetworkRailBusinessSystems\Common\Controllers\FaviconController;
 use NetworkRailBusinessSystems\Common\Controllers\LogoController;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
@@ -41,6 +43,24 @@ class CommonServiceProvider extends ServiceProvider
         $this->setupPolicies();
         $this->setupRoutes();
         $this->setupViews();
+
+        $this->setBanner();
+    }
+
+    public function setBanner(): void
+    {
+        if (
+            Cache::has(BannerController::CACHE_KEY) === true
+            && flash()->messages->isEmpty() === true
+        ) {
+            $banner = Cache::get(BannerController::CACHE_KEY);
+
+            match ($banner['type']) {
+                'danger' => flash()->error($banner['message']),
+                'warning' => flash()->warning($banner['message']),
+                default => flash()->info($banner['message']),
+            };
+        }
     }
 
     public function setupBaseUrlRedirect(): void
@@ -177,6 +197,15 @@ class CommonServiceProvider extends ServiceProvider
                         Route::get('/', 'index')->name('index');
 
                         Route::supportPageAdmin();
+
+                        Route::prefix('/banner')
+                            ->name('banner.')
+                            ->controller(BannerController::class)
+                            ->group(function () {
+                                Route::get('/', 'create')->name('create');
+                                Route::post('/', 'store')->name('store');
+                                Route::delete('/', 'clear')->name('clear');
+                            });
 
                         Route::prefix('/users')
                             ->name('users.')
