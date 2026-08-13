@@ -68,9 +68,12 @@ class UserController extends Controller
             $this->newUserModel(),
         );
 
+        $userModel = $this->newUserModel();
+
         try {
-            $user = User::importFromDirectory(
-                $request->input('email', 'mail'),
+            $user = $userModel::importFromDirectory(
+                $request->input('email'),
+                'mail',
             );
         } catch (NotInDirectoryException $exception) {
             flash()->error('Enter the e-mail of a person with a Network Rail account');
