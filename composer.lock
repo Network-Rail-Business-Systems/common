@@ -2868,16 +2868,16 @@
         },
         {
             "name": "networkrailbusinesssystems/directory-link",
-            "version": "1.1.2",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Network-Rail-Business-Systems/directory-link.git",
-                "reference": "e685a63911b2370b2111b0120541d9cf19e27a60"
+                "reference": "68d1e201f5e086b42eb412305f4b33a67d5d8407"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/directory-link/zipball/e685a63911b2370b2111b0120541d9cf19e27a60",
-                "reference": "e685a63911b2370b2111b0120541d9cf19e27a60",
+                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/directory-link/zipball/68d1e201f5e086b42eb412305f4b33a67d5d8407",
+                "reference": "68d1e201f5e086b42eb412305f4b33a67d5d8407",
                 "shasum": ""
             },
             "require": {
@@ -2924,9 +2924,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Network-Rail-Business-Systems/directory-link/issues",
-                "source": "https://github.com/Network-Rail-Business-Systems/directory-link/tree/1.1.2"
+                "source": "https://github.com/Network-Rail-Business-Systems/directory-link/tree/1.1.4"
             },
-            "time": "2026-08-13T08:32:54+00:00"
+            "time": "2026-08-13T11:05:27+00:00"
         },
         {
             "name": "networkrailbusinesssystems/entra",
@@ -8951,8 +8951,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/081e24134f8eaa1e15bd5236eb7ae387668dd053",
-                "reference": "081e24134f8eaa1e15bd5236eb7ae387668dd053",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b2068f1d28de41955b7edf3b31704e1e45be9f99",
+                "reference": "b2068f1d28de41955b7edf3b31704e1e45be9f99",
                 "shasum": ""
             },
             "require": {
@@ -9009,7 +9009,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-13T08:06:45+00:00"
+            "time": "2026-08-13T09:58:56+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

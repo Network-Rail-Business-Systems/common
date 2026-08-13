@@ -167,6 +167,6 @@ class User extends Authenticatable implements AuthenticatesWithEntra, SyncsWithD
     // AuthenticatesWithEntra
     public static function findOrCreateByAzureId(string $azureId): AuthenticatesWithEntra
     {
-        return static::importFromDirectory($azureId);
+        return static::importFromDirectory($azureId, 'id');
     }
 }
