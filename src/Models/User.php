@@ -54,6 +54,8 @@ class User extends Authenticatable implements AuthenticatesWithEntra, SyncsWithD
     use SoftDeletes;
     use UsesDirectory;
 
+    public const int STALE_CUTOFF_MONTHS = 12;
+
     protected $fillable = [
         'email',
         'first_name',
