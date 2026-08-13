@@ -30,6 +30,11 @@ class SetupRoutesTest extends TestCase
         );
 
         $this->assertEquals(
+            'http://localhost/logos/header',
+            route('logos.header'),
+        );
+
+        $this->assertEquals(
             'http://localhost/admin',
             route('admin.index'),
         );

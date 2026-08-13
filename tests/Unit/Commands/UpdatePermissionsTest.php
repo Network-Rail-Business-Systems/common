@@ -98,4 +98,19 @@ class UpdatePermissionsTest extends TestCase
             'role_id' => 2,
         ]);
     }
+
+    public function testNo(): void
+    {
+        $this->artisan('update:permissions')
+            ->expectsOutput('This command will update the Roles and Permissions in this system to match the defined enums.')
+            ->expectsConfirmation('Continue?', 'no')
+            ->expectsOutput('Cancelled');
+    }
+
+    public function testWithoutInteraction(): void
+    {
+        $this->artisan('update:permissions --no-interaction')
+            ->expectsOutput('This command will update the Roles and Permissions in this system to match the defined enums.')
+            ->assertSuccessful();
+    }
 }
