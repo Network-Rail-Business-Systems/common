@@ -5,12 +5,12 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Overrides\CurlVersion;
 use NetworkRailBusinessSystems\Common\Overrides\CurlVersion;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-class SupportsHttps2Test extends TestCase
+class SupportsProxyTunnelingTest extends TestCase
 {
     public function test(): void
     {
         $this->assertFalse(
-            CurlVersion::supportsHttp2(),
+            CurlVersion::supportsProxyTunneling(),
         );
     }
 }

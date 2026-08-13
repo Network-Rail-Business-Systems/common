@@ -3,7 +3,8 @@
 namespace NetworkRailBusinessSystems\Common\FormRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use NetworkRailBusinessSystems\Entra\Rules\UserExistsInEntra;
+use NetworkRailBusinessSystems\DirectoryLink\Models\DirectoryUser;
+use NetworkRailBusinessSystems\DirectoryLink\Rules\ExistsInDirectory;
 
 class ImportUserRequest extends FormRequest
 {
@@ -19,7 +20,7 @@ class ImportUserRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-                new UserExistsInEntra(),
+                new ExistsInDirectory(DirectoryUser::class),
             ],
         ];
     }
