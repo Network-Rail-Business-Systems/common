@@ -2868,16 +2868,16 @@
         },
         {
             "name": "networkrailbusinesssystems/directory-link",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Network-Rail-Business-Systems/directory-link.git",
-                "reference": "da2d529eaa4da36bed95b238ea068843efcaf7c0"
+                "reference": "e685a63911b2370b2111b0120541d9cf19e27a60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/directory-link/zipball/da2d529eaa4da36bed95b238ea068843efcaf7c0",
-                "reference": "da2d529eaa4da36bed95b238ea068843efcaf7c0",
+                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/directory-link/zipball/e685a63911b2370b2111b0120541d9cf19e27a60",
+                "reference": "e685a63911b2370b2111b0120541d9cf19e27a60",
                 "shasum": ""
             },
             "require": {
@@ -2924,22 +2924,22 @@
             ],
             "support": {
                 "issues": "https://github.com/Network-Rail-Business-Systems/directory-link/issues",
-                "source": "https://github.com/Network-Rail-Business-Systems/directory-link/tree/1.1.1"
+                "source": "https://github.com/Network-Rail-Business-Systems/directory-link/tree/1.1.2"
             },
-            "time": "2026-08-11T07:40:53+00:00"
+            "time": "2026-08-13T08:32:54+00:00"
         },
         {
             "name": "networkrailbusinesssystems/entra",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Network-Rail-Business-Systems/entra.git",
-                "reference": "50ae9b2c52553fef03e2e85a0e0f87e2e33c7890"
+                "reference": "c0a5f237c3a7d21f21a59b22d8e8284be527eb12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/entra/zipball/50ae9b2c52553fef03e2e85a0e0f87e2e33c7890",
-                "reference": "50ae9b2c52553fef03e2e85a0e0f87e2e33c7890",
+                "url": "https://api.github.com/repos/Network-Rail-Business-Systems/entra/zipball/c0a5f237c3a7d21f21a59b22d8e8284be527eb12",
+                "reference": "c0a5f237c3a7d21f21a59b22d8e8284be527eb12",
                 "shasum": ""
             },
             "require": {
@@ -2988,9 +2988,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Network-Rail-Business-Systems/entra/issues",
-                "source": "https://github.com/Network-Rail-Business-Systems/entra/tree/2.2.4"
+                "source": "https://github.com/Network-Rail-Business-Systems/entra/tree/2.2.5"
             },
-            "time": "2026-08-12T11:22:03+00:00"
+            "time": "2026-08-13T08:31:14+00:00"
         },
         {
             "name": "networkrailbusinesssystems/support-page",
@@ -7191,20 +7191,21 @@
     "packages-dev": [
         {
             "name": "anthonyedmonds/laravel-testing-traits",
-            "version": "1.3.2",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AnthonyEdmonds/laravel-testing-traits.git",
-                "reference": "14c792300224c819b4e8f44d01d1bfd1fadb30a2"
+                "reference": "5fc5ebd9af750320f98434ef29b64e858d32b44c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-testing-traits/zipball/14c792300224c819b4e8f44d01d1bfd1fadb30a2",
-                "reference": "14c792300224c819b4e8f44d01d1bfd1fadb30a2",
+                "url": "https://api.github.com/repos/AnthonyEdmonds/laravel-testing-traits/zipball/5fc5ebd9af750320f98434ef29b64e858d32b44c",
+                "reference": "5fc5ebd9af750320f98434ef29b64e858d32b44c",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "^13",
+                "orchestra/testbench": "^11",
                 "php": "^8.3",
                 "phpunit/phpunit": "^12"
             },
@@ -7243,9 +7244,9 @@
             ],
             "support": {
                 "issues": "https://github.com/AnthonyEdmonds/laravel-testing-traits/issues",
-                "source": "https://github.com/AnthonyEdmonds/laravel-testing-traits/tree/1.3.2"
+                "source": "https://github.com/AnthonyEdmonds/laravel-testing-traits/tree/1.4.1"
             },
-            "time": "2026-06-09T14:09:41+00:00"
+            "time": "2026-08-13T08:30:33+00:00"
         },
         {
             "name": "brianium/paratest",
