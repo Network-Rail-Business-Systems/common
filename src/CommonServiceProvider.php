@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
+use NetworkRailBusinessSystems\Common\Controllers\FaviconController;
 use NetworkRailBusinessSystems\Common\Controllers\LogoController;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
 use NetworkRailBusinessSystems\Common\Jobs\CleanupFailedJobs;
@@ -137,6 +138,22 @@ class CommonServiceProvider extends ServiceProvider
     {
         Route::macro('common', function () {
             Route::supportPage();
+
+            Route::prefix('/favicons')
+                ->name('favicons.')
+                ->controller(FaviconController::class)
+                ->group(function () {
+                    Route::get('/ico', 'ico')->name('ico');
+
+                    Route::prefix('/png')
+                        ->name('png.')
+                        ->group(function () {
+                            Route::get('/16', 'png16')->name('16');
+                            Route::get('/32', 'png32')->name('32');
+                            Route::get('/48', 'png48')->name('48');
+                            Route::get('/64', 'png64')->name('64');
+                        });
+                });
 
             Route::prefix('/privacy')
                 ->controller(PrivacyController::class)
