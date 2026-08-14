@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -21,7 +22,9 @@ class LogoController extends Controller
     protected function download(string $path): BinaryFileResponse
     {
         return Response::file($path)->setCache([
-            'last_modified' => File::lastModified($path),
+            'last_modified' => Carbon::createFromTimestamp(
+                File::lastModified($path),
+            ),
             'public' => true,
         ]);
     }
