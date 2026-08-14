@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Controllers;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -9,11 +10,19 @@ class LogoController extends Controller
 {
     public function header(): BinaryFileResponse
     {
-        return Response::file(__DIR__ . '/../Resources/Images/logo-header.svg');
+        return $this->download(__DIR__ . '/../Resources/Images/logo-header.svg');
     }
 
     public function footer(): BinaryFileResponse
     {
-        return Response::file(__DIR__ . '/../Resources/Images/logo-footer.svg');
+        return $this->download(__DIR__ . '/../Resources/Images/logo-footer.svg');
+    }
+
+    protected function download(string $path): BinaryFileResponse
+    {
+        return Response::file($path)->setCache([
+            'last_modified' => File::lastModified($path),
+            'public' => true,
+        ]);
     }
 }
