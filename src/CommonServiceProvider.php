@@ -6,15 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use NetworkRailBusinessSystems\Common\Commands\UpdatePermissions;
+use NetworkRailBusinessSystems\Common\Controllers\BannerController;
+use NetworkRailBusinessSystems\Common\Controllers\FaviconController;
 use NetworkRailBusinessSystems\Common\Controllers\LogoController;
 use NetworkRailBusinessSystems\Common\Controllers\PrivacyController;
+use NetworkRailBusinessSystems\Common\Jobs\CleanupFailedJobs;
+use NetworkRailBusinessSystems\Common\Jobs\CleanupTempStorage;
+use NetworkRailBusinessSystems\Common\Jobs\StripStaleUsers;
+use NetworkRailBusinessSystems\Common\Jobs\WarnStaleUsers;
 
 class CommonServiceProvider extends ServiceProvider
 {
@@ -30,10 +38,29 @@ class CommonServiceProvider extends ServiceProvider
         $this->setupCommands();
         $this->setupConfig();
         $this->setupHttps();
+        $this->setupJobs();
         $this->setupModels();
         $this->setupPolicies();
         $this->setupRoutes();
         $this->setupViews();
+
+        $this->setBanner();
+    }
+
+    public function setBanner(): void
+    {
+        if (
+            Cache::has(BannerController::CACHE_KEY) === true
+            && flash()->messages->isEmpty() === true
+        ) {
+            $banner = Cache::get(BannerController::CACHE_KEY);
+
+            match ($banner['type']) {
+                'danger' => flash()->error($banner['message']),
+                'warning' => flash()->warning($banner['message']),
+                default => flash()->info($banner['message']),
+            };
+        }
     }
 
     public function setupBaseUrlRedirect(): void
@@ -80,6 +107,29 @@ class CommonServiceProvider extends ServiceProvider
         }
     }
 
+    public function setupJobs(): void
+    {
+        Schedule::job(new WarnStaleUsers())
+            ->daily()
+            ->name('warn_stale_users')
+            ->onOneServer();
+
+        Schedule::job(new StripStaleUsers())
+            ->daily()
+            ->name('strip_stale_users')
+            ->onOneServer();
+
+        Schedule::job(new CleanupFailedJobs(168))
+            ->weekly()
+            ->name('cleanup_failed_jobs')
+            ->onOneServer();
+
+        Schedule::job(new CleanupTempStorage())
+            ->daily()
+            ->name('cleanup_temp_storage')
+            ->onOneServer();
+    }
+
     public function setupModels(): void
     {
         Schema::defaultStringLength(191);
@@ -109,6 +159,22 @@ class CommonServiceProvider extends ServiceProvider
         Route::macro('common', function () {
             Route::supportPage();
 
+            Route::prefix('/favicons')
+                ->name('favicons.')
+                ->controller(FaviconController::class)
+                ->group(function () {
+                    Route::get('/ico', 'ico')->name('ico');
+
+                    Route::prefix('/png')
+                        ->name('png.')
+                        ->group(function () {
+                            Route::get('/16', 'png16')->name('16');
+                            Route::get('/32', 'png32')->name('32');
+                            Route::get('/48', 'png48')->name('48');
+                            Route::get('/64', 'png64')->name('64');
+                        });
+                });
+
             Route::prefix('/privacy')
                 ->controller(PrivacyController::class)
                 ->group(function () {
@@ -131,6 +197,15 @@ class CommonServiceProvider extends ServiceProvider
                         Route::get('/', 'index')->name('index');
 
                         Route::supportPageAdmin();
+
+                        Route::prefix('/banner')
+                            ->name('banner.')
+                            ->controller(BannerController::class)
+                            ->group(function () {
+                                Route::get('/', 'create')->name('create');
+                                Route::post('/', 'store')->name('store');
+                                Route::delete('/', 'clear')->name('clear');
+                            });
 
                         Route::prefix('/users')
                             ->name('users.')
