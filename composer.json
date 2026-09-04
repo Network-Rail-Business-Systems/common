@@ -27,7 +27,7 @@
     "minimum-stability": "dev",
     "require" : {
         "php": "^8.3",
-        "illuminate/support": "^12",
+        "illuminate/support": "^13",
         "laracasts/flash": "^3",
         "spatie/simple-excel": "^3"
     },
@@ -37,7 +37,7 @@
         "larastan/larastan": "^3",
         "laravel/pint": "^1",
         "networkrailbusinesssystems/badges": "^1",
-        "orchestra/testbench": "^10",
+        "orchestra/testbench": "^11",
         "phpunit/phpunit": "^12"
     },
     "config" : {
