@@ -135,6 +135,11 @@ class CurlVersion
         return false;
     }
 
+    public static function supportsSharedPoolConnectionCaps(): bool
+    {
+        return false;
+    }
+
     public static function ensureConnectionCapsSupported(string $option): void
     {
         //
