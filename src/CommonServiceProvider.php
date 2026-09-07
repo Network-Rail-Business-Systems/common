@@ -187,6 +187,8 @@ class CommonServiceProvider extends ServiceProvider
                 ->group(function () {
                     Route::get('/header', 'header')->name('header');
                     Route::get('/footer', 'footer')->name('footer');
+                    Route::get('/mail/header', 'mailHeader')->name('mail.header');
+                    Route::get('/mail/footer', 'mailFooter')->name('mail.footer');
                 });
 
             Route::middleware('EntraAuthenticated')->group(function () {

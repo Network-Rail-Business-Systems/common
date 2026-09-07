@@ -16,4 +16,14 @@ class LogoController extends Controller
     {
         return Response::file(__DIR__ . '/../Resources/Images/logo-footer.svg');
     }
+
+    public function mailHeader(): BinaryFileResponse
+    {
+        return Response::file(__DIR__ . '/../Resources/Images/logo-mail-header.png');
+    }
+
+    public function mailFooter(): BinaryFileResponse
+    {
+        return Response::file(__DIR__ . '/../Resources/Images/logo-mail-footer.png');
+    }
 }
