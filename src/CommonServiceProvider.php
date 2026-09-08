@@ -3,7 +3,6 @@
 namespace NetworkRailBusinessSystems\Common;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -29,7 +28,6 @@ class CommonServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'common');
-        $this->setupOverrides();
     }
 
     public function boot(): void
@@ -134,16 +132,6 @@ class CommonServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Model::shouldBeStrict(App::isProduction() === false);
-    }
-
-    public function setupOverrides(): void
-    {
-        $loader = AliasLoader::getInstance();
-
-        $loader->alias(
-            'GuzzleHttp\Handler\CurlVersion',
-            'NetworkRailBusinessSystems\Common\Overrides\CurlVersion',
-        );
     }
 
     public function setupPolicies(): void
