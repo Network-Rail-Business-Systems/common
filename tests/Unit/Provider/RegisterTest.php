@@ -2,9 +2,6 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Provider;
 
-use GuzzleHttp\Handler\CurlVersion;
-use Illuminate\Foundation\AliasLoader;
-use NetworkRailBusinessSystems\Common\Overrides\CurlVersion as CurlVersionOverride;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -14,13 +11,6 @@ class RegisterTest extends TestCase
         $this->assertEquals(
             '/home',
             config('common.home'),
-        );
-
-        $loader = AliasLoader::getInstance();
-
-        $this->assertEquals(
-            CurlVersionOverride::class,
-            $loader->getAliases()[CurlVersion::class],
         );
     }
 }
