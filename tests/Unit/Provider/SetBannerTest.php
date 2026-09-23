@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Provider;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Controllers\BannerController;
@@ -22,6 +23,8 @@ class SetBannerTest extends TestCase
     #[DataProvider('expectations')]
     public function testSetsInfoBanner(string $type): void
     {
+        App::shouldReceive('runningInConsole')->andReturn(false);
+
         Cache::put(BannerController::CACHE_KEY, [
             'type' => $type,
             'message' => 'Potato',
@@ -55,6 +58,8 @@ class SetBannerTest extends TestCase
 
     public function testDoesntWhenFlashExists(): void
     {
+        App::shouldReceive('runningInConsole')->andReturn(false);
+
         flash()->info('Carrot');
 
         Cache::put(BannerController::CACHE_KEY, [
@@ -72,5 +77,18 @@ class SetBannerTest extends TestCase
             'Carrot',
             $messages->first()->message,
         );
+    }
+
+    public function testReturnsWhenInConsole(): void
+    {
+        Cache::put(BannerController::CACHE_KEY, [
+            'type' => 'info',
+            'message' => 'Potato',
+            'ends_at' => null,
+        ]);
+
+        $this->provider->setBanner();
+
+        $this->assertEmpty(flash()->messages);
     }
 }
