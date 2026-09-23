@@ -23,6 +23,8 @@ class SetBannerTest extends TestCase
     #[DataProvider('expectations')]
     public function testSetsInfoBanner(string $type): void
     {
+        App::shouldReceive('runningInConsole')->andReturn(false);
+
         Cache::put(BannerController::CACHE_KEY, [
             'type' => $type,
             'message' => 'Potato',
@@ -56,6 +58,8 @@ class SetBannerTest extends TestCase
 
     public function testDoesntWhenFlashExists(): void
     {
+        App::shouldReceive('runningInConsole')->andReturn(false);
+
         flash()->info('Carrot');
 
         Cache::put(BannerController::CACHE_KEY, [
@@ -77,10 +81,6 @@ class SetBannerTest extends TestCase
 
     public function testReturnsWhenInConsole(): void
     {
-        App::partialMock()
-            ->shouldReceive('runningInConsole')
-            ->andReturn(true);
-
         Cache::put(BannerController::CACHE_KEY, [
             'type' => 'info',
             'message' => 'Potato',
