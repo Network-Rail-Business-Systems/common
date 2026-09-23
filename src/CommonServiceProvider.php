@@ -47,6 +47,10 @@ class CommonServiceProvider extends ServiceProvider
 
     public function setBanner(): void
     {
+        if (App::runningInConsole() === true) {
+            return;
+        }
+
         if (
             Cache::has(BannerController::CACHE_KEY) === true
             && flash()->messages->isEmpty() === true

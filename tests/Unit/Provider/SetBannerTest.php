@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Provider;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Controllers\BannerController;
@@ -72,5 +73,22 @@ class SetBannerTest extends TestCase
             'Carrot',
             $messages->first()->message,
         );
+    }
+
+    public function testReturnsWhenInConsole(): void
+    {
+        App::partialMock()
+            ->shouldReceive('runningInConsole')
+            ->andReturn(true);
+
+        Cache::put(BannerController::CACHE_KEY, [
+            'type' => 'info',
+            'message' => 'Potato',
+            'ends_at' => null,
+        ]);
+
+        $this->provider->setBanner();
+
+        $this->assertEmpty(flash()->messages);
     }
 }
