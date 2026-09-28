@@ -10,6 +10,19 @@ use Illuminate\Support\Str;
 
 trait HasFormatters
 {
+    protected function formatBoolean(
+        ?bool $value,
+        string $true = 'Yes',
+        string $false = 'No',
+        ?string $blank = null,
+    ): ?string {
+        return match ($value) {
+            true => $true,
+            false => $false,
+            default => $blank,
+        };
+    }
+
     protected function formatCount(
         array|Arrayable|null $list,
         string $term,
