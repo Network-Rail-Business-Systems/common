@@ -17,6 +17,7 @@ use NetworkRailBusinessSystems\ActivityLog\Traits\HasActivities;
 use NetworkRailBusinessSystems\Common\Builders\UsersBuilder;
 use NetworkRailBusinessSystems\Common\Factories\UserFactory;
 use NetworkRailBusinessSystems\Common\Traits\ImprovedHasAttribute;
+use NetworkRailBusinessSystems\DirectoryLink\Exceptions\NotInDirectoryException;
 use NetworkRailBusinessSystems\DirectoryLink\Interfaces\SyncsWithDirectory;
 use NetworkRailBusinessSystems\DirectoryLink\Traits\UsesDirectory;
 use NetworkRailBusinessSystems\Entra\Interfaces\AuthenticatesWithEntra;
@@ -167,6 +168,10 @@ class User extends Authenticatable implements AuthenticatesWithEntra, SyncsWithD
     // AuthenticatesWithEntra
     public static function findOrCreateByAzureId(string $azureId): AuthenticatesWithEntra
     {
-        return static::importFromDirectory($azureId, 'id');
+        try {
+            return static::importFromDirectory($azureId, 'id');
+        } catch (NotInDirectoryException $exception) {
+            abort(403, 'You were not found in the directory; this is usually because your Entra account is new or incomplete.');
+        }
     }
 }
