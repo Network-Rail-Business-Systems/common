@@ -91,7 +91,10 @@ class CommonServiceProvider extends ServiceProvider
 
     public function setupHttps(): void
     {
-        if (App::runningUnitTests() === false) {
+        if (
+            App::isLocal() === false
+            && App::runningUnitTests() === false
+        ) {
             URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', 'on');
         }
