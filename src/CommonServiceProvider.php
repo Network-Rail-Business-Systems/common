@@ -91,8 +91,10 @@ class CommonServiceProvider extends ServiceProvider
 
     public function setupHttps(): void
     {
-        URL::forceScheme('https');
-        $this->app['request']->server->set('HTTPS', 'on');
+        if (App::runningUnitTests() === false) {
+            URL::forceScheme('https');
+            $this->app['request']->server->set('HTTPS', 'on');
+        }
     }
 
     public function setupJobs(): void
