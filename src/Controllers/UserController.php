@@ -119,7 +119,7 @@ class UserController extends Controller
 
         return Csv::export(
             mb_strtolower(config('app.acronym')) . '_users.csv',
-            $this->exportQuery()->get(),
+            $this->exportQuery()->get()->dd(),
         );
     }
 
@@ -128,29 +128,25 @@ class UserController extends Controller
         $finder = new UserFinder();
         $userModel = $this->newUserModel();
 
-        $rolesTable = config('permission.table_names.roles');
-        $modelHasRolesTable = config('permission.table_names.model_has_roles');
-        $modelColumn = config('permission.column_names.model_morph_key');
-
         return DB::table('users AS results')
             ->select([
                 'results.id AS id',
                 DB::raw('MAX(results.name) AS name'),
                 DB::raw('MAX(results.email) AS email'),
                 DB::raw('MAX(results.updated_at) AS last_login'),
-                DB::raw("GROUP_CONCAT($rolesTable.name, \",\") AS roles"),
+                DB::raw('GROUP_CONCAT(roles.name, ",") AS roles'),
             ])
             ->leftJoin(
-                $modelHasRolesTable,
-                "$modelHasRolesTable.$modelColumn",
+                'model_has_roles',
+                'model_has_roles.model_id',
                 '=',
                 'results.id',
             )
             ->leftJoin(
-                $rolesTable,
-                "$rolesTable.id",
+                'roles',
+                'roles.id',
                 '=',
-                "$modelHasRolesTable.$modelColumn",
+                'model_has_roles.role_id',
             )
             ->whereExists(
                 $userModel::query()

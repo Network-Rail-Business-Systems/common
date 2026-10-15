@@ -27,7 +27,7 @@ class ExportTest extends TestCase
         $this->useDatabase();
         $this->usePermissions();
 
-        $this->signInWithRole(Role::Admin->value);
+        $this->signInWithRole(Role::Admin);
 
         $this->controller = new UserController();
         $this->response = $this->controller->export();
