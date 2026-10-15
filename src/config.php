@@ -21,9 +21,6 @@ return [
         'roles' => 'Role::class',
     ],
 
-    /** Whether to force HTTPS regardless of hostname */
-    'force_https' => env('FORCE_HTTPS', false),
-
     /** The path to the main landing page */
     'home' => '/home',
 
