@@ -119,7 +119,7 @@ class UserController extends Controller
 
         return Csv::export(
             mb_strtolower(config('app.acronym')) . '_users.csv',
-            $this->exportQuery()->get()->dd(),
+            $this->exportQuery()->get(),
         );
     }
 
