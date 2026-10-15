@@ -42,10 +42,5 @@ class BootTest extends TestCase
         );
 
         $this->assertTrue(Model::preventsLazyLoading());
-
-        $this->assertEquals(
-            'on',
-            $this->app['request']->server->get('HTTPS'),
-        );
     }
 }

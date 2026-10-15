@@ -7,7 +7,6 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Schema;
@@ -93,13 +92,8 @@ class CommonServiceProvider extends ServiceProvider
     public function setupHttps(): void
     {
         if (
-            config('common.force_https', false) === true
-            || in_array(Request::host(), [
-                'systems.hiav.networkrail.co.uk',
-                'systems3.hiav.networkrail.co.uk',
-                'systems4.hiav.networkrail.co.uk',
-                'systems5.hiav.networkrail.co.uk',
-            ])
+            App::isLocal() === false
+            && App::runningUnitTests() === false
         ) {
             URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', 'on');

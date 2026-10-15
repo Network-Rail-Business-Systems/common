@@ -59,7 +59,6 @@ The `config/common.php` file contains the following options:
 |-------------|----------------------------------------------------------|--------|----------------------------|
 | controllers | Which controllers to use within common functions         | array  | role, user                 |
 | enums       | Which enums to use within common functions               | array  | permissions, roles         |
-| force_https | Whether to force HTTPS on regardless of the hostname     | string | false                      |
 | home        | The base resource to redirect to from the root directory | string | /home                      |
 | models      | Which models to use within common functions              | array  | permission, role, user     |
 | permissions | Which Permissions to use within common functions         | array  | access_admin, manage_users |
