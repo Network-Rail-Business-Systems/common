@@ -2,28 +2,28 @@
 
 namespace NetworkRailBusinessSystems\Common\Controllers;
 
-use Illuminate\Support\Facades\Response;
+use NetworkRailBusinessSystems\Common\Enums\Logo;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class LogoController extends Controller
 {
     public function header(): BinaryFileResponse
     {
-        return Response::file(__DIR__ . '/../Resources/Images/logo-header.svg');
+        return Logo::Header->download();
     }
 
     public function footer(): BinaryFileResponse
     {
-        return Response::file(__DIR__ . '/../Resources/Images/logo-footer.svg');
+        return Logo::Footer->download();
     }
 
     public function mailHeader(): BinaryFileResponse
     {
-        return Response::file(__DIR__ . '/../Resources/Images/logo-mail-header.png');
+        return Logo::MailHeader->download();
     }
 
     public function mailFooter(): BinaryFileResponse
     {
-        return Response::file(__DIR__ . '/../Resources/Images/logo-mail-footer.png');
+        return Logo::MailFooter->download();
     }
 }
