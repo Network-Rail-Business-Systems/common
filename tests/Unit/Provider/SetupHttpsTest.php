@@ -2,12 +2,10 @@
 
 namespace NetworkRailBusinessSystems\Common\Tests\Unit\Provider;
 
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Mockery;
-use NetworkRailBusinessSystems\Common\CommonServiceProvider;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
@@ -17,67 +15,71 @@ class SetupHttpsTest extends TestCase
 {
     protected function setUp(): void
     {
-        // Must be empty to allow each test to define a host.
+        // Each test performs its own setup
     }
 
-    #[DataProvider('expectations')]
-    public function test(
-        string $host,
-        ?string $expectation = 'on',
-        bool $forceHTTPS = false,
-    ): void {
-        Mockery::mock('overload:' . Request::class, function ($mock) use ($host) {
-            $mock->shouldReceive('host')->andReturn($host);
+    public function testOn(): void
+    {
+        Mockery::mock('overload:' . App::class, function ($mock) {
+            $mock->shouldReceive('runningInConsole')
+                ->once()
+                ->andReturnTrue();
+
+            $mock->shouldReceive('isProduction')
+                ->once()
+                ->andReturnFalse();
+
+            $mock->shouldReceive('isLocal')
+                ->once()
+                ->andReturnFalse();
+
+            $mock->shouldReceive('runningUnitTests')
+                ->once()
+                ->andReturnFalse();
         });
 
         parent::setUp();
 
-        if ($forceHTTPS === true) {
-            config()->set('common.force_https', true);
-        }
-
-        $provider = new CommonServiceProvider($this->app);
-        $provider->setupHttps();
-
         $this->assertEquals(
-            $expectation,
+            'on',
             $this->app['request']->server->get('HTTPS'),
-            'Scheme was not forced as expected',
         );
 
         $this->assertEquals(
-            $expectation === 'on' ? 'https://' : 'http://',
+            'https://',
             URL::formatScheme(),
         );
     }
 
-    public static function expectations(): array
+    public function testOff(): void
     {
-        return [
-            [
-                'host' => 'systems.hiav.networkrail.co.uk',
-            ],
-            [
-                'host' => 'systems2.hiav.networkrail.co.uk',
-                'expectation' => null,
-            ],
-            [
-                'host' => 'systems3.hiav.networkrail.co.uk',
-            ],
-            [
-                'host' => 'systems4.hiav.networkrail.co.uk',
-            ],
-            [
-                'host' => 'systems5.hiav.networkrail.co.uk',
-            ],
-            [
-                'host' => 'www.example.com',
-                'expectation' => null,
-            ],
-            [
-                'host' => 'www.example.com',
-                'forceHTTPS' => true,
-            ],
-        ];
+        Mockery::mock('overload:' . App::class, function ($mock) {
+            $mock->shouldReceive('runningInConsole')
+                ->once()
+                ->andReturnTrue();
+
+            $mock->shouldReceive('isProduction')
+                ->once()
+                ->andReturnFalse();
+
+            $mock->shouldReceive('isLocal')
+                ->once()
+                ->andReturnTrue();
+
+            $mock->shouldReceive('runningUnitTests')
+                ->once()
+                ->andReturnTrue();
+        });
+
+        parent::setUp();
+
+        $this->assertNull(
+            $this->app['request']->server->get('HTTPS'),
+        );
+
+        $this->assertEquals(
+            'http://',
+            URL::formatScheme(),
+        );
     }
 }
