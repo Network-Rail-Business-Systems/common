@@ -1,6 +1,6 @@
 <?php
 
-namespace NetworkRailBusinessSystems\Common\Tests\Unit\Enums\Logo;
+namespace NetworkRailBusinessSystems\Common\Tests\Unit\Traits\ImageEnum;
 
 use NetworkRailBusinessSystems\Common\Enums\Logo;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
