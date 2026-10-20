@@ -165,12 +165,15 @@ Instead, an `HttpResponseException` will be thrown and a message flashed to info
 
 Ensure that the `rows` passed into `export` can be turned into a flat array per row, otherwise it may fail.
 
-## HasFormatters
+## Traits
+
+### HasFormatters
 
 The `HasFormatters` trait is provided for consistent formatting of values in common formats.
 
 | Method           | Type             | Output                                           |
 |------------------|------------------|--------------------------------------------------|
+| formatBoolean()  | bool             | String in "Yes" / "No" format                    |
 | formatCount()    | array\|Arrayable | String with count before plural or singular term | 
 | formatCurrency() | float\|int       | String in £0.00 format                           |
 | formatDate()     | Carbon           | String in d/m/Y H:i format                       |
@@ -182,13 +185,36 @@ Each method has additional parameters to customise its behaviour.
 
 They also handle "blank" values, returning either `null` or a defined value of your choice.
 
-## ImprovedHasAttribute
+### ImprovedHasAttribute
 
 By default, Laravel only checks `$attributes` and `$casts` on a `Model` for attribute existence.
 
 This causes an exception to be thrown when using strict models, even though the attribute name is correct.
 
 Adding `use ImprovedHasAttribute` to a model adds `$fillable` and `$guarded` to the check to avoid this.
+
+## Logos
+
+A `Logo` enum is provided along with consistent assets for use across our systems.
+
+The following logos are available:
+
+| Logo       | Type | Height | Width | Description         |
+|------------|------|-------:|------:|---------------------|
+| Footer     | .svg |     55 |   146 | Route Services logo |
+| Header     | .svg |     44 |   117 | Network Rail logo   |
+| MailFooter | .png |     75 |   147 | Route Services logo |
+| MailHeader | .png |     50 |   133 | Network Rail logo   |
+
+Each `Logo` has the following methods:
+
+| Method    | Returns            | Description                                                   |
+|-----------|--------------------|---------------------------------------------------------------|
+| assetPath | string             | A `file://` URL for the logo, useful for embedding in e-mails |
+| download  | BinaryFileResponse | Download the logo with predefined caching                     |
+| height    | int                | The height of the logo in pixels                              |
+| realPath  | string             | The literal local filepath for the logo                       |
+| width     | int                | The width of the logo in pixels                               |
 
 ## Help and support
 
