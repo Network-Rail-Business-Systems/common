@@ -15,9 +15,14 @@ enum Logo: string
 
     case MailFooter = 'logo-mail-footer.png';
 
+    public function assetPath(): string
+    {
+        return 'file://' . $this->realPath();
+    }
+
     public function download(): BinaryFileResponse
     {
-        return Response::file($this->path())
+        return Response::file($this->realPath())
             ->setAutoEtag()
             ->setAutoLastModified()
             ->setMaxAge(0)
@@ -29,11 +34,11 @@ enum Logo: string
         return match ($this) {
             Logo::Header => 44,
             Logo::Footer => 55,
-            default => getimagesize($this->path())[1] ?? 0,
+            default => getimagesize($this->realPath())[1] ?? 0,
         };
     }
 
-    public function path(): string
+    public function realPath(): string
     {
         return realpath(__DIR__ . '/../Resources/Images/' . $this->value);
     }
@@ -43,7 +48,7 @@ enum Logo: string
         return match ($this) {
             Logo::Header => 117,
             Logo::Footer => 146,
-            default => getimagesize($this->path())[0] ?? 0,
+            default => getimagesize($this->realPath())[0] ?? 0,
         };
     }
 }
