@@ -192,6 +192,17 @@ This causes an exception to be thrown when using strict models, even though the 
 
 Adding `use ImprovedHasAttribute` to a model adds `$fillable` and `$guarded` to the check to avoid this.
 
+### TestCache
+
+Adding `use TestCache` to your test will verify the following cache types:
+
++ Config
++ Events
++ Routes
++ Views
+
+Each cache is built and subsequently cleared in order to check that the application can successfully boot its caches
+
 ## Logos
 
 A `Logo` enum is provided along with consistent assets for use across our systems.
