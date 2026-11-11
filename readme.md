@@ -201,7 +201,7 @@ Adding `use TestCache` to your test will verify the following cache types:
 + Routes
 + Views
 
-Each cache is built and subsequently cleared in order to check that the application can successfully boot its caches
+Each cache is built and subsequently cleared in order to check that the application can successfully boot and generate its caches
 
 ## Logos
 
