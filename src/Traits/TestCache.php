@@ -1,10 +1,8 @@
 <?php
 
-namespace NetworkRailBusinessSystems\Common\Tests\Unit\Artisan;
+namespace NetworkRailBusinessSystems\Common\Traits;
 
-use NetworkRailBusinessSystems\Common\Tests\TestCase;
-
-abstract class CacheTestCase extends TestCase
+trait TestCache
 {
     public const array COMMANDS = [
         'config',
