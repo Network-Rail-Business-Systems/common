@@ -4,7 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Artisan;
 
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
-abstract class CacheTest extends TestCase
+abstract class CacheTestCase extends TestCase
 {
     public const array COMMANDS = [
         'config',
