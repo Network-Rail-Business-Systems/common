@@ -39,8 +39,9 @@ class AdminController extends Controller
             $permission !== null
             && str_starts_with($permission, 'config:') === true
         ) {
-            $permission = str_replace('config:', '', $permission);
-            $permission = config($permission);
+            $permission = config(
+                str_replace('config:', '', $permission),
+            );
         }
 
         return [
