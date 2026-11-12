@@ -57,6 +57,7 @@ The `config/common.php` file contains the following options:
 
 | Key         | Usage                                                    | Type   | Default                    |
 |-------------|----------------------------------------------------------|--------|----------------------------|
+| admin       | The list of links available on the admin index page      | array  | String[]                   |
 | controllers | Which controllers to use within common functions         | array  | role, user                 |
 | enums       | Which enums to use within common functions               | array  | permissions, roles         |
 | home        | The base resource to redirect to from the root directory | string | /home                      |
@@ -214,6 +215,45 @@ Each `Logo` has the following methods:
 | height    | int                | The height of the logo in pixels                              |
 | realPath  | string             | The literal local filepath for the logo                       |
 | width     | int                | The width of the logo in pixels                               |
+
+## Admin
+
+To configure the list of links on the admin index page, change the `common.admin` config setting:
+
+```php
+'admin' => [
+    ...
+    'My link label' => [
+        'permission' => 'my_permission',
+        'route' => 'my.route.name',
+    ],
+    'Another link label' => [
+        'permission' => 'config:common.permission.name',
+        'route' => 'my.route.name',
+    ],
+    ...
+]
+```
+
+You may add any number of links.
+
+They will automatically be sorted alphabetically by label.
+
+### Route
+
+All provided route names will be passed to the `route()` helper.
+
+### Permission
+
+You may provide one of three values for the link permission:
+
+* `null`
+* The literal string name
+* A config reference
+
+When providing a config reference, prefix the config setting name with `config:`.
+
+The `permission` key can also be excluded, which will be treated as `null`.
 
 ## Help and support
 
