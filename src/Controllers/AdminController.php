@@ -2,6 +2,7 @@
 
 namespace NetworkRailBusinessSystems\Common\Controllers;
 
+use BackedEnum;
 use Illuminate\Contracts\View\View;
 
 class AdminController extends Controller
@@ -22,7 +23,7 @@ class AdminController extends Controller
             );
         }
 
-        ksort($links);
+        ksort($links, SORT_STRING|SORT_FLAG_CASE);
 
         return view('common::admin.index', [
             'breadcrumbs' => [
@@ -33,10 +34,10 @@ class AdminController extends Controller
         ]);
     }
 
-    protected function makeLink(string $route, ?string $permission): array
+    protected function makeLink(string $route, BackedEnum|string|null $permission): array
     {
         if (
-            $permission !== null
+            is_string($permission) === true
             && str_starts_with($permission, 'config:') === true
         ) {
             $permission = config(
