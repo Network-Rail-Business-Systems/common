@@ -14,6 +14,7 @@ trait TestCache
     public function test(): void
     {
         foreach (self::COMMANDS as $command) {
+            $this->artisan("$command:clear")->assertSuccessful();
             $this->artisan("$command:cache")->assertSuccessful();
             $this->artisan("$command:clear")->assertSuccessful();
         }
