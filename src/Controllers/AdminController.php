@@ -23,7 +23,7 @@ class AdminController extends Controller
             );
         }
 
-        ksort($links, SORT_STRING|SORT_FLAG_CASE);
+        ksort($links, SORT_STRING | SORT_FLAG_CASE);
 
         return view('common::admin.index', [
             'breadcrumbs' => [

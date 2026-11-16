@@ -32,6 +32,7 @@
             <directory>src/FormRequests</directory>
             <directory>src/ResourceCollections</directory>
             <directory>src/Views</directory>
+            <file>src/Traits/TestCache.php</file>
         </exclude>
     </source>
 </phpunit>
