@@ -57,4 +57,19 @@ return [
         'E-mail address',
         'Name',
     ],
+
+    'admin' => [
+        'Manage support page' => [
+            'permission' => 'config:support-page.permission',
+            'route' => 'admin.support-page.index',
+        ],
+        'Manage system banner' => [
+            'permission' => 'config:common.permissions.manage_banner',
+            'route' => 'admin.banner.create',
+        ],
+        'Manage Users and Roles' => [
+            'permission' => 'config:common.permissions.manage_users',
+            'route' => 'admin.users.index',
+        ],
+    ],
 ];

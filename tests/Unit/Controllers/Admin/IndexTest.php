@@ -4,6 +4,7 @@ namespace NetworkRailBusinessSystems\Common\Tests\Unit\Controllers\Admin;
 
 use Illuminate\Contracts\View\View;
 use NetworkRailBusinessSystems\Common\Controllers\AdminController;
+use NetworkRailBusinessSystems\Common\Tests\Enums\Permission;
 use NetworkRailBusinessSystems\Common\Tests\Enums\Role;
 use NetworkRailBusinessSystems\Common\Tests\TestCase;
 
@@ -42,6 +43,24 @@ class IndexTest extends TestCase
                 'Admin' => route('admin.index'),
             ],
             $data['breadcrumbs'],
+        );
+
+        $this->assertEquals(
+            [
+                'Manage support page' => [
+                    'permission' => Permission::ManageSupportPage,
+                    'route' => route('admin.support-page.index'),
+                ],
+                'Manage system banner' => [
+                    'permission' => Permission::ManageBanner,
+                    'route' => route('admin.banner.create'),
+                ],
+                'Manage Users and Roles' => [
+                    'permission' => Permission::ManageUsers,
+                    'route' => route('admin.users.index'),
+                ],
+            ],
+            $data['links'],
         );
 
         $this->assertEquals(

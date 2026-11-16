@@ -51,6 +51,7 @@ abstract class TestCase extends BaseTestCase
         config()->set('common.enums.roles', Role::class);
         config()->set('common.permissions.access_admin', Permission::AccessAdmin);
         config()->set('common.permissions.impersonate', Permission::Impersonate);
+        config()->set('common.permissions.manage_banner', Permission::ManageBanner);
         config()->set('common.permissions.manage_users', Permission::ManageUsers);
         config()->set('common.template', 'bulma');
         config()->set('common.models.user', User::class);
@@ -99,6 +100,8 @@ abstract class TestCase extends BaseTestCase
             'mail' => 'email',
             'surname' => 'last_name',
         ]);
+
+        config()->set('support-page.permission', Permission::ManageSupportPage);
 
         $this->withoutVite();
         View::replaceNamespace('common', __DIR__ . '/../src/Views/bulma');

@@ -15,6 +15,7 @@ class PermissionTest extends TestCase
                 Permission::Impersonate->value,
                 Permission::ManageBanner->value,
                 Permission::ManageUsers->value,
+                Permission::ManageSupportPage->value,
             ],
             Permission::values(),
         );
