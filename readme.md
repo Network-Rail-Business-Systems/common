@@ -204,15 +204,15 @@ For example,
 ```php
 class CacheTest extends TestCase 
 {
-    use TestCache
+    use TestCache;
 }
 ```
 This will verify the following cache types:
 
-+ Config
-+ Events
-+ Routes
-+ Views
+* Config
+* Events
+* Routes
+* Views
 
 Each cache is built and subsequently cleared in order to check that the application can successfully boot and generate its caches
 
