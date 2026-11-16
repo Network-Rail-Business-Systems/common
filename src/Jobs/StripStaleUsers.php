@@ -25,6 +25,12 @@ class StripStaleUsers implements ShouldBeUnique, ShouldQueue
         /** @var class-string<User> $userClass */
         $userClass = config('common.models.user');
 
+        // Todo remove after all systems migrated to common
+        /** @phpstan-ignore function.alreadyNarrowedType */
+        if (is_a($userClass, User::class, true) === false) {
+            return;
+        }
+
         $userClass::query()
             ->goneStale(
                 Carbon::today()->subMonths($userClass::STALE_CUTOFF_MONTHS),
