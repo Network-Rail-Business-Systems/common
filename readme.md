@@ -194,7 +194,19 @@ Adding `use ImprovedHasAttribute` to a model adds `$fillable` and `$guarded` to 
 
 ### TestCache
 
-Adding `use TestCache` to your test will verify the following cache types:
+Adding `use TestCache` to your test will easily verify your application's caches.   
+
+It is recommended to do this through a specific testcase.   
+
+For example,
+
+```php
+class CacheTest extends TestCase 
+{
+    use TestCache
+}
+```
+This will verify the following cache types:
 
 + Config
 + Events
